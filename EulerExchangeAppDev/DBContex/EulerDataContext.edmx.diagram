@@ -6,11 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="ef3615bc52c24ea29dc4ba6cbe89a3f5" Name="Diagram1">
         <EntityTypeShape EntityType="masterModel.Companies" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="masterModel.MSreplication_options" Width="1.5" PointX="2.75" PointY="2.75" />
+        <EntityTypeShape EntityType="masterModel.TipArtikal" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="masterModel.MSreplication_options" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="masterModel.spt_fallback_db" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="masterModel.spt_fallback_dev" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="masterModel.spt_fallback_usg" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="masterModel.spt_monitor" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="masterModel.spt_fallback_usg" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="masterModel.spt_monitor" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

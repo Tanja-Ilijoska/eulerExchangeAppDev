@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using EulerExchangeAppDev.Models;
+using GoldData.Models;
 
-namespace EulerExchangeAppDev
+namespace GoldData
 {
     public class EmailService : IIdentityMessageService
     {
@@ -53,11 +53,11 @@ namespace EulerExchangeAppDev
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-                //RequiredLength = 6,
-                //RequireNonLetterOrDigit = true,
-                //RequireDigit = true,
-                //RequireLowercase = true,
-                //RequireUppercase = true,
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = true,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireUppercase = true,
             };
 
             // Configure user lockout defaults

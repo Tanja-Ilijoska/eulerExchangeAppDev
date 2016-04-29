@@ -8,10 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using EulerExchangeAppDev.Models;
-using EulerExchangeAppDev.DBContex;
+using GoldData.Models;
 
-namespace EulerExchangeAppDev.Controllers
+namespace GoldData.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -140,10 +139,7 @@ namespace EulerExchangeAppDev.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            RegisterViewModel model = new RegisterViewModel();
-            CompaniesViewModel company = new CompaniesViewModel();
-            model.Company = company;
-            return View(model);
+            return View();
         }
 
         //
@@ -155,36 +151,7 @@ namespace EulerExchangeAppDev.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
-                if (model.Company != null)
-                {
-                    masterEntities dbContext = new masterEntities();
-                    Companies company = new Companies()
-                        {
-                            AdditionalEMails = model.Company.AdditionalEMails,
-                            CompanyName = model.Company.CompanyName,
-                            CompanyAddress = model.Company.CompanyAddress,
-                            CompanyCity = model.Company.CompanyCity,
-                            CompanyCountry = model.Company.CompanyCountry,
-                            CompanyLocation = model.Company.CompanyLocation,
-                            CompanyPhone = model.Company.CompanyPhone,
-                            CompanyWebsite = model.Company.CompanyWebsite,
-                            ContactPersonName = model.Company.ContactPersonName,
-                            NumberOfEmployees = model.Company.NumberOfEmployees,
-                            YearFounded = model.Company.YearFounded,
-                            YearlyRevenue = model.Company.YearlyRevenue
-                        };
-
-                    dbContext.Set<Companies>().Add(company);
-                    try
-                    {
-                        dbContext.SaveChanges();
-                    }
-                    catch(Exception ex)
-                    {
-
-                    }
-                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -200,7 +167,6 @@ namespace EulerExchangeAppDev.Controllers
                 }
                 AddErrors(result);
             }
-
 
             // If we got this far, something failed, redisplay form
             return View(model);
