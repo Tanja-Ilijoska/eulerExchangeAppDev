@@ -12,8 +12,10 @@ namespace EulerExchangeAppDev.DBContex
     using System;
     using System.Collections.Generic;
     
-    public partial class Komitenti
+    public partial class TipArtikal
     {
         public int Id { get; set; }
+        public string Number { get; set; }
+        public string Decription { get; set; }
     }
 }

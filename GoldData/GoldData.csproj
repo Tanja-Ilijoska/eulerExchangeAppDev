@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{13B62C56-86BB-4C87-8D59-00CB566297BD}</ProjectGuid>
+    <ProjectGuid>{C91F523F-8160-4BBD-8F08-18B05FACAB53}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EulerExchangeAppDev</RootNamespace>
-    <AssemblyName>EulerExchangeAppDev</AssemblyName>
+    <RootNamespace>GoldData</RootNamespace>
+    <AssemblyName>GoldData</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -43,8 +43,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -160,56 +158,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\GoldData\GoldDataAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="DBContex\Companies.cs">
-      <DependentUpon>EulerDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContex\EulerDataContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EulerDataContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContex\EulerDataContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EulerDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContex\EulerDataContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EulerDataContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DBContex\MSreplication_options.cs">
-      <DependentUpon>EulerDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContex\spt_fallback_db.cs">
-      <DependentUpon>EulerDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContex\spt_fallback_dev.cs">
-      <DependentUpon>EulerDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContex\spt_fallback_usg.cs">
-      <DependentUpon>EulerDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContex\spt_monitor.cs">
-      <DependentUpon>EulerDataContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContex\TipArtikal.cs">
-      <DependentUpon>EulerDataContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604241150079_InitialCreate.cs" />
-    <Compile Include="Migrations\201604241150079_InitialCreate.Designer.cs">
-      <DependentUpon>201604241150079_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CompaniesViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -224,25 +179,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="DBContex\EulerDataContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EulerDataContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DBContex\EulerDataContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EulerDataContext.edmx</DependentUpon>
-      <LastGenOutput>EulerDataContext.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DBContex\EulerDataContext.edmx.diagram">
-      <DependentUpon>EulerDataContext.edmx</DependentUpon>
-    </Content>
-    <Content Include="DBContex\EulerDataContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EulerDataContext.edmx</DependentUpon>
-      <LastGenOutput>EulerDataContext.cs</LastGenOutput>
-    </Content>
-    <Content Include="Areas\GoldData\Views\web.config" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -289,13 +226,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Account\Companies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\GoldData\Controllers\" />
-    <Folder Include="Areas\GoldData\Models\" />
-    <Folder Include="Areas\GoldData\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -303,14 +236,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604241150079_InitialCreate.resx">
-      <DependentUpon>201604241150079_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -328,9 +253,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>22354</DevelopmentServerPort>
+          <DevelopmentServerPort>57364</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:22354/</IISUrl>
+          <IISUrl>http://localhost:57364/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

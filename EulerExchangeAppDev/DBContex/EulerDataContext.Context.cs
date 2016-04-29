@@ -26,7 +26,7 @@ namespace EulerExchangeAppDev.DBContex
         }
     
         public virtual DbSet<Companies> Companies { get; set; }
-        public virtual DbSet<Komitenti> Komitenti { get; set; }
+        public virtual DbSet<TipArtikal> TipArtikal { get; set; }
         public virtual DbSet<MSreplication_options> MSreplication_options { get; set; }
         public virtual DbSet<spt_fallback_db> spt_fallback_db { get; set; }
         public virtual DbSet<spt_fallback_dev> spt_fallback_dev { get; set; }
