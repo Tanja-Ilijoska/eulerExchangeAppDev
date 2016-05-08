@@ -5,16 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ef3615bc52c24ea29dc4ba6cbe89a3f5" Name="Diagram1">
-        <EntityTypeShape EntityType="masterModel.Companies" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="masterModel.GemstoneType" Width="1.5" PointX="0.75" PointY="1.25" />
-        <EntityTypeShape EntityType="masterModel.Rings" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="masterModel.TipArtikal" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="masterModel.MSreplication_options" Width="1.5" PointX="4.75" PointY="4.75" />
-        <EntityTypeShape EntityType="masterModel.spt_fallback_db" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="masterModel.spt_fallback_dev" Width="1.5" PointX="6.75" PointY="4.75" />
-        <EntityTypeShape EntityType="masterModel.spt_fallback_usg" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="masterModel.spt_monitor" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="masterModel.Companies" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="masterModel.GemstoneType" Width="1.5" PointX="0.75" PointY="3" />
+        <EntityTypeShape EntityType="masterModel.ImageURL" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="masterModel.RingGemstoneType" Width="1.5" PointX="5.25" PointY="2.625" />
+        <EntityTypeShape EntityType="masterModel.RingImageURL" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="masterModel.Rings" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="masterModel.TipArtikal" Width="1.5" PointX="5.75" PointY="8.75" />
+        <EntityTypeShape EntityType="masterModel.MSreplication_options" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="masterModel.spt_fallback_db" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="masterModel.spt_fallback_dev" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="masterModel.spt_fallback_usg" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="masterModel.spt_monitor" Width="1.5" PointX="9.75" PointY="4.75" />
+        <AssociationConnector Association="masterModel.FK_RingGemstoneType_GemstoneType" />
         <AssociationConnector Association="masterModel.FK_Rings_GemstoneType" />
+        <AssociationConnector Association="masterModel.FK_RingGemstoneType_Rings" />
+        <AssociationConnector Association="masterModel.FK_RingImageURL_Ring" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

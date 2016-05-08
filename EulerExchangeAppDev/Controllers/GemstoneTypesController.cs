@@ -123,5 +123,10 @@ namespace EulerExchangeAppDev.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public IEnumerable<GemstoneType> GetGemstoneTypes()
+        {
+            return db.GemstoneType;
+        }
     }
 }
