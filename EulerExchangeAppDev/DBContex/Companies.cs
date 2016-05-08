@@ -16,7 +16,6 @@ namespace EulerExchangeAppDev.DBContex
     {
         public int Id { get; set; }
         public string ContactPersonName { get; set; }
-        public string ContactPersonLastName { get; set; }
         public string CompanyName { get; set; }
         public int YearFounded { get; set; }
         public Nullable<int> NumberOfEmployees { get; set; }
@@ -28,5 +27,6 @@ namespace EulerExchangeAppDev.DBContex
         public string CompanyWebsite { get; set; }
         public string AdditionalEMails { get; set; }
         public string CompanyLocation { get; set; }
+        public Nullable<int> UserId { get; set; }
     }
 }

@@ -11,7 +11,6 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ContactPersonName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ContactPersonLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="YearFounded" Type="int" Nullable="false" />
           <Property Name="NumberOfEmployees" Type="int" />
@@ -23,6 +22,7 @@
           <Property Name="CompanyWebsite" Type="nvarchar" MaxLength="50" />
           <Property Name="AdditionalEMails" Type="nvarchar" MaxLength="250" />
           <Property Name="CompanyLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="GemstoneType">
           <Key>
@@ -61,7 +61,7 @@ warning 6002: The table/view 'master.dbo.MSreplication_options' does not have a 
           <Property Name="Size" Type="nvarchar" MaxLength="10" />
           <Property Name="Radius" Type="decimal" Precision="18" Scale="4" />
           <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="GemstoneID" Type="int" />
+          <Property Name="Gemstones" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'master.dbo.spt_fallback_db' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -159,31 +159,10 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <Property Name="total_write" Type="int" Nullable="false" />
           <Property Name="total_errors" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="TipArtikal">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-        </EntityType>
-        <Association Name="FK_Rings_GemstoneType">
-          <End Role="GemstoneType" Type="Self.GemstoneType" Multiplicity="0..1" />
-          <End Role="Rings" Type="Self.Rings" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GemstoneType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Rings">
-              <PropertyRef Name="GemstoneID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="masterModelStoreContainer">
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GemstoneType" EntityType="Self.GemstoneType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rings" EntityType="Self.Rings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TipArtikal" EntityType="Self.TipArtikal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MSreplication_options" EntityType="Self.MSreplication_options" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [MSreplication_options].[optname] AS [optname], 
@@ -248,10 +227,6 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
     [spt_monitor].[total_errors] AS [total_errors]
     FROM [dbo].[spt_monitor] AS [spt_monitor]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_Rings_GemstoneType" Association="Self.FK_Rings_GemstoneType">
-            <End Role="GemstoneType" EntitySet="GemstoneType" />
-            <End Role="Rings" EntitySet="Rings" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -261,16 +236,11 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <EntitySet Name="Companies" EntityType="masterModel.Companies" />
           <EntitySet Name="GemstoneType" EntityType="masterModel.GemstoneType" />
           <EntitySet Name="Rings" EntityType="masterModel.Rings" />
-          <EntitySet Name="TipArtikal" EntityType="masterModel.TipArtikal" />
           <EntitySet Name="MSreplication_options" EntityType="masterModel.MSreplication_options" />
           <EntitySet Name="spt_fallback_db" EntityType="masterModel.spt_fallback_db" />
           <EntitySet Name="spt_fallback_dev" EntityType="masterModel.spt_fallback_dev" />
           <EntitySet Name="spt_fallback_usg" EntityType="masterModel.spt_fallback_usg" />
           <EntitySet Name="spt_monitor" EntityType="masterModel.spt_monitor" />
-          <AssociationSet Name="FK_Rings_GemstoneType" Association="masterModel.FK_Rings_GemstoneType">
-            <End Role="GemstoneType" EntitySet="GemstoneType" />
-            <End Role="Rings" EntitySet="Rings" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Companies">
           <Key>
@@ -278,7 +248,6 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ContactPersonName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactPersonLastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="YearFounded" Type="Int32" Nullable="false" />
           <Property Name="NumberOfEmployees" Type="Int32" />
@@ -290,6 +259,7 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <Property Name="CompanyWebsite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalEMails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CompanyLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
         </EntityType>
         <EntityType Name="GemstoneType">
           <Key>
@@ -299,7 +269,6 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Carats" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="Rings" Relationship="masterModel.FK_Rings_GemstoneType" FromRole="GemstoneType" ToRole="Rings" />
         </EntityType>
         <EntityType Name="Rings">
           <Key>
@@ -311,16 +280,7 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Radius" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="GemstoneID" Type="Int32" />
-          <NavigationProperty Name="GemstoneType" Relationship="masterModel.FK_Rings_GemstoneType" FromRole="Rings" ToRole="GemstoneType" />
-        </EntityType>
-        <EntityType Name="TipArtikal">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Gemstones" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MSreplication_options">
           <Key>
@@ -426,18 +386,6 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <Property Name="total_write" Type="Int32" Nullable="false" />
           <Property Name="total_errors" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Rings_GemstoneType">
-          <End Type="masterModel.GemstoneType" Role="GemstoneType" Multiplicity="0..1" />
-          <End Type="masterModel.Rings" Role="Rings" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GemstoneType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Rings">
-              <PropertyRef Name="GemstoneID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -447,6 +395,7 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="masterModel.Companies">
               <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CompanyLocation" ColumnName="CompanyLocation" />
                 <ScalarProperty Name="AdditionalEMails" ColumnName="AdditionalEMails" />
                 <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
@@ -458,7 +407,6 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
                 <ScalarProperty Name="NumberOfEmployees" ColumnName="NumberOfEmployees" />
                 <ScalarProperty Name="YearFounded" ColumnName="YearFounded" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="ContactPersonLastName" ColumnName="ContactPersonLastName" />
                 <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -477,19 +425,10 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <EntitySetMapping Name="Rings">
             <EntityTypeMapping TypeName="masterModel.Rings">
               <MappingFragment StoreEntitySet="Rings">
-                <ScalarProperty Name="GemstoneID" ColumnName="GemstoneID" />
+                <ScalarProperty Name="Gemstones" ColumnName="Gemstones" />
                 <ScalarProperty Name="Circumference" ColumnName="Circumference" />
                 <ScalarProperty Name="Radius" ColumnName="Radius" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipArtikal">
-            <EntityTypeMapping TypeName="masterModel.TipArtikal">
-              <MappingFragment StoreEntitySet="TipArtikal">
                 <ScalarProperty Name="Decription" ColumnName="Decription" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

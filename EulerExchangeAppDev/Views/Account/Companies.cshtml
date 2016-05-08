@@ -9,7 +9,7 @@
             zoom: 14
         });
         //var infoWindow = new google.maps.InfoWindow({ map: map });
-        marker = new google.maps.Marker({map: map,});
+        marker = new google.maps.Marker({ map: map, draggable: true, position:map.center });
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
