@@ -20,6 +20,8 @@ namespace EulerExchangeAppDev.DBContex
         public string Size { get; set; }
         public Nullable<decimal> Radius { get; set; }
         public Nullable<decimal> Circumference { get; set; }
-        public string Gemstones { get; set; }
+        public Nullable<int> GemstoneID { get; set; }
+    
+        public virtual GemstoneType GemstoneType { get; set; }
     }
 }

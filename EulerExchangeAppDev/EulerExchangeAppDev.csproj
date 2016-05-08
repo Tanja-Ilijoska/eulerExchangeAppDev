@@ -209,6 +209,9 @@
     <Compile Include="DBContex\spt_monitor.cs">
       <DependentUpon>EulerDataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBContex\TipArtikal.cs">
+      <DependentUpon>EulerDataContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
