@@ -7,6 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EulerExchangeAppDev.DBContex;
+using System.IO;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.Infrastructure;
+using Kendo.Mvc.Resources;
+using AutoMapper;
 
 namespace EulerExchangeAppDev.Controllers
 {
@@ -28,6 +34,7 @@ namespace EulerExchangeAppDev.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Rings rings = db.Rings.Find(id);
+            rings.GemstoneType = db.GemstoneType.Find(id);
             if (rings == null)
             {
                 return HttpNotFound();
@@ -46,7 +53,7 @@ namespace EulerExchangeAppDev.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Number,Decription,Size,Radius,Circumference,Gemstones")] Rings rings)
+        public ActionResult Create([Bind(Include = "Id,Number,Decription,Size,Radius,Circumference,GemstoneID")] Rings rings)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +73,7 @@ namespace EulerExchangeAppDev.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Rings rings = db.Rings.Find(id);
+            rings.GemstoneType = db.GemstoneType.Find(id);
             if (rings == null)
             {
                 return HttpNotFound();
@@ -78,12 +86,12 @@ namespace EulerExchangeAppDev.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Number,Decription,Size,Radius,Circumference,Gemstones")] Rings rings)
+        public ActionResult Edit([Bind(Include = "Id,Number,Decription,Size,Radius,Circumference,GemstoneID")] Rings rings)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(rings).State = EntityState.Modified;
-                db.SaveChanges();
+                db.SaveChanges();           
                 return RedirectToAction("Index");
             }
             return View(rings);
@@ -123,5 +131,8 @@ namespace EulerExchangeAppDev.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
+
     }
 }

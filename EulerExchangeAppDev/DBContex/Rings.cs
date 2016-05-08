@@ -14,6 +14,12 @@ namespace EulerExchangeAppDev.DBContex
     
     public partial class Rings
     {
+        public Rings()
+        {
+            this.RingGemstoneType = new HashSet<RingGemstoneType>();
+            this.RingImageURL = new HashSet<RingImageURL>();
+        }
+    
         public int Id { get; set; }
         public string Number { get; set; }
         public string Decription { get; set; }
@@ -21,7 +27,10 @@ namespace EulerExchangeAppDev.DBContex
         public Nullable<decimal> Radius { get; set; }
         public Nullable<decimal> Circumference { get; set; }
         public Nullable<int> GemstoneID { get; set; }
+        public Nullable<int> ImageURLID { get; set; }
     
         public virtual GemstoneType GemstoneType { get; set; }
+        public virtual ICollection<RingGemstoneType> RingGemstoneType { get; set; }
+        public virtual ICollection<RingImageURL> RingImageURL { get; set; }
     }
 }
