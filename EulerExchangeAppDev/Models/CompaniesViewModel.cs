@@ -14,9 +14,6 @@ namespace EulerExchangeAppDev.Models
         [Display(Name = "Contact person name")]
         public string ContactPersonName { get; set; }
 
-        [Display(Name = "Contact person last name")]
-        public string ContactPersonLastName { get; set; }
-
         [Display(Name = "Company name")]
         public string CompanyName { get; set; }
 

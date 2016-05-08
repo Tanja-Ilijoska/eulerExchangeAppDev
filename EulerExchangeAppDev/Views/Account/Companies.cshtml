@@ -1,4 +1,53 @@
 ﻿@model EulerExchangeAppDev.Models.CompaniesViewModel
+<script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap">
+</script>
+
+<script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 41.996541031799026, lng: 21.43236322402913 },
+            zoom: 14
+        });
+        //var infoWindow = new google.maps.InfoWindow({ map: map });
+        marker = new google.maps.Marker({map: map,});
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                //infoWindow.setPosition(pos);
+                //infoWindow.setContent('Location found.');
+                document.getElementById("location").value = position.coords.latitude + "," + position.coords.longitude;
+                marker.setPosition(pos);
+                marker.setTitle('My location');
+                map.setCenter(pos);
+            }, function () {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+
+        google.maps.event.addListener(map, 'click', function (event) {
+            marker.setPosition(event.latLng);
+            document.getElementById("location").value = event.latLng.lat()+","+event.latLng.lng();
+        });
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+    }
+
+
+</script>
 
 <div class="form-group">
     @Html.LabelFor(m => m.CompanyName, new { @class = "col-md-2 control-label" })
@@ -10,12 +59,6 @@
     @Html.LabelFor(m => m.ContactPersonName, new { @class = "col-md-2 control-label" })
     <div class="col-md-10">
         @Html.TextBoxFor(m => m.ContactPersonName, new { @class = "form-control" })
-    </div>
-</div>
-<div class="form-group">
-    @Html.LabelFor(m => m.ContactPersonLastName, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-        @Html.TextBoxFor(m => m.ContactPersonLastName, new { @class = "form-control" })
     </div>
 </div>
 <div class="form-group">
@@ -67,14 +110,16 @@
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(m => m.NumberOfEmployees, new { @class = "col-md-2 control-label" })
-    <div class="col-md-10">
-        @Html.TextBoxFor(m => m.NumberOfEmployees, new { @class = "form-control" })
-    </div>
-</div>
-<div class="form-group">
     @Html.LabelFor(m => m.YearlyRevenue, new { @class = "col-md-2 control-label" })
     <div class="col-md-10">
         @Html.TextBoxFor(m => m.YearlyRevenue, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.CompanyLocation, new { @class = "col-md-2 control-label" })
+
+    <div id="map" style="height:300px;width:400px"></div>
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.CompanyLocation, new { @class = "form-control" , @id = "location", @style = "display:none"})
     </div>
 </div>

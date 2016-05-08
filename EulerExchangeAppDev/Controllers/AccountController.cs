@@ -169,7 +169,6 @@ namespace EulerExchangeAppDev.Controllers
                             CompanyLocation = model.Company.CompanyLocation,
                             CompanyPhone = model.Company.CompanyPhone,
                             CompanyWebsite = model.Company.CompanyWebsite,
-                            ContactPersonLastName = model.Company.ContactPersonLastName,
                             ContactPersonName = model.Company.ContactPersonName,
                             NumberOfEmployees = model.Company.NumberOfEmployees,
                             YearFounded = model.Company.YearFounded,
@@ -181,7 +180,7 @@ namespace EulerExchangeAppDev.Controllers
                     {
                         dbContext.SaveChanges();
                     }
-                    catch
+                    catch(Exception ex)
                     {
 
                     }

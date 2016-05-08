@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Tanya\documents\visual studio 2013\Projects\EulerExchangeAppDev\EulerExchangeAppDev\DBContex\EulerDataContext.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Bojan\Source\Repos\eulerExchangeAppDev\EulerExchangeAppDev\DBContex\EulerDataContext.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
