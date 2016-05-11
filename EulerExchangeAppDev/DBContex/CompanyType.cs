@@ -12,27 +12,15 @@ namespace EulerExchangeAppDev.DBContex
     using System;
     using System.Collections.Generic;
     
-    public partial class Companies
+    public partial class CompanyType
     {
-        public Companies()
+        public CompanyType()
         {
             this.CompaniesCompanyType = new HashSet<CompaniesCompanyType>();
         }
     
         public int Id { get; set; }
-        public string ContactPersonName { get; set; }
-        public string ContactPersonLastName { get; set; }
-        public string CompanyName { get; set; }
-        public int YearFounded { get; set; }
-        public Nullable<int> NumberOfEmployees { get; set; }
-        public Nullable<decimal> YearlyRevenue { get; set; }
-        public string CompanyAddress { get; set; }
-        public string CompanyCountry { get; set; }
-        public string CompanyCity { get; set; }
-        public string CompanyPhone { get; set; }
-        public string CompanyWebsite { get; set; }
-        public string AdditionalEMails { get; set; }
-        public string CompanyLocation { get; set; }
+        public string Type { get; set; }
     
         public virtual ICollection<CompaniesCompanyType> CompaniesCompanyType { get; set; }
     }

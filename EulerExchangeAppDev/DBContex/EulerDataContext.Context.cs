@@ -26,12 +26,13 @@ namespace EulerExchangeAppDev.DBContex
         }
     
         public virtual DbSet<Companies> Companies { get; set; }
+        public virtual DbSet<CompaniesCompanyType> CompaniesCompanyType { get; set; }
+        public virtual DbSet<CompanyType> CompanyType { get; set; }
         public virtual DbSet<GemstoneType> GemstoneType { get; set; }
         public virtual DbSet<ImageURL> ImageURL { get; set; }
         public virtual DbSet<RingGemstoneType> RingGemstoneType { get; set; }
         public virtual DbSet<RingImageURL> RingImageURL { get; set; }
         public virtual DbSet<Rings> Rings { get; set; }
-        public virtual DbSet<TipArtikal> TipArtikal { get; set; }
         public virtual DbSet<MSreplication_options> MSreplication_options { get; set; }
         public virtual DbSet<spt_fallback_db> spt_fallback_db { get; set; }
         public virtual DbSet<spt_fallback_dev> spt_fallback_dev { get; set; }

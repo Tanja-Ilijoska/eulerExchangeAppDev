@@ -14,8 +14,15 @@ namespace EulerExchangeAppDev.DBContex
     
     public partial class ImageURL
     {
+        public ImageURL()
+        {
+            this.RingImageURL = new HashSet<RingImageURL>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> Type { get; set; }
         public string ImageURL1 { get; set; }
+    
+        public virtual ICollection<RingImageURL> RingImageURL { get; set; }
     }
 }

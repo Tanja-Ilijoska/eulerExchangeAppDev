@@ -12,13 +12,13 @@ namespace EulerExchangeAppDev.DBContex
     using System;
     using System.Collections.Generic;
     
-    public partial class RingImageURL
+    public partial class CompaniesCompanyType
     {
         public int Id { get; set; }
-        public Nullable<int> RingID { get; set; }
-        public Nullable<int> ImageUrlID { get; set; }
+        public int CompanyId { get; set; }
+        public int CompanyTypeId { get; set; }
     
-        public virtual ImageURL ImageURL { get; set; }
-        public virtual Rings Rings { get; set; }
+        public virtual Companies Companies { get; set; }
+        public virtual CompanyType CompanyType { get; set; }
     }
 }

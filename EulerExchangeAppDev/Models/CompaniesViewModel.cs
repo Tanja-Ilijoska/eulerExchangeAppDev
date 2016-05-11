@@ -46,5 +46,8 @@ namespace EulerExchangeAppDev.Models
 
         [Display(Name = "Location")]
         public string CompanyLocation { get; set; }
+
+        [Display(Name ="CompanyTypes")]
+        public IList<CompanyTypeViewModel> CompanyTypes { get; set; }
     }
 }
