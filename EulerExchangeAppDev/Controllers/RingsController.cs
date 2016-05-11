@@ -13,6 +13,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.Infrastructure;
 using Kendo.Mvc.Resources;
 using AutoMapper;
+using EulerExchangeAppDev.Models;
 
 namespace EulerExchangeAppDev.Controllers
 {
@@ -53,11 +54,13 @@ namespace EulerExchangeAppDev.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Number,Decription,Size,Radius,Circumference,GemstoneID")] Rings rings)
+        public ActionResult Create(RingsItemDetails rings)
         {
             if (ModelState.IsValid)
             {
-                db.Rings.Add(rings);
+                var ring = new Rings();
+                Mapper.Map<RingsItemDetails, Rings>(rings);
+                db.Rings.Add(ring);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -132,7 +135,56 @@ namespace EulerExchangeAppDev.Controllers
             base.Dispose(disposing);
         }
 
-        
+        public ActionResult Async()
+        {
+            return View();
+        }
+
+        public ActionResult Save(IEnumerable<HttpPostedFileBase> files)
+        {
+            // The Name of the Upload component is "files"
+            if (files != null)
+            {
+                foreach (var file in files)
+                {
+                    // Some browsers send file names with full path.
+                    // We are only interested in the file name.
+                    var fileName = Path.GetFileName(file.FileName);
+                    var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+
+                    // The files are not actually saved in this demo
+                    // file.SaveAs(physicalPath);
+                }
+            }
+
+            // Return an empty string to signify success
+            return Content("");
+        }
+
+        public ActionResult Remove(string[] fileNames)
+        {
+            // The parameter of the Remove action must be called "fileNames"
+
+            if (fileNames != null)
+            {
+                foreach (var fullName in fileNames)
+                {
+                    var fileName = Path.GetFileName(fullName);
+                    var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                
+                    // TODO: Verify user permissions
+
+                    if (System.IO.File.Exists(physicalPath))
+                    {
+                        // The files are not actually removed in this demo
+                        // System.IO.File.Delete(physicalPath);
+                    }
+                }
+            }
+
+            // Return an empty string to signify success
+            return Content("");
+        }
 
     }
 }

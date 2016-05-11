@@ -47,4 +47,34 @@ namespace EulerExchangeAppDev.Models
         [Display(Name = "Location")]
         public string CompanyLocation { get; set; }
     }
+
+    public class RingsItemDetails
+    {
+        [ScaffoldColumn(false)]
+        public int Id { get; set; }
+
+        public string Number { get; set; }
+        public string Decription { get; set; }
+        public string Size { get; set; }
+        public Nullable<decimal> Radius { get; set; }
+        public Nullable<decimal> Circumference { get; set; }
+        public Nullable<int> GemstoneID { get; set; }
+        public Nullable<int> ImageURLID { get; set; }
+
+
+    }
+
+    public class RingsListItem
+    {
+        [ScaffoldColumn(false)]
+        public int Id { get; set; }
+
+        public string Number { get; set; }
+        public string Decription { get; set; }
+        public string Size { get; set; }
+        public Nullable<decimal> Radius { get; set; }
+        public Nullable<decimal> Circumference { get; set; }
+        public Nullable<int> GemstoneID { get; set; }
+        public Nullable<int> ImageURLID { get; set; }
+    }
 }
