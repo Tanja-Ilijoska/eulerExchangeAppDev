@@ -13,5 +13,7 @@ namespace EulerExchangeAppDev.Models
 
         [Display(Name = "Type")]
         public string Type { get; set; }
+
+        public bool IsSelected { get; set; }
     }
 }

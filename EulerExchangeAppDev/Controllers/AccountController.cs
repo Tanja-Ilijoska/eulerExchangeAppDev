@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EulerExchangeAppDev.Models;
 using EulerExchangeAppDev.DBContex;
+using System.Collections.Generic;
+using AutoMapper;
 
 namespace EulerExchangeAppDev.Controllers
 {
@@ -140,8 +142,14 @@ namespace EulerExchangeAppDev.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            IMapper Mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
             RegisterViewModel model = new RegisterViewModel();
             CompaniesViewModel company = new CompaniesViewModel();
+            List<CompanyTypeViewModel> companyTypes = new List<CompanyTypeViewModel>();
+            masterEntities dbContext = new masterEntities();
+            var companytypv = dbContext.Set<CompanyType>();
+            Mapper.Map(companytypv, companyTypes);
+            company.CompanyTypes = companyTypes;
             model.Company = company;
             return View(model);
         }
@@ -174,6 +182,10 @@ namespace EulerExchangeAppDev.Controllers
                             YearFounded = model.Company.YearFounded,
                             YearlyRevenue = model.Company.YearlyRevenue
                         };
+                    List<CompanyTypeViewModel> companyTypes = new List<CompanyTypeViewModel>();
+                  //  var companytypv = dbContext.Set<CompanyType>();
+                  //  Mapper.Map(companytypv, companyTypes);
+                    model.Company.CompanyTypes = companyTypes;
 
                     dbContext.Set<Companies>().Add(company);
                     try
