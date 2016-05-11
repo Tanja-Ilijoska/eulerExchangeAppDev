@@ -54,12 +54,13 @@ namespace EulerExchangeAppDev.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RingsItemDetails rings)
+        public ActionResult Create(RingsViewModel rings)
         {
+            IMapper Mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
             if (ModelState.IsValid)
             {
-                var ring = new Rings();
-                Mapper.Map<RingsItemDetails, Rings>(rings);
+                Rings ring = new Rings();
+                Mapper.Map(rings, ring);
                 db.Rings.Add(ring);
                 db.SaveChanges();
                 return RedirectToAction("Index");

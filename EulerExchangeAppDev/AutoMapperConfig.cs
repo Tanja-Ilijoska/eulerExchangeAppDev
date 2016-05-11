@@ -19,6 +19,8 @@ namespace EulerExchangeAppDev
             {
                 cfg.CreateMap<CompanyType, CompanyTypeViewModel>().ReverseMap();
                 cfg.CreateMap<Companies, CompaniesViewModel>().ReverseMap();
+
+                cfg.CreateMap<Rings, RingsViewModel>().ReverseMap();
             });
         }
     }
