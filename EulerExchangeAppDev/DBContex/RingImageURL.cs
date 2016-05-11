@@ -16,8 +16,9 @@ namespace EulerExchangeAppDev.DBContex
     {
         public int Id { get; set; }
         public Nullable<int> RingID { get; set; }
-        public string RingImageURL1 { get; set; }
+        public Nullable<int> ImageUrlID { get; set; }
     
+        public virtual ImageURL ImageURL { get; set; }
         public virtual Rings Rings { get; set; }
     }
 }

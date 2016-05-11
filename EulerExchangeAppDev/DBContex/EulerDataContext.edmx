@@ -24,6 +24,21 @@
           <Property Name="AdditionalEMails" Type="nvarchar" MaxLength="250" />
           <Property Name="CompanyLocation" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="CompaniesCompanyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="CompanyTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="GemstoneType">
           <Key>
             <PropertyRef Name="Id" />
@@ -73,7 +88,7 @@ warning 6002: The table/view 'master.dbo.MSreplication_options' does not have a 
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RingID" Type="int" />
-          <Property Name="RingImageURL" Type="nvarchar" MaxLength="250" />
+          <Property Name="ImageUrlID" Type="int" />
         </EntityType>
         <EntityType Name="Rings">
           <Key>
@@ -184,14 +199,30 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <Property Name="total_write" Type="int" Nullable="false" />
           <Property Name="total_errors" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="TipArtikal">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-        </EntityType>
+        <Association Name="FK_CompaniesCompanyType_Company">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="CompaniesCompanyType" Type="Self.CompaniesCompanyType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesCompanyType">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesCompanyType_CompanyTypeId">
+          <End Role="CompanyType" Type="Self.CompanyType" Multiplicity="1" />
+          <End Role="CompaniesCompanyType" Type="Self.CompaniesCompanyType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesCompanyType">
+              <PropertyRef Name="CompanyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RingGemstoneType_GemstoneType">
           <End Role="GemstoneType" Type="Self.GemstoneType" Multiplicity="1" />
           <End Role="RingGemstoneType" Type="Self.RingGemstoneType" Multiplicity="*" />
@@ -213,6 +244,18 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
             </Principal>
             <Dependent Role="RingGemstoneType">
               <PropertyRef Name="RingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RingImageURL_ImageURL">
+          <End Role="ImageURL" Type="Self.ImageURL" Multiplicity="0..1" />
+          <End Role="RingImageURL" Type="Self.RingImageURL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageURL">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RingImageURL">
+              <PropertyRef Name="ImageUrlID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -242,12 +285,13 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
         </Association>
         <EntityContainer Name="masterModelStoreContainer">
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompaniesCompanyType" EntityType="Self.CompaniesCompanyType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyType" EntityType="Self.CompanyType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GemstoneType" EntityType="Self.GemstoneType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImageURL" EntityType="Self.ImageURL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RingGemstoneType" EntityType="Self.RingGemstoneType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RingImageURL" EntityType="Self.RingImageURL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rings" EntityType="Self.Rings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TipArtikal" EntityType="Self.TipArtikal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MSreplication_options" EntityType="Self.MSreplication_options" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [MSreplication_options].[optname] AS [optname], 
@@ -312,6 +356,14 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
     [spt_monitor].[total_errors] AS [total_errors]
     FROM [dbo].[spt_monitor] AS [spt_monitor]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_CompaniesCompanyType_Company" Association="Self.FK_CompaniesCompanyType_Company">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="CompaniesCompanyType" EntitySet="CompaniesCompanyType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesCompanyType_CompanyTypeId" Association="Self.FK_CompaniesCompanyType_CompanyTypeId">
+            <End Role="CompanyType" EntitySet="CompanyType" />
+            <End Role="CompaniesCompanyType" EntitySet="CompaniesCompanyType" />
+          </AssociationSet>
           <AssociationSet Name="FK_RingGemstoneType_GemstoneType" Association="Self.FK_RingGemstoneType_GemstoneType">
             <End Role="GemstoneType" EntitySet="GemstoneType" />
             <End Role="RingGemstoneType" EntitySet="RingGemstoneType" />
@@ -319,6 +371,10 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <AssociationSet Name="FK_RingGemstoneType_Rings" Association="Self.FK_RingGemstoneType_Rings">
             <End Role="Rings" EntitySet="Rings" />
             <End Role="RingGemstoneType" EntitySet="RingGemstoneType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RingImageURL_ImageURL" Association="Self.FK_RingImageURL_ImageURL">
+            <End Role="ImageURL" EntitySet="ImageURL" />
+            <End Role="RingImageURL" EntitySet="RingImageURL" />
           </AssociationSet>
           <AssociationSet Name="FK_RingImageURL_Ring" Association="Self.FK_RingImageURL_Ring">
             <End Role="Rings" EntitySet="Rings" />
@@ -335,17 +391,26 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
       <Schema Namespace="masterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="masterEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Companies" EntityType="masterModel.Companies" />
+          <EntitySet Name="CompaniesCompanyType" EntityType="masterModel.CompaniesCompanyType" />
+          <EntitySet Name="CompanyType" EntityType="masterModel.CompanyType" />
           <EntitySet Name="GemstoneType" EntityType="masterModel.GemstoneType" />
           <EntitySet Name="ImageURL" EntityType="masterModel.ImageURL" />
           <EntitySet Name="RingGemstoneType" EntityType="masterModel.RingGemstoneType" />
           <EntitySet Name="RingImageURL" EntityType="masterModel.RingImageURL" />
           <EntitySet Name="Rings" EntityType="masterModel.Rings" />
-          <EntitySet Name="TipArtikal" EntityType="masterModel.TipArtikal" />
           <EntitySet Name="MSreplication_options" EntityType="masterModel.MSreplication_options" />
           <EntitySet Name="spt_fallback_db" EntityType="masterModel.spt_fallback_db" />
           <EntitySet Name="spt_fallback_dev" EntityType="masterModel.spt_fallback_dev" />
           <EntitySet Name="spt_fallback_usg" EntityType="masterModel.spt_fallback_usg" />
           <EntitySet Name="spt_monitor" EntityType="masterModel.spt_monitor" />
+          <AssociationSet Name="FK_CompaniesCompanyType_Company" Association="masterModel.FK_CompaniesCompanyType_Company">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="CompaniesCompanyType" EntitySet="CompaniesCompanyType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompaniesCompanyType_CompanyTypeId" Association="masterModel.FK_CompaniesCompanyType_CompanyTypeId">
+            <End Role="CompanyType" EntitySet="CompanyType" />
+            <End Role="CompaniesCompanyType" EntitySet="CompaniesCompanyType" />
+          </AssociationSet>
           <AssociationSet Name="FK_RingGemstoneType_GemstoneType" Association="masterModel.FK_RingGemstoneType_GemstoneType">
             <End Role="GemstoneType" EntitySet="GemstoneType" />
             <End Role="RingGemstoneType" EntitySet="RingGemstoneType" />
@@ -353,6 +418,10 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <AssociationSet Name="FK_Rings_GemstoneType" Association="masterModel.FK_Rings_GemstoneType">
             <End Role="GemstoneType" EntitySet="GemstoneType" />
             <End Role="Rings" EntitySet="Rings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RingImageURL_ImageURL" Association="masterModel.FK_RingImageURL_ImageURL">
+            <End Role="ImageURL" EntitySet="ImageURL" />
+            <End Role="RingImageURL" EntitySet="RingImageURL" />
           </AssociationSet>
           <AssociationSet Name="FK_RingGemstoneType_Rings" Association="masterModel.FK_RingGemstoneType_Rings">
             <End Role="Rings" EntitySet="Rings" />
@@ -381,6 +450,25 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <Property Name="CompanyWebsite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalEMails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CompanyLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CompaniesCompanyType" Relationship="masterModel.FK_CompaniesCompanyType_Company" FromRole="Companies" ToRole="CompaniesCompanyType" />
+        </EntityType>
+        <EntityType Name="CompaniesCompanyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Companies" Relationship="masterModel.FK_CompaniesCompanyType_Company" FromRole="CompaniesCompanyType" ToRole="Companies" />
+          <NavigationProperty Name="CompanyType" Relationship="masterModel.FK_CompaniesCompanyType_CompanyTypeId" FromRole="CompaniesCompanyType" ToRole="CompanyType" />
+        </EntityType>
+        <EntityType Name="CompanyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CompaniesCompanyType" Relationship="masterModel.FK_CompaniesCompanyType_CompanyTypeId" FromRole="CompanyType" ToRole="CompaniesCompanyType" />
         </EntityType>
         <EntityType Name="GemstoneType">
           <Key>
@@ -400,6 +488,7 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="Int32" />
           <Property Name="ImageURL1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RingImageURL" Relationship="masterModel.FK_RingImageURL_ImageURL" FromRole="ImageURL" ToRole="RingImageURL" />
         </EntityType>
         <EntityType Name="RingGemstoneType">
           <Key>
@@ -417,7 +506,8 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RingID" Type="Int32" />
-          <Property Name="RingImageURL1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrlID" Type="Int32" />
+          <NavigationProperty Name="ImageURL" Relationship="masterModel.FK_RingImageURL_ImageURL" FromRole="RingImageURL" ToRole="ImageURL" />
           <NavigationProperty Name="Rings" Relationship="masterModel.FK_RingImageURL_Ring" FromRole="RingImageURL" ToRole="Rings" />
         </EntityType>
         <EntityType Name="Rings">
@@ -435,14 +525,6 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <NavigationProperty Name="GemstoneType" Relationship="masterModel.FK_Rings_GemstoneType" FromRole="Rings" ToRole="GemstoneType" />
           <NavigationProperty Name="RingGemstoneType" Relationship="masterModel.FK_RingGemstoneType_Rings" FromRole="Rings" ToRole="RingGemstoneType" />
           <NavigationProperty Name="RingImageURL" Relationship="masterModel.FK_RingImageURL_Ring" FromRole="Rings" ToRole="RingImageURL" />
-        </EntityType>
-        <EntityType Name="TipArtikal">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MSreplication_options">
           <Key>
@@ -548,6 +630,30 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <Property Name="total_write" Type="Int32" Nullable="false" />
           <Property Name="total_errors" Type="Int32" Nullable="false" />
         </EntityType>
+        <Association Name="FK_CompaniesCompanyType_Company">
+          <End Type="masterModel.Companies" Role="Companies" Multiplicity="1" />
+          <End Type="masterModel.CompaniesCompanyType" Role="CompaniesCompanyType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesCompanyType">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompaniesCompanyType_CompanyTypeId">
+          <End Type="masterModel.CompanyType" Role="CompanyType" Multiplicity="1" />
+          <End Type="masterModel.CompaniesCompanyType" Role="CompaniesCompanyType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompaniesCompanyType">
+              <PropertyRef Name="CompanyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RingGemstoneType_GemstoneType">
           <End Type="masterModel.GemstoneType" Role="GemstoneType" Multiplicity="1" />
           <End Type="masterModel.RingGemstoneType" Role="RingGemstoneType" Multiplicity="*" />
@@ -569,6 +675,18 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
             </Principal>
             <Dependent Role="Rings">
               <PropertyRef Name="GemstoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RingImageURL_ImageURL">
+          <End Type="masterModel.ImageURL" Role="ImageURL" Multiplicity="0..1" />
+          <End Type="masterModel.RingImageURL" Role="RingImageURL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageURL">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RingImageURL">
+              <PropertyRef Name="ImageUrlID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -622,6 +740,23 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CompaniesCompanyType">
+            <EntityTypeMapping TypeName="masterModel.CompaniesCompanyType">
+              <MappingFragment StoreEntitySet="CompaniesCompanyType">
+                <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyType">
+            <EntityTypeMapping TypeName="masterModel.CompanyType">
+              <MappingFragment StoreEntitySet="CompanyType">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="GemstoneType">
             <EntityTypeMapping TypeName="masterModel.GemstoneType">
               <MappingFragment StoreEntitySet="GemstoneType">
@@ -653,7 +788,7 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
           <EntitySetMapping Name="RingImageURL">
             <EntityTypeMapping TypeName="masterModel.RingImageURL">
               <MappingFragment StoreEntitySet="RingImageURL">
-                <ScalarProperty Name="RingImageURL1" ColumnName="RingImageURL" />
+                <ScalarProperty Name="ImageUrlID" ColumnName="ImageUrlID" />
                 <ScalarProperty Name="RingID" ColumnName="RingID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -667,15 +802,6 @@ warning 6002: The table/view 'master.dbo.spt_monitor' does not have a primary ke
                 <ScalarProperty Name="Circumference" ColumnName="Circumference" />
                 <ScalarProperty Name="Radius" ColumnName="Radius" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipArtikal">
-            <EntityTypeMapping TypeName="masterModel.TipArtikal">
-              <MappingFragment StoreEntitySet="TipArtikal">
                 <ScalarProperty Name="Decription" ColumnName="Decription" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
