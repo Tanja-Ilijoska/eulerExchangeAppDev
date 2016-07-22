@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using EulerExchangeAppDev.Models;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(EulerExchangeAppDev.Startup))]

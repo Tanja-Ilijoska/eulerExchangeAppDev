@@ -1,0 +1,65 @@
+﻿@*@model IEnumerable<EulerExchangeAppDev.Models.ChainsViewModel>*@
+@model PagedList.IPagedList<EulerExchangeAppDev.Models.ChainsViewModel>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div style="display:table">
+    @foreach (var item in Model)
+    {
+        <div style="float:left;width:200px">
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })<br />
+
+            @if (item.ChainsImageURL != null && item.ChainsImageURL.Count > 0)
+            {
+                <img src='@Url.Action("GetImage", "Chains", item.ChainsImageURL.First())' width="150" height="150" /><br />
+
+            }
+            else
+            {
+                <img src="~/DataImages/noimage.png" width="150" /><br />
+            }
+
+            <b>@Html.DisplayNameFor(model => model.First().Number):</b>
+            @Html.DisplayFor(modelItem => item.Number)<br />
+
+            <b>@Html.DisplayNameFor(model => model.First().Decription):</b>
+            @Html.DisplayFor(modelItem => item.Decription)<br />
+
+            <b>@Html.DisplayNameFor(model => model.First().Size):</b>
+            @Html.DisplayFor(modelItem => item.Size)<br />
+
+            <b>@Html.DisplayNameFor(model => model.First().Length):</b>
+            @Html.DisplayFor(modelItem => item.Length)<br />
+
+            <b>@Html.DisplayNameFor(model => model.First().Circumference):</b>
+            @Html.DisplayFor(modelItem => item.Circumference)<br />
+
+            <b>@Html.DisplayNameFor(model => model.First().Carat):</b>
+            @Html.DisplayFor(modelItem => item.Carat)<br />
+
+            <b>@Html.DisplayNameFor(model => model.First().Price):</b>
+            @Html.DisplayFor(modelItem => item.Price)<br />
+
+            <b>@Html.DisplayNameFor(model => model.First().Weight):</b>
+            @Html.DisplayFor(modelItem => item.Weight)<br />
+
+        </div>
+    }
+</div>
+<div style="float:inherit">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+

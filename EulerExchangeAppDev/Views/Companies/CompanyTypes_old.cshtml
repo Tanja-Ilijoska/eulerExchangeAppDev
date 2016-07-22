@@ -1,0 +1,16 @@
+﻿@model List<EulerExchangeAppDev.Models.CompanyTypeViewModel>
+
+<div class="form-group">
+    
+    <div class="col-md-2 control-label form-horizontal">Company types</div>
+    <div class="col-md-10">
+        @foreach (var type in Model)
+        {
+            @Html.CheckBoxFor(m => m.SingleOrDefault(x => x.Id == type.Id).IsSelected)
+
+            @Html.HiddenFor(m => m.SingleOrDefault(x => x.Id == type.Id).Id)
+
+            @type.Type
+        }
+    </div>
+</div>

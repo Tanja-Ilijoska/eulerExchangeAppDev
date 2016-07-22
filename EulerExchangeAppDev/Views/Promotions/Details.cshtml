@@ -1,0 +1,146 @@
+﻿@model EulerExchangeAppDev.Models.Promotions
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Promotions</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinOrderGram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinOrderGram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinOrderPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinOrderPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PeriodFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PeriodFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PeriodTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PeriodTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EngagementRIngs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EngagementRIngs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeddingRings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeddingRings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pendants)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pendants)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chains)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chains)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Necklaces)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Necklaces)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bracelets)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bracelets)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Earrings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Earrings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LightSets)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LightSets)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SetsWatchesSunglasses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SetsWatchesSunglasses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Companies.ContactPersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Companies.ContactPersonName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d16511bb7ae34f909f74ae297047ee67" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="EulerDatabaseModel.Bracelets" Width="1.5" PointX="3" PointY="35.125" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.BraceletsImageURL" Width="1.5" PointX="5.25" PointY="35.875" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Chains" Width="1.5" PointX="3" PointY="17" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.ChainsImageURL" Width="1.5" PointX="5.25" PointY="17.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Companies" Width="1.5" PointX="0.75" PointY="25.25" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.CompanyType" Width="1.5" PointX="3" PointY="21.125" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Discounts" Width="1.5" PointX="3" PointY="13.5" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Earrings" Width="1.5" PointX="3" PointY="43" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.EarringsImageURL" Width="1.5" PointX="5.25" PointY="43.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.EngagementRings" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.EngagementRingsImageURL" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.ImageURL" Width="1.5" PointX="3.75" PointY="24.625" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.LightSets" Width="1.5" PointX="3" PointY="39.125" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.LightSetsImageURL" Width="1.5" PointX="5.25" PointY="39.875" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Necklaces" Width="1.5" PointX="3" PointY="31" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.NecklacesImageURL" Width="1.5" PointX="5.25" PointY="31.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Pendants" Width="1.5" PointX="3" PointY="47" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.PendantsImageURL" Width="1.5" PointX="5.25" PointY="47.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Promotions" Width="1.5" PointX="3" PointY="51" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Rings" Width="1.5" PointX="6" PointY="23.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.SetsWatchesSunglasses" Width="1.5" PointX="3" PointY="27.5" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.SetsWatchesSunglassesImageURL" Width="1.5" PointX="5.25" PointY="28" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.WeddingRings" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.WeddingRingsImageURL" Width="1.5" PointX="5.25" PointY="6.125" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_Bracelets_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_BraceletsImageURL_Bracelets" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_Chains_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_ChainsImageURL_Chains" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_Discounts_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_Earrings_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_EngagementRings_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_LightSets_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_Necklaces_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_Pendants_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_Promotion_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_Rings_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_SetsWatchesSunglasses_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_WeddingRings_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_EarringsImageURL_Earrings" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_EngagementRingsImageURL_EngagementRings" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_LightSetsImageURL_LightSets" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_NecklacesImageURL_Necklaces" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_PendantsImageURL_Pendants" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_SetsWatchesSunglassesImageURL_SetsWatchesSunglasses" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_WeddingRingsImageURL_WeddingRings" />
+        <AssociationConnector Association="EulerDatabaseModel.CompaniesCompanyType" />
+        <AssociationConnector Association="EulerDatabaseModel.RingsImageURL" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

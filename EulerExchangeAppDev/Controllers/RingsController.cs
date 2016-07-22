@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using EulerExchangeAppDev.DBContex;
 using System.IO;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
@@ -14,17 +13,25 @@ using Kendo.Mvc.Infrastructure;
 using Kendo.Mvc.Resources;
 using AutoMapper;
 using EulerExchangeAppDev.Models;
+using System.Security.Claims;
+using EulerExchangeAppDev.DataAccess;
 
 namespace EulerExchangeAppDev.Controllers
 {
     public class RingsController : Controller
     {
         private masterEntities db = new masterEntities();
+        IMapper Mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
 
         // GET: Rings
         public ActionResult Index()
         {
-            return View(db.Rings.ToList());
+            List<RingsViewModel> ringsViewModel = new List<RingsViewModel>();
+            List<Rings> rings = db.Rings.ToList();
+            Mapper.Map(rings, ringsViewModel);
+
+            //var ringsViewModel = Mapper.Map<List<Rings>, List<RingsViewModel>>(rings);
+            return View(ringsViewModel);
         }
 
         // GET: Rings/Details/5
@@ -35,12 +42,12 @@ namespace EulerExchangeAppDev.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Rings rings = db.Rings.Find(id);
-            rings.GemstoneType = db.GemstoneType.Find(id);
+            //rings.GemstoneType = db.GemstoneType.Find(id);
             if (rings == null)
             {
                 return HttpNotFound();
             }
-            return View(rings);
+            return View(Mapper.Map<Rings, RingsViewModel>(rings));
         }
 
         // GET: Rings/Create
@@ -54,15 +61,25 @@ namespace EulerExchangeAppDev.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RingsViewModel rings)
+        public ActionResult Create(RingsViewModel rings, IEnumerable<HttpPostedFileBase> files)
         {
-            IMapper Mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
             if (ModelState.IsValid)
             {
                 Rings ring = new Rings();
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+
+                UserInfo userInfo = new UserInfo(db);
+
+                Companies company = userInfo.getLoggedCompanyId(claimsIdentity);
+                ring.Companies = company;
+                
                 Mapper.Map(rings, ring);
                 db.Rings.Add(ring);
                 db.SaveChanges();
+
+                //save images
+                SaveImages(files, company, ring);
+
                 return RedirectToAction("Index");
             }
 
@@ -77,12 +94,12 @@ namespace EulerExchangeAppDev.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Rings rings = db.Rings.Find(id);
-            rings.GemstoneType = db.GemstoneType.Find(id);
+            //rings.GemstoneType = db.GemstoneType.Find(id);
             if (rings == null)
             {
                 return HttpNotFound();
             }
-            return View(rings);
+            return View(Mapper.Map<Rings,RingsViewModel>(rings));
         }
 
         // POST: Rings/Edit/5
@@ -113,7 +130,7 @@ namespace EulerExchangeAppDev.Controllers
             {
                 return HttpNotFound();
             }
-            return View(rings);
+            return View(Mapper.Map<Rings, RingsViewModel>(rings));
         }
 
         // POST: Rings/Delete/5
@@ -141,22 +158,41 @@ namespace EulerExchangeAppDev.Controllers
             return View();
         }
 
-        public ActionResult Save(IEnumerable<HttpPostedFileBase> files)
+        public ActionResult SaveImages(IEnumerable<HttpPostedFileBase> files, Companies company, Rings ring)
         {
             // The Name of the Upload component is "files"
             if (files != null)
             {
+                int i = 1;
                 foreach (var file in files)
                 {
+
                     // Some browsers send file names with full path.
                     // We are only interested in the file name.
                     var fileName = Path.GetFileName(file.FileName);
-                    var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                    var physicalPath = Server.MapPath("/")+"DataImages/Rings/" + company.Id + "/ring" + ring.Id;
+                    var webPath = "DataImages/Rings/" + company.Id + "/ring" + ring.Id;
+
+                    if (!System.IO.Directory.Exists(physicalPath))
+                    {
+                        System.IO.Directory.CreateDirectory(physicalPath);
+                    }
 
                     // The files are not actually saved in this demo
-                    // file.SaveAs(physicalPath);
+                    physicalPath = physicalPath + "/" + i + "." + file.FileName.Split('.')[1];
+                    webPath = webPath + "/" + i + "." + file.FileName.Split('.')[1];
+
+                    file.SaveAs(physicalPath);
+                    //physicalPath = physicalPath.Replace(" ", "%20");
+                    ImageURL imageURL = new ImageURL();
+                    imageURL.ImageURL1 = webPath;
+                    ring.ImageURL.Add(imageURL);
+                    i++;
                 }
             }
+
+
+            db.SaveChanges();
 
             // Return an empty string to signify success
             return Content("");
@@ -187,5 +223,17 @@ namespace EulerExchangeAppDev.Controllers
             return Content("");
         }
 
+        public ActionResult GetImage(ImageURL item)
+        {
+            if(item == null)
+                return null;
+
+            string path = Server.MapPath("/")+item.ImageURL1;
+            if (!System.IO.File.Exists(path))
+                return null;
+
+            byte[] imageByteData = System.IO.File.ReadAllBytes(path);
+            return File(imageByteData, "image");
+        }
     }
 }

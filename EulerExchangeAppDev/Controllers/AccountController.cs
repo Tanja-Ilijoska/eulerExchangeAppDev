@@ -9,9 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EulerExchangeAppDev.Models;
-using EulerExchangeAppDev.DBContex;
 using System.Collections.Generic;
 using AutoMapper;
+using EulerExchangeAppDev.DataAccess;
+using System.Diagnostics;
 
 namespace EulerExchangeAppDev.Controllers
 {
@@ -142,15 +143,22 @@ namespace EulerExchangeAppDev.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            IMapper Mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
             RegisterViewModel model = new RegisterViewModel();
             CompaniesViewModel company = new CompaniesViewModel();
-            List<CompanyTypeViewModel> companyTypes = new List<CompanyTypeViewModel>();
-            masterEntities dbContext = new masterEntities();
-            var companytypv = dbContext.Set<CompanyType>();
-            Mapper.Map(companytypv, companyTypes);
-            company.CompanyTypes = companyTypes;
             model.Company = company;
+
+            var allCompanyTypes = CompanyTypeManager.GetAll(); //returns List<CompanyTypes>
+            var checkBoxListItems = new List<CheckBoxListItem>();
+            foreach (var type in allCompanyTypes)
+            {
+                checkBoxListItems.Add(new CheckBoxListItem()
+                {
+                    ID = type.Id,
+                    Display = type.Type,
+                    IsChecked = false //On the add view, no genres are selected by default
+                });
+            }
+            company.CompanyTypes = checkBoxListItems;
             return View(model);
         }
 
@@ -163,56 +171,64 @@ namespace EulerExchangeAppDev.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
-                if (model.Company != null)
-                {
-                    masterEntities dbContext = new masterEntities();
-                    Companies company = new Companies()
-                        {
-                            AdditionalEMails = model.Company.AdditionalEMails,
-                            CompanyName = model.Company.CompanyName,
-                            CompanyAddress = model.Company.CompanyAddress,
-                            CompanyCity = model.Company.CompanyCity,
-                            CompanyCountry = model.Company.CompanyCountry,
-                            CompanyLocation = model.Company.CompanyLocation,
-                            CompanyPhone = model.Company.CompanyPhone,
-                            CompanyWebsite = model.Company.CompanyWebsite,
-                            ContactPersonName = model.Company.ContactPersonName,
-                            NumberOfEmployees = model.Company.NumberOfEmployees,
-                            YearFounded = model.Company.YearFounded,
-                            YearlyRevenue = model.Company.YearlyRevenue
-                        };
-                    List<CompanyTypeViewModel> companyTypes = new List<CompanyTypeViewModel>();
-                  //  var companytypv = dbContext.Set<CompanyType>();
-                  //  Mapper.Map(companytypv, companyTypes);
-                    model.Company.CompanyTypes = companyTypes;
-
-                    dbContext.Set<Companies>().Add(company);
-                    try
-                    {
-                        dbContext.SaveChanges();
-                    }
-                    catch(Exception ex)
-                    {
-
-                    }
-                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    try
+                    {
+                        masterEntities dbContext = new masterEntities();
+                        Companies company;
+                        if (model.Company != null)
+                        {
+
+                            company = new Companies()
+                            {
+                                AdditionalEMails = model.Company.AdditionalEMails,
+                                CompanyName = model.Company.CompanyName,
+                                CompanyAddress = model.Company.CompanyAddress,
+                                CompanyCity = model.Company.CompanyCity,
+                                CompanyCountry = model.Company.CompanyCountry,
+                                CompanyLocation = model.Company.CompanyLocation,
+                                CompanyPhone = model.Company.CompanyPhone,
+                                CompanyWebsite = model.Company.CompanyWebsite,
+                                ContactPersonName = model.Company.ContactPersonName,
+                                NumberOfEmployees = model.Company.NumberOfEmployees,
+                                YearFounded = model.Company.YearFounded,
+                                YearlyRevenue = model.Company.YearlyRevenue
+                            };
+
+                            foreach (var companyTypeId in model.Company.CompanyTypes.Where(x => x.IsChecked).Select(x => x.ID).ToList())
+                            {
+                                var type = dbContext.CompanyType.Find(companyTypeId);
+                                company.CompanyType.Add(type);
+                            }
+
+                            dbContext.Companies.Add(company);
+                            //dbContext.Set<Company>().Add(company);
+
+                            company.UserId = user.Id;
+
+                            dbContext.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.ToString());
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
-
 
             // If we got this far, something failed, redisplay form
             return View(model);

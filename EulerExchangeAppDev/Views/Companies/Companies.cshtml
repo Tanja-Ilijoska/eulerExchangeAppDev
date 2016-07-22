@@ -1,7 +1,10 @@
 ﻿@model EulerExchangeAppDev.Models.CompaniesViewModel
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap">
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9fZslBCm6dN2U64XIJcjpeAZzOPzd5Gw&callback=initMap">
 </script>
+
+  
 
 <script>
     function initMap() {
@@ -123,5 +126,12 @@
     <div id="map" style="height:300px;width:400px"></div>
     <div class="col-md-10">
         @Html.TextBoxFor(m => m.CompanyLocation, new { @class = "form-control" , @id = "location", @style = "display:none"})
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.CompanyTypes, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+       @Html.EditorFor(m => m.CompanyTypes)
     </div>
 </div>

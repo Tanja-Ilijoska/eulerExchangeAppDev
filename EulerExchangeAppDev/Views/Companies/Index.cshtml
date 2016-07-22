@@ -1,0 +1,111 @@
+﻿@model IEnumerable<EulerProject.Models.Company>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactPersonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactPersonLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearFounded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfEmployees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearlyRevenue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyCountry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyWebsite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdditionalEMails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactPersonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactPersonLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearFounded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfEmployees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearlyRevenue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyCountry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyWebsite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdditionalEMails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

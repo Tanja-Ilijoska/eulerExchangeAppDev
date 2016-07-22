@@ -32,10 +32,11 @@
         </div>
     </div>
     
+@*
     @Html.Partial("~/Views/Companies/CompanyTypes.cshtml", Model.Company.CompanyTypes, new ViewDataDictionary { TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "Company_CompanyTypes" } })
-
+*@
     @Html.Partial("~/Views/Companies/Companies.cshtml", Model.Company, new ViewDataDictionary { TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "Company" } })
-    
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Register" />

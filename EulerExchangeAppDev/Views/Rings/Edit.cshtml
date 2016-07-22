@@ -1,4 +1,4 @@
-﻿@model EulerExchangeAppDev.DBContex.Rings
+﻿@model EulerExchangeAppDev.Models.RingsViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -54,15 +54,7 @@
                 @Html.EditorFor(model => model.Circumference, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Circumference, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GemstoneID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GemstoneID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GemstoneID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        </div>s
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

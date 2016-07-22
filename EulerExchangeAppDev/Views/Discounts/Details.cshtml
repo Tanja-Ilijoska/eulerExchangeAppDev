@@ -1,0 +1,74 @@
+﻿@model EulerExchangeAppDev.Models.Discounts
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Discounts</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Persent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Persent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FixPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FixPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinOrderGram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinOrderGram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinOrderPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinOrderPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PeriodFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PeriodFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PeriodTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PeriodTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Companies.ContactPersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Companies.ContactPersonName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

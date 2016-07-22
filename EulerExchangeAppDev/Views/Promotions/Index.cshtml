@@ -1,0 +1,120 @@
+﻿@model IEnumerable<EulerExchangeAppDev.Models.PromotionsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinOrderGram)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinOrderPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PeriodFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PeriodTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EngagementRIngs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WeddingRings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pendants)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Chains)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Necklaces)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bracelets)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Earrings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LightSets)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SetsWatchesSunglasses)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinOrderGram)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinOrderPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PeriodFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PeriodTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngagementRIngs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeddingRings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pendants)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chains)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Necklaces)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bracelets)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Earrings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LightSets)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SetsWatchesSunglasses)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Companies.ContactPersonName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
