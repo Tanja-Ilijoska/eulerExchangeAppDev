@@ -25,29 +25,15 @@ namespace EulerExchangeAppDev.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Bracelets> Bracelets { get; set; }
-        public virtual DbSet<BraceletsImageURL> BraceletsImageURL { get; set; }
-        public virtual DbSet<Chains> Chains { get; set; }
-        public virtual DbSet<ChainsImageURL> ChainsImageURL { get; set; }
         public virtual DbSet<Companies> Companies { get; set; }
         public virtual DbSet<CompanyType> CompanyType { get; set; }
         public virtual DbSet<Discounts> Discounts { get; set; }
-        public virtual DbSet<Earrings> Earrings { get; set; }
-        public virtual DbSet<EarringsImageURL> EarringsImageURL { get; set; }
-        public virtual DbSet<EngagementRings> EngagementRings { get; set; }
-        public virtual DbSet<EngagementRingsImageURL> EngagementRingsImageURL { get; set; }
+        public virtual DbSet<Gemstones> Gemstones { get; set; }
         public virtual DbSet<ImageURL> ImageURL { get; set; }
-        public virtual DbSet<LightSets> LightSets { get; set; }
-        public virtual DbSet<LightSetsImageURL> LightSetsImageURL { get; set; }
-        public virtual DbSet<Necklaces> Necklaces { get; set; }
-        public virtual DbSet<NecklacesImageURL> NecklacesImageURL { get; set; }
-        public virtual DbSet<Pendants> Pendants { get; set; }
-        public virtual DbSet<PendantsImageURL> PendantsImageURL { get; set; }
+        public virtual DbSet<JewelryCategories> JewelryCategories { get; set; }
+        public virtual DbSet<JewelryItems> JewelryItems { get; set; }
+        public virtual DbSet<JewelryMachines> JewelryMachines { get; set; }
+        public virtual DbSet<JewelryMachinesImageURL> JewelryMachinesImageURL { get; set; }
         public virtual DbSet<Promotions> Promotions { get; set; }
-        public virtual DbSet<Rings> Rings { get; set; }
-        public virtual DbSet<SetsWatchesSunglasses> SetsWatchesSunglasses { get; set; }
-        public virtual DbSet<SetsWatchesSunglassesImageURL> SetsWatchesSunglassesImageURL { get; set; }
-        public virtual DbSet<WeddingRings> WeddingRings { get; set; }
-        public virtual DbSet<WeddingRingsImageURL> WeddingRingsImageURL { get; set; }
     }
 }

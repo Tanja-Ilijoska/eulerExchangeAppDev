@@ -1,0 +1,101 @@
+﻿@model IEnumerable<EulerExchangeAppDev.Models.JewelryMachinesViewModel>
+@*@model PagedList.IPagedList<EulerExchangeAppDev.Models.JewelryMachinesViewModel>*@
+
+    <link rel="stylesheet" href="~/Scripts/MagnificPopup/magnific-popup.css">
+    <script src="~/Scripts/MagnificPopup/jquery.magnific-popup.js"></script>
+
+    <div style="display:table">
+        @foreach (var item in Model)
+        {
+            <div>
+
+                <div style="background-color:#eeeeee">@item.Companies.CompanyName</div>
+
+                @if (item.JewelryMachinesImageURL != null && item.JewelryMachinesImageURL.Count > 0)
+                {
+                    <div class="gallery">
+                        <a href="@Url.Action("GetImage", "JewelryMachines", item.JewelryMachinesImageURL.First())" productDetails="@item.ProductDetails">
+                            <img src='@Url.Action("GetImage", "JewelryMachines", item.JewelryMachinesImageURL.First())' width="150" height="150" /><br />
+                        </a>
+                        @for (int i = 1; i < item.JewelryMachinesImageURL.Count; i++)
+                        {
+                            <a href="@Url.Action("GetImage", "JewelryMachines", item.JewelryMachinesImageURL.ElementAt(i))" style="display:none" productDetails="@item.ProductDetails"></a>
+                        }
+
+                    </div>
+                }
+                else
+                {
+                    <img src="~/DataImages/noimage.png" width="150" />
+                    <br />
+                }
+
+                <b>@Html.DisplayNameFor(model => model.First().ModelType):</b>
+                @Html.DisplayFor(modelItem => item.ModelType)
+                <br />
+
+                <b>@Html.DisplayNameFor(model => model.First().BrandName):</b>
+                @Html.DisplayFor(modelItem => item.BrandName)
+                <br />
+
+                <b>@Html.DisplayNameFor(model => model.First().Price):</b>
+                @Html.DisplayFor(modelItem => item.Price)
+                <br />
+
+                <b>@Html.DisplayNameFor(model => model.First().ProductDetails):</b>
+                @Html.DisplayFor(modelItem => item.ProductDetails)
+                <br />
+
+                <b>@Html.DisplayNameFor(model => model.First().AfterSalesService):</b>
+                @Html.DisplayFor(modelItem => item.AfterSalesService)
+                <br />
+
+            </div>
+        }
+    </div>
+<hr>
+    <script>
+        $('.gallery').each(function () { // the containers for all your galleries
+            $(this).magnificPopup({
+                delegate: 'a', // the selector for gallery item
+                type: 'image',
+                tLoading: 'Loading image #%curr%...',
+                image: {
+                    verticalFit: true
+                },
+                gallery: {
+                    enabled: true,
+                    navigateByImgClick: true,
+                    preload: [0, 1]
+                },
+                image: {
+                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                    titleSrc: function (item) {
+                        return "ProductDetails: " + item.el.attr('productDetails');
+                    },
+                    markup: '<div class="mfp-figure">' +
+                                '<div style="color:white">TEXT</div>' +
+                                '<div class="mfp-close"></div>' +
+                                    '<div class="mfp-img"></div>' +
+                                '<div class="mfp-bottom-bar">' +
+                                    '<div class="mfp-title"></div>' +
+                                    '<div class="mfp-counter"></div>' +
+                                 '</div>' +
+                            '</div>',
+                    verticalFit: true
+                },
+                callbacks: {
+                    resize: changeImgSize,
+                    imageLoadComplete: changeImgSize,
+                    change: changeImgSize
+                }
+            });
+        });
+
+
+        function changeImgSize() {
+            var img = this.content.find('img');
+            img.css('height', '500');
+            img.css('width', '500');
+        }
+    </script>

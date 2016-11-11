@@ -13,10 +13,14 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/kendo")
 
+        @Styles.Render("~/Content/marquee.css")
+        <link href="~/Content/marquee.css" rel="stylesheet" />
+
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 </head>
 <body>
+    @*
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             
@@ -31,10 +35,10 @@
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
     <li>@Html.ActionLink("About", "About", "Home")</li>
-    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Rings", "Index", "Rings")</li>
                     <li>@Html.ActionLink("EngagementRings", "Index", "EngagementRings")</li>
                     <li>@Html.ActionLink("WeddingRings", "Index", "WeddingRings")</li>
@@ -51,15 +55,23 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="container body-content">
         @RenderBody()
         <hr />
+        @*<div class="example1">
+        <p>
+            @ViewBag.currencyRates
+        </p>
+    </div>*@
+        <div class="marquee">
+            <p>@ViewBag.currencyRates</p>
+        </div>
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Lumenore</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

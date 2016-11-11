@@ -5,52 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="EulerDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Bracelets">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Size" Type="nvarchar" MaxLength="10" />
-          <Property Name="Length" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="BraceletsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BraceletId" Type="int" Nullable="false" />
-          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="Chains">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Size" Type="nvarchar" MaxLength="10" />
-          <Property Name="Length" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ChainsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ChainId" Type="int" Nullable="false" />
-          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
-        </EntityType>
         <EntityType Name="Companies">
           <Key>
             <PropertyRef Name="Id" />
@@ -98,50 +52,12 @@
           <Property Name="PeriodTo" Type="datetime" Nullable="false" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Earrings">
+        <EntityType Name="Gemstones">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Size" Type="nvarchar" MaxLength="10" />
-          <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EarringsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EarringId" Type="int" Nullable="false" />
-          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="EngagementRings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Size" Type="nvarchar" MaxLength="10" />
-          <Property Name="Radius" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EngagementRingsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EngagementRingId" Type="int" Nullable="false" />
-          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ImageURL">
           <Key>
@@ -150,72 +66,65 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
         </EntityType>
-        <EntityType Name="LightSets">
+        <EntityType Name="JewelryCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JewelryItems">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Size" Type="nvarchar" MaxLength="10" />
-          <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="CategoryJewelryId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="real" />
+          <Property Name="Price" Type="real" />
+          <Property Name="Millem" Type="real" />
+          <Property Name="Carat" Type="real" />
+          <Property Name="Pieces" Type="int" />
+          <Property Name="Size" Type="nvarchar" MaxLength="20" />
+          <Property Name="Length" Type="real" />
+          <Property Name="Thick" Type="real" />
+          <Property Name="Wide" Type="real" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="JewelryItemsGemstones">
+          <Key>
+            <PropertyRef Name="JewelryItemId" />
+            <PropertyRef Name="GemstoneId" />
+          </Key>
+          <Property Name="JewelryItemId" Type="int" Nullable="false" />
+          <Property Name="GemstoneId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JewelryItemsImageURL">
+          <Key>
+            <PropertyRef Name="JewelryItemId" />
+            <PropertyRef Name="ImageURLId" />
+          </Key>
+          <Property Name="JewelryItemId" Type="int" Nullable="false" />
+          <Property Name="ImageURLId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JewelryMachines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModelType" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductDetails" Type="nvarchar" MaxLength="500" />
+          <Property Name="AfterSalesService" Type="nvarchar" MaxLength="500" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="LightSetsImageURL">
+        <EntityType Name="JewelryMachinesImageURL">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LightSetId" Type="int" Nullable="false" />
-          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="Necklaces">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Size" Type="nvarchar" MaxLength="10" />
-          <Property Name="Length" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="NecklacesImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NecklaceId" Type="int" Nullable="false" />
-          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="Pendants">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Size" Type="nvarchar" MaxLength="10" />
-          <Property Name="Radius" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PendantsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PendantId" Type="int" Nullable="false" />
+          <Property Name="JewelryMachinesId" Type="int" Nullable="false" />
           <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Promotions">
@@ -229,7 +138,7 @@
           <Property Name="PeriodFrom" Type="datetime" Nullable="false" />
           <Property Name="PeriodTo" Type="datetime" Nullable="false" />
           <Property Name="Rings" Type="bit" />
-          <Property Name="EngagementRIngs" Type="bit" />
+          <Property Name="EngagementRings" Type="bit" />
           <Property Name="WeddingRings" Type="bit" />
           <Property Name="Pendants" Type="bit" />
           <Property Name="Chains" Type="bit" />
@@ -240,120 +149,6 @@
           <Property Name="SetsWatchesSunglasses" Type="bit" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Rings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Size" Type="nvarchar" MaxLength="10" />
-          <Property Name="Radius" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RingsImageURL">
-          <Key>
-            <PropertyRef Name="RingId" />
-            <PropertyRef Name="ImageURLId" />
-          </Key>
-          <Property Name="RingId" Type="int" Nullable="false" />
-          <Property Name="ImageURLId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="SetsWatchesSunglasses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="SetsWatchesSunglassesImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SetsWatchesSunglasseId" Type="int" Nullable="false" />
-          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="WeddingRings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="Decription" Type="nvarchar" MaxLength="150" />
-          <Property Name="Size" Type="nvarchar" MaxLength="10" />
-          <Property Name="Radius" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="WeddingRingsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="WeddingRingId" Type="int" Nullable="false" />
-          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
-        </EntityType>
-        <Association Name="FK_Bracelets_Companies">
-          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="Bracelets" Type="Self.Bracelets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bracelets">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BraceletsImageURL_Bracelets">
-          <End Role="Bracelets" Type="Self.Bracelets" Multiplicity="1" />
-          <End Role="BraceletsImageURL" Type="Self.BraceletsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bracelets">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BraceletsImageURL">
-              <PropertyRef Name="BraceletId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Chains_Companies">
-          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="Chains" Type="Self.Chains" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Chains">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChainsImageURL_Chains">
-          <End Role="Chains" Type="Self.Chains" Multiplicity="1" />
-          <End Role="ChainsImageURL" Type="Self.ChainsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Chains">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChainsImageURL">
-              <PropertyRef Name="ChainId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CompaniesCompanyType_Company">
           <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
           <End Role="CompaniesCompanyType" Type="Self.CompaniesCompanyType" Multiplicity="*" />
@@ -390,123 +185,99 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Earrings_Companies">
+        <Association Name="FK_ItemsJewelry_CategoriesJewelry">
+          <End Role="JewelryCategories" Type="Self.JewelryCategories" Multiplicity="1" />
+          <End Role="JewelryItems" Type="Self.JewelryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JewelryCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JewelryItems">
+              <PropertyRef Name="CategoryJewelryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemsJewelry_Companies">
           <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="Earrings" Type="Self.Earrings" Multiplicity="*" />
+          <End Role="JewelryItems" Type="Self.JewelryItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Companies">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Earrings">
+            <Dependent Role="JewelryItems">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EarringsImageURL_Earrings">
-          <End Role="Earrings" Type="Self.Earrings" Multiplicity="1" />
-          <End Role="EarringsImageURL" Type="Self.EarringsImageURL" Multiplicity="*" />
+        <Association Name="FK_JewelryItemsGemstones_Gemstones">
+          <End Role="Gemstones" Type="Self.Gemstones" Multiplicity="1" />
+          <End Role="JewelryItemsGemstones" Type="Self.JewelryItemsGemstones" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Earrings">
+            <Principal Role="Gemstones">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="EarringsImageURL">
-              <PropertyRef Name="EarringId" />
+            <Dependent Role="JewelryItemsGemstones">
+              <PropertyRef Name="GemstoneId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EngagementRings_Companies">
+        <Association Name="FK_JewelryItemsGemstones_JewelryItems">
+          <End Role="JewelryItems" Type="Self.JewelryItems" Multiplicity="1" />
+          <End Role="JewelryItemsGemstones" Type="Self.JewelryItemsGemstones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JewelryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JewelryItemsGemstones">
+              <PropertyRef Name="JewelryItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JewelryItemsImageURL_ImageURL">
+          <End Role="ImageURL" Type="Self.ImageURL" Multiplicity="1" />
+          <End Role="JewelryItemsImageURL" Type="Self.JewelryItemsImageURL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ImageURL">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JewelryItemsImageURL">
+              <PropertyRef Name="ImageURLId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JewelryItemsImageURL_JewelryItems">
+          <End Role="JewelryItems" Type="Self.JewelryItems" Multiplicity="1" />
+          <End Role="JewelryItemsImageURL" Type="Self.JewelryItemsImageURL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JewelryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JewelryItemsImageURL">
+              <PropertyRef Name="JewelryItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JewelryMachines_Companies">
           <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="EngagementRings" Type="Self.EngagementRings" Multiplicity="*" />
+          <End Role="JewelryMachines" Type="Self.JewelryMachines" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Companies">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="EngagementRings">
+            <Dependent Role="JewelryMachines">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EngagementRingsImageURL_EngagementRings">
-          <End Role="EngagementRings" Type="Self.EngagementRings" Multiplicity="1" />
-          <End Role="EngagementRingsImageURL" Type="Self.EngagementRingsImageURL" Multiplicity="*" />
+        <Association Name="FK_JewelryMachinesImageURL_JewelryMachines">
+          <End Role="JewelryMachines" Type="Self.JewelryMachines" Multiplicity="1" />
+          <End Role="JewelryMachinesImageURL" Type="Self.JewelryMachinesImageURL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="EngagementRings">
+            <Principal Role="JewelryMachines">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="EngagementRingsImageURL">
-              <PropertyRef Name="EngagementRingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LightSets_Companies">
-          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="LightSets" Type="Self.LightSets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LightSets">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LightSetsImageURL_LightSets">
-          <End Role="LightSets" Type="Self.LightSets" Multiplicity="1" />
-          <End Role="LightSetsImageURL" Type="Self.LightSetsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LightSets">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LightSetsImageURL">
-              <PropertyRef Name="LightSetId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Necklaces_Companies">
-          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="Necklaces" Type="Self.Necklaces" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Necklaces">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NecklacesImageURL_Necklaces">
-          <End Role="Necklaces" Type="Self.Necklaces" Multiplicity="1" />
-          <End Role="NecklacesImageURL" Type="Self.NecklacesImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Necklaces">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NecklacesImageURL">
-              <PropertyRef Name="NecklaceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pendants_Companies">
-          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="Pendants" Type="Self.Pendants" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pendants">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PendantsImageURL_Pendants">
-          <End Role="Pendants" Type="Self.Pendants" Multiplicity="1" />
-          <End Role="PendantsImageURL" Type="Self.PendantsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pendants">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PendantsImageURL">
-              <PropertyRef Name="PendantId" />
+            <Dependent Role="JewelryMachinesImageURL">
+              <PropertyRef Name="JewelryMachinesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -522,133 +293,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Rings_Companies">
-          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="Rings" Type="Self.Rings" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Rings">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RingsImageURL_ImageURL">
-          <End Role="ImageURL" Type="Self.ImageURL" Multiplicity="1" />
-          <End Role="RingsImageURL" Type="Self.RingsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ImageURL">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RingsImageURL">
-              <PropertyRef Name="ImageURLId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RingsImageURL_Rings">
-          <End Role="Rings" Type="Self.Rings" Multiplicity="1" />
-          <End Role="RingsImageURL" Type="Self.RingsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rings">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RingsImageURL">
-              <PropertyRef Name="RingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SetsWatchesSunglasses_Companies">
-          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="SetsWatchesSunglasses" Type="Self.SetsWatchesSunglasses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SetsWatchesSunglasses">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SetsWatchesSunglassesImageURL_SetsWatchesSunglasses">
-          <End Role="SetsWatchesSunglasses" Type="Self.SetsWatchesSunglasses" Multiplicity="1" />
-          <End Role="SetsWatchesSunglassesImageURL" Type="Self.SetsWatchesSunglassesImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SetsWatchesSunglasses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SetsWatchesSunglassesImageURL">
-              <PropertyRef Name="SetsWatchesSunglasseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WeddingRings_Companies">
-          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="WeddingRings" Type="Self.WeddingRings" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WeddingRings">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WeddingRingsImageURL_WeddingRings">
-          <End Role="WeddingRings" Type="Self.WeddingRings" Multiplicity="1" />
-          <End Role="WeddingRingsImageURL" Type="Self.WeddingRingsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WeddingRings">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WeddingRingsImageURL">
-              <PropertyRef Name="WeddingRingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="EulerDatabaseModelStoreContainer">
-          <EntitySet Name="Bracelets" EntityType="Self.Bracelets" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BraceletsImageURL" EntityType="Self.BraceletsImageURL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Chains" EntityType="Self.Chains" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChainsImageURL" EntityType="Self.ChainsImageURL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompaniesCompanyType" EntityType="Self.CompaniesCompanyType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyType" EntityType="Self.CompanyType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Earrings" EntityType="Self.Earrings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EarringsImageURL" EntityType="Self.EarringsImageURL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EngagementRings" EntityType="Self.EngagementRings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EngagementRingsImageURL" EntityType="Self.EngagementRingsImageURL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gemstones" EntityType="Self.Gemstones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImageURL" EntityType="Self.ImageURL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LightSets" EntityType="Self.LightSets" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LightSetsImageURL" EntityType="Self.LightSetsImageURL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Necklaces" EntityType="Self.Necklaces" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NecklacesImageURL" EntityType="Self.NecklacesImageURL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Pendants" EntityType="Self.Pendants" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PendantsImageURL" EntityType="Self.PendantsImageURL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JewelryCategories" EntityType="Self.JewelryCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JewelryItems" EntityType="Self.JewelryItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JewelryItemsGemstones" EntityType="Self.JewelryItemsGemstones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JewelryItemsImageURL" EntityType="Self.JewelryItemsImageURL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JewelryMachines" EntityType="Self.JewelryMachines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JewelryMachinesImageURL" EntityType="Self.JewelryMachinesImageURL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotions" EntityType="Self.Promotions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rings" EntityType="Self.Rings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RingsImageURL" EntityType="Self.RingsImageURL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SetsWatchesSunglasses" EntityType="Self.SetsWatchesSunglasses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SetsWatchesSunglassesImageURL" EntityType="Self.SetsWatchesSunglassesImageURL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WeddingRings" EntityType="Self.WeddingRings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WeddingRingsImageURL" EntityType="Self.WeddingRingsImageURL" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Bracelets_Companies" Association="Self.FK_Bracelets_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Bracelets" EntitySet="Bracelets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BraceletsImageURL_Bracelets" Association="Self.FK_BraceletsImageURL_Bracelets">
-            <End Role="Bracelets" EntitySet="Bracelets" />
-            <End Role="BraceletsImageURL" EntitySet="BraceletsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Chains_Companies" Association="Self.FK_Chains_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Chains" EntitySet="Chains" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChainsImageURL_Chains" Association="Self.FK_ChainsImageURL_Chains">
-            <End Role="Chains" EntitySet="Chains" />
-            <End Role="ChainsImageURL" EntitySet="ChainsImageURL" />
-          </AssociationSet>
           <AssociationSet Name="FK_CompaniesCompanyType_Company" Association="Self.FK_CompaniesCompanyType_Company">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="CompaniesCompanyType" EntitySet="CompaniesCompanyType" />
@@ -661,77 +319,41 @@
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Discounts" EntitySet="Discounts" />
           </AssociationSet>
-          <AssociationSet Name="FK_Earrings_Companies" Association="Self.FK_Earrings_Companies">
+          <AssociationSet Name="FK_ItemsJewelry_CategoriesJewelry" Association="Self.FK_ItemsJewelry_CategoriesJewelry">
+            <End Role="JewelryCategories" EntitySet="JewelryCategories" />
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemsJewelry_Companies" Association="Self.FK_ItemsJewelry_Companies">
             <End Role="Companies" EntitySet="Companies" />
-            <End Role="Earrings" EntitySet="Earrings" />
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_EarringsImageURL_Earrings" Association="Self.FK_EarringsImageURL_Earrings">
-            <End Role="Earrings" EntitySet="Earrings" />
-            <End Role="EarringsImageURL" EntitySet="EarringsImageURL" />
+          <AssociationSet Name="FK_JewelryItemsGemstones_Gemstones" Association="Self.FK_JewelryItemsGemstones_Gemstones">
+            <End Role="Gemstones" EntitySet="Gemstones" />
+            <End Role="JewelryItemsGemstones" EntitySet="JewelryItemsGemstones" />
           </AssociationSet>
-          <AssociationSet Name="FK_EngagementRings_Companies" Association="Self.FK_EngagementRings_Companies">
+          <AssociationSet Name="FK_JewelryItemsGemstones_JewelryItems" Association="Self.FK_JewelryItemsGemstones_JewelryItems">
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
+            <End Role="JewelryItemsGemstones" EntitySet="JewelryItemsGemstones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JewelryItemsImageURL_ImageURL" Association="Self.FK_JewelryItemsImageURL_ImageURL">
+            <End Role="ImageURL" EntitySet="ImageURL" />
+            <End Role="JewelryItemsImageURL" EntitySet="JewelryItemsImageURL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JewelryItemsImageURL_JewelryItems" Association="Self.FK_JewelryItemsImageURL_JewelryItems">
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
+            <End Role="JewelryItemsImageURL" EntitySet="JewelryItemsImageURL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JewelryMachines_Companies" Association="Self.FK_JewelryMachines_Companies">
             <End Role="Companies" EntitySet="Companies" />
-            <End Role="EngagementRings" EntitySet="EngagementRings" />
+            <End Role="JewelryMachines" EntitySet="JewelryMachines" />
           </AssociationSet>
-          <AssociationSet Name="FK_EngagementRingsImageURL_EngagementRings" Association="Self.FK_EngagementRingsImageURL_EngagementRings">
-            <End Role="EngagementRings" EntitySet="EngagementRings" />
-            <End Role="EngagementRingsImageURL" EntitySet="EngagementRingsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LightSets_Companies" Association="Self.FK_LightSets_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="LightSets" EntitySet="LightSets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LightSetsImageURL_LightSets" Association="Self.FK_LightSetsImageURL_LightSets">
-            <End Role="LightSets" EntitySet="LightSets" />
-            <End Role="LightSetsImageURL" EntitySet="LightSetsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Necklaces_Companies" Association="Self.FK_Necklaces_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Necklaces" EntitySet="Necklaces" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NecklacesImageURL_Necklaces" Association="Self.FK_NecklacesImageURL_Necklaces">
-            <End Role="Necklaces" EntitySet="Necklaces" />
-            <End Role="NecklacesImageURL" EntitySet="NecklacesImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pendants_Companies" Association="Self.FK_Pendants_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Pendants" EntitySet="Pendants" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PendantsImageURL_Pendants" Association="Self.FK_PendantsImageURL_Pendants">
-            <End Role="Pendants" EntitySet="Pendants" />
-            <End Role="PendantsImageURL" EntitySet="PendantsImageURL" />
+          <AssociationSet Name="FK_JewelryMachinesImageURL_JewelryMachines" Association="Self.FK_JewelryMachinesImageURL_JewelryMachines">
+            <End Role="JewelryMachines" EntitySet="JewelryMachines" />
+            <End Role="JewelryMachinesImageURL" EntitySet="JewelryMachinesImageURL" />
           </AssociationSet>
           <AssociationSet Name="FK_Promotion_Companies" Association="Self.FK_Promotion_Companies">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Promotions" EntitySet="Promotions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Rings_Companies" Association="Self.FK_Rings_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Rings" EntitySet="Rings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RingsImageURL_ImageURL" Association="Self.FK_RingsImageURL_ImageURL">
-            <End Role="ImageURL" EntitySet="ImageURL" />
-            <End Role="RingsImageURL" EntitySet="RingsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RingsImageURL_Rings" Association="Self.FK_RingsImageURL_Rings">
-            <End Role="Rings" EntitySet="Rings" />
-            <End Role="RingsImageURL" EntitySet="RingsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SetsWatchesSunglasses_Companies" Association="Self.FK_SetsWatchesSunglasses_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="SetsWatchesSunglasses" EntitySet="SetsWatchesSunglasses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SetsWatchesSunglassesImageURL_SetsWatchesSunglasses" Association="Self.FK_SetsWatchesSunglassesImageURL_SetsWatchesSunglasses">
-            <End Role="SetsWatchesSunglasses" EntitySet="SetsWatchesSunglasses" />
-            <End Role="SetsWatchesSunglassesImageURL" EntitySet="SetsWatchesSunglassesImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WeddingRings_Companies" Association="Self.FK_WeddingRings_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="WeddingRings" EntitySet="WeddingRings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WeddingRingsImageURL_WeddingRings" Association="Self.FK_WeddingRingsImageURL_WeddingRings">
-            <End Role="WeddingRings" EntitySet="WeddingRings" />
-            <End Role="WeddingRingsImageURL" EntitySet="WeddingRingsImageURL" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -739,175 +361,53 @@
     <edmx:ConceptualModels>
       <Schema Namespace="EulerDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="masterEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Bracelets" EntityType="EulerDatabaseModel.Bracelets" />
-          <EntitySet Name="BraceletsImageURL" EntityType="EulerDatabaseModel.BraceletsImageURL" />
-          <EntitySet Name="Chains" EntityType="EulerDatabaseModel.Chains" />
-          <EntitySet Name="ChainsImageURL" EntityType="EulerDatabaseModel.ChainsImageURL" />
           <EntitySet Name="Companies" EntityType="EulerDatabaseModel.Companies" />
           <EntitySet Name="CompanyType" EntityType="EulerDatabaseModel.CompanyType" />
           <EntitySet Name="Discounts" EntityType="EulerDatabaseModel.Discounts" />
-          <EntitySet Name="Earrings" EntityType="EulerDatabaseModel.Earrings" />
-          <EntitySet Name="EarringsImageURL" EntityType="EulerDatabaseModel.EarringsImageURL" />
-          <EntitySet Name="EngagementRings" EntityType="EulerDatabaseModel.EngagementRings" />
-          <EntitySet Name="EngagementRingsImageURL" EntityType="EulerDatabaseModel.EngagementRingsImageURL" />
+          <EntitySet Name="Gemstones" EntityType="EulerDatabaseModel.Gemstones" />
           <EntitySet Name="ImageURL" EntityType="EulerDatabaseModel.ImageURL" />
-          <EntitySet Name="LightSets" EntityType="EulerDatabaseModel.LightSets" />
-          <EntitySet Name="LightSetsImageURL" EntityType="EulerDatabaseModel.LightSetsImageURL" />
-          <EntitySet Name="Necklaces" EntityType="EulerDatabaseModel.Necklaces" />
-          <EntitySet Name="NecklacesImageURL" EntityType="EulerDatabaseModel.NecklacesImageURL" />
-          <EntitySet Name="Pendants" EntityType="EulerDatabaseModel.Pendants" />
-          <EntitySet Name="PendantsImageURL" EntityType="EulerDatabaseModel.PendantsImageURL" />
+          <EntitySet Name="JewelryCategories" EntityType="EulerDatabaseModel.JewelryCategories" />
+          <EntitySet Name="JewelryItems" EntityType="EulerDatabaseModel.JewelryItems" />
+          <EntitySet Name="JewelryMachines" EntityType="EulerDatabaseModel.JewelryMachines" />
+          <EntitySet Name="JewelryMachinesImageURL" EntityType="EulerDatabaseModel.JewelryMachinesImageURL" />
           <EntitySet Name="Promotions" EntityType="EulerDatabaseModel.Promotions" />
-          <EntitySet Name="Rings" EntityType="EulerDatabaseModel.Rings" />
-          <EntitySet Name="SetsWatchesSunglasses" EntityType="EulerDatabaseModel.SetsWatchesSunglasses" />
-          <EntitySet Name="SetsWatchesSunglassesImageURL" EntityType="EulerDatabaseModel.SetsWatchesSunglassesImageURL" />
-          <EntitySet Name="WeddingRings" EntityType="EulerDatabaseModel.WeddingRings" />
-          <EntitySet Name="WeddingRingsImageURL" EntityType="EulerDatabaseModel.WeddingRingsImageURL" />
-          <AssociationSet Name="FK_Bracelets_Companies" Association="EulerDatabaseModel.FK_Bracelets_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Bracelets" EntitySet="Bracelets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BraceletsImageURL_Bracelets" Association="EulerDatabaseModel.FK_BraceletsImageURL_Bracelets">
-            <End Role="Bracelets" EntitySet="Bracelets" />
-            <End Role="BraceletsImageURL" EntitySet="BraceletsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Chains_Companies" Association="EulerDatabaseModel.FK_Chains_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Chains" EntitySet="Chains" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ChainsImageURL_Chains" Association="EulerDatabaseModel.FK_ChainsImageURL_Chains">
-            <End Role="Chains" EntitySet="Chains" />
-            <End Role="ChainsImageURL" EntitySet="ChainsImageURL" />
-          </AssociationSet>
           <AssociationSet Name="FK_Discounts_Companies" Association="EulerDatabaseModel.FK_Discounts_Companies">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Discounts" EntitySet="Discounts" />
           </AssociationSet>
-          <AssociationSet Name="FK_Earrings_Companies" Association="EulerDatabaseModel.FK_Earrings_Companies">
+          <AssociationSet Name="FK_ItemsJewelry_Companies" Association="EulerDatabaseModel.FK_ItemsJewelry_Companies">
             <End Role="Companies" EntitySet="Companies" />
-            <End Role="Earrings" EntitySet="Earrings" />
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_EngagementRings_Companies" Association="EulerDatabaseModel.FK_EngagementRings_Companies">
+          <AssociationSet Name="FK_JewelryMachines_Companies" Association="EulerDatabaseModel.FK_JewelryMachines_Companies">
             <End Role="Companies" EntitySet="Companies" />
-            <End Role="EngagementRings" EntitySet="EngagementRings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LightSets_Companies" Association="EulerDatabaseModel.FK_LightSets_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="LightSets" EntitySet="LightSets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Necklaces_Companies" Association="EulerDatabaseModel.FK_Necklaces_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Necklaces" EntitySet="Necklaces" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pendants_Companies" Association="EulerDatabaseModel.FK_Pendants_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Pendants" EntitySet="Pendants" />
+            <End Role="JewelryMachines" EntitySet="JewelryMachines" />
           </AssociationSet>
           <AssociationSet Name="FK_Promotion_Companies" Association="EulerDatabaseModel.FK_Promotion_Companies">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Promotions" EntitySet="Promotions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Rings_Companies" Association="EulerDatabaseModel.FK_Rings_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="Rings" EntitySet="Rings" />
+          <AssociationSet Name="FK_ItemsJewelry_CategoriesJewelry" Association="EulerDatabaseModel.FK_ItemsJewelry_CategoriesJewelry">
+            <End Role="JewelryCategories" EntitySet="JewelryCategories" />
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_SetsWatchesSunglasses_Companies" Association="EulerDatabaseModel.FK_SetsWatchesSunglasses_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="SetsWatchesSunglasses" EntitySet="SetsWatchesSunglasses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WeddingRings_Companies" Association="EulerDatabaseModel.FK_WeddingRings_Companies">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="WeddingRings" EntitySet="WeddingRings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EarringsImageURL_Earrings" Association="EulerDatabaseModel.FK_EarringsImageURL_Earrings">
-            <End Role="Earrings" EntitySet="Earrings" />
-            <End Role="EarringsImageURL" EntitySet="EarringsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EngagementRingsImageURL_EngagementRings" Association="EulerDatabaseModel.FK_EngagementRingsImageURL_EngagementRings">
-            <End Role="EngagementRings" EntitySet="EngagementRings" />
-            <End Role="EngagementRingsImageURL" EntitySet="EngagementRingsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LightSetsImageURL_LightSets" Association="EulerDatabaseModel.FK_LightSetsImageURL_LightSets">
-            <End Role="LightSets" EntitySet="LightSets" />
-            <End Role="LightSetsImageURL" EntitySet="LightSetsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NecklacesImageURL_Necklaces" Association="EulerDatabaseModel.FK_NecklacesImageURL_Necklaces">
-            <End Role="Necklaces" EntitySet="Necklaces" />
-            <End Role="NecklacesImageURL" EntitySet="NecklacesImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PendantsImageURL_Pendants" Association="EulerDatabaseModel.FK_PendantsImageURL_Pendants">
-            <End Role="Pendants" EntitySet="Pendants" />
-            <End Role="PendantsImageURL" EntitySet="PendantsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SetsWatchesSunglassesImageURL_SetsWatchesSunglasses" Association="EulerDatabaseModel.FK_SetsWatchesSunglassesImageURL_SetsWatchesSunglasses">
-            <End Role="SetsWatchesSunglasses" EntitySet="SetsWatchesSunglasses" />
-            <End Role="SetsWatchesSunglassesImageURL" EntitySet="SetsWatchesSunglassesImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WeddingRingsImageURL_WeddingRings" Association="EulerDatabaseModel.FK_WeddingRingsImageURL_WeddingRings">
-            <End Role="WeddingRings" EntitySet="WeddingRings" />
-            <End Role="WeddingRingsImageURL" EntitySet="WeddingRingsImageURL" />
+          <AssociationSet Name="FK_JewelryMachinesImageURL_JewelryMachines" Association="EulerDatabaseModel.FK_JewelryMachinesImageURL_JewelryMachines">
+            <End Role="JewelryMachines" EntitySet="JewelryMachines" />
+            <End Role="JewelryMachinesImageURL" EntitySet="JewelryMachinesImageURL" />
           </AssociationSet>
           <AssociationSet Name="CompaniesCompanyType" Association="EulerDatabaseModel.CompaniesCompanyType">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="CompanyType" EntitySet="CompanyType" />
           </AssociationSet>
-          <AssociationSet Name="RingsImageURL" Association="EulerDatabaseModel.RingsImageURL">
+          <AssociationSet Name="JewelryItemsGemstones" Association="EulerDatabaseModel.JewelryItemsGemstones">
+            <End Role="Gemstones" EntitySet="Gemstones" />
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
+          </AssociationSet>
+          <AssociationSet Name="JewelryItemsImageURL" Association="EulerDatabaseModel.JewelryItemsImageURL">
             <End Role="ImageURL" EntitySet="ImageURL" />
-            <End Role="Rings" EntitySet="Rings" />
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Bracelets">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Length" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Bracelets_Companies" FromRole="Bracelets" ToRole="Companies" />
-          <NavigationProperty Name="BraceletsImageURL" Relationship="EulerDatabaseModel.FK_BraceletsImageURL_Bracelets" FromRole="Bracelets" ToRole="BraceletsImageURL" />
-        </EntityType>
-        <EntityType Name="BraceletsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BraceletId" Type="Int32" Nullable="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Bracelets" Relationship="EulerDatabaseModel.FK_BraceletsImageURL_Bracelets" FromRole="BraceletsImageURL" ToRole="Bracelets" />
-        </EntityType>
-        <EntityType Name="Chains">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Length" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Chains_Companies" FromRole="Chains" ToRole="Companies" />
-          <NavigationProperty Name="ChainsImageURL" Relationship="EulerDatabaseModel.FK_ChainsImageURL_Chains" FromRole="Chains" ToRole="ChainsImageURL" />
-        </EntityType>
-        <EntityType Name="ChainsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ChainId" Type="Int32" Nullable="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Chains" Relationship="EulerDatabaseModel.FK_ChainsImageURL_Chains" FromRole="ChainsImageURL" ToRole="Chains" />
-        </EntityType>
         <EntityType Name="Companies">
           <Key>
             <PropertyRef Name="Id" />
@@ -926,18 +426,10 @@
           <Property Name="AdditionalEMails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CompanyLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Bracelets" Relationship="EulerDatabaseModel.FK_Bracelets_Companies" FromRole="Companies" ToRole="Bracelets" />
-          <NavigationProperty Name="Chains" Relationship="EulerDatabaseModel.FK_Chains_Companies" FromRole="Companies" ToRole="Chains" />
           <NavigationProperty Name="Discounts" Relationship="EulerDatabaseModel.FK_Discounts_Companies" FromRole="Companies" ToRole="Discounts" />
-          <NavigationProperty Name="Earrings" Relationship="EulerDatabaseModel.FK_Earrings_Companies" FromRole="Companies" ToRole="Earrings" />
-          <NavigationProperty Name="EngagementRings" Relationship="EulerDatabaseModel.FK_EngagementRings_Companies" FromRole="Companies" ToRole="EngagementRings" />
-          <NavigationProperty Name="LightSets" Relationship="EulerDatabaseModel.FK_LightSets_Companies" FromRole="Companies" ToRole="LightSets" />
-          <NavigationProperty Name="Necklaces" Relationship="EulerDatabaseModel.FK_Necklaces_Companies" FromRole="Companies" ToRole="Necklaces" />
-          <NavigationProperty Name="Pendants" Relationship="EulerDatabaseModel.FK_Pendants_Companies" FromRole="Companies" ToRole="Pendants" />
+          <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.FK_ItemsJewelry_Companies" FromRole="Companies" ToRole="JewelryItems" />
+          <NavigationProperty Name="JewelryMachines" Relationship="EulerDatabaseModel.FK_JewelryMachines_Companies" FromRole="Companies" ToRole="JewelryMachines" />
           <NavigationProperty Name="Promotions" Relationship="EulerDatabaseModel.FK_Promotion_Companies" FromRole="Companies" ToRole="Promotions" />
-          <NavigationProperty Name="Rings" Relationship="EulerDatabaseModel.FK_Rings_Companies" FromRole="Companies" ToRole="Rings" />
-          <NavigationProperty Name="SetsWatchesSunglasses" Relationship="EulerDatabaseModel.FK_SetsWatchesSunglasses_Companies" FromRole="Companies" ToRole="SetsWatchesSunglasses" />
-          <NavigationProperty Name="WeddingRings" Relationship="EulerDatabaseModel.FK_WeddingRings_Companies" FromRole="Companies" ToRole="WeddingRings" />
           <NavigationProperty Name="CompanyType" Relationship="EulerDatabaseModel.CompaniesCompanyType" FromRole="Companies" ToRole="CompanyType" />
         </EntityType>
         <EntityType Name="CompanyType">
@@ -962,56 +454,13 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Discounts_Companies" FromRole="Discounts" ToRole="Companies" />
         </EntityType>
-        <EntityType Name="Earrings">
+        <EntityType Name="Gemstones">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Earrings_Companies" FromRole="Earrings" ToRole="Companies" />
-          <NavigationProperty Name="EarringsImageURL" Relationship="EulerDatabaseModel.FK_EarringsImageURL_Earrings" FromRole="Earrings" ToRole="EarringsImageURL" />
-        </EntityType>
-        <EntityType Name="EarringsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EarringId" Type="Int32" Nullable="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Earrings" Relationship="EulerDatabaseModel.FK_EarringsImageURL_Earrings" FromRole="EarringsImageURL" ToRole="Earrings" />
-        </EntityType>
-        <EntityType Name="EngagementRings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Radius" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_EngagementRings_Companies" FromRole="EngagementRings" ToRole="Companies" />
-          <NavigationProperty Name="EngagementRingsImageURL" Relationship="EulerDatabaseModel.FK_EngagementRingsImageURL_EngagementRings" FromRole="EngagementRings" ToRole="EngagementRingsImageURL" />
-        </EntityType>
-        <EntityType Name="EngagementRingsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EngagementRingId" Type="Int32" Nullable="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EngagementRings" Relationship="EulerDatabaseModel.FK_EngagementRingsImageURL_EngagementRings" FromRole="EngagementRingsImageURL" ToRole="EngagementRings" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.JewelryItemsGemstones" FromRole="Gemstones" ToRole="JewelryItems" />
         </EntityType>
         <EntityType Name="ImageURL">
           <Key>
@@ -1019,84 +468,60 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImageURL1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Rings" Relationship="EulerDatabaseModel.RingsImageURL" FromRole="ImageURL" ToRole="Rings" />
+          <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.JewelryItemsImageURL" FromRole="ImageURL" ToRole="JewelryItems" />
         </EntityType>
-        <EntityType Name="LightSets">
+        <EntityType Name="JewelryCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.FK_ItemsJewelry_CategoriesJewelry" FromRole="JewelryCategories" ToRole="JewelryItems" />
+        </EntityType>
+        <EntityType Name="JewelryItems">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="CategoryJewelryId" Type="Int32" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_LightSets_Companies" FromRole="LightSets" ToRole="Companies" />
-          <NavigationProperty Name="LightSetsImageURL" Relationship="EulerDatabaseModel.FK_LightSetsImageURL_LightSets" FromRole="LightSets" ToRole="LightSetsImageURL" />
+          <Property Name="Weight" Type="Single" />
+          <Property Name="Price" Type="Single" />
+          <Property Name="Millem" Type="Single" />
+          <Property Name="Carat" Type="Single" />
+          <Property Name="Pieces" Type="Int32" />
+          <Property Name="Size" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Length" Type="Single" />
+          <Property Name="Thick" Type="Single" />
+          <Property Name="Wide" Type="Single" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_ItemsJewelry_Companies" FromRole="JewelryItems" ToRole="Companies" />
+          <NavigationProperty Name="JewelryCategories" Relationship="EulerDatabaseModel.FK_ItemsJewelry_CategoriesJewelry" FromRole="JewelryItems" ToRole="JewelryCategories" />
+          <NavigationProperty Name="Gemstones" Relationship="EulerDatabaseModel.JewelryItemsGemstones" FromRole="JewelryItems" ToRole="Gemstones" />
+          <NavigationProperty Name="ImageURL" Relationship="EulerDatabaseModel.JewelryItemsImageURL" FromRole="JewelryItems" ToRole="ImageURL" />
         </EntityType>
-        <EntityType Name="LightSetsImageURL">
+        <EntityType Name="JewelryMachines">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LightSetId" Type="Int32" Nullable="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LightSets" Relationship="EulerDatabaseModel.FK_LightSetsImageURL_LightSets" FromRole="LightSetsImageURL" ToRole="LightSets" />
-        </EntityType>
-        <EntityType Name="Necklaces">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Length" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="ModelType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AfterSalesService" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Necklaces_Companies" FromRole="Necklaces" ToRole="Companies" />
-          <NavigationProperty Name="NecklacesImageURL" Relationship="EulerDatabaseModel.FK_NecklacesImageURL_Necklaces" FromRole="Necklaces" ToRole="NecklacesImageURL" />
+          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_JewelryMachines_Companies" FromRole="JewelryMachines" ToRole="Companies" />
+          <NavigationProperty Name="JewelryMachinesImageURL" Relationship="EulerDatabaseModel.FK_JewelryMachinesImageURL_JewelryMachines" FromRole="JewelryMachines" ToRole="JewelryMachinesImageURL" />
         </EntityType>
-        <EntityType Name="NecklacesImageURL">
+        <EntityType Name="JewelryMachinesImageURL">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NecklaceId" Type="Int32" Nullable="false" />
+          <Property Name="JewelryMachinesId" Type="Int32" Nullable="false" />
           <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Necklaces" Relationship="EulerDatabaseModel.FK_NecklacesImageURL_Necklaces" FromRole="NecklacesImageURL" ToRole="Necklaces" />
-        </EntityType>
-        <EntityType Name="Pendants">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Radius" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Pendants_Companies" FromRole="Pendants" ToRole="Companies" />
-          <NavigationProperty Name="PendantsImageURL" Relationship="EulerDatabaseModel.FK_PendantsImageURL_Pendants" FromRole="Pendants" ToRole="PendantsImageURL" />
-        </EntityType>
-        <EntityType Name="PendantsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PendantId" Type="Int32" Nullable="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Pendants" Relationship="EulerDatabaseModel.FK_PendantsImageURL_Pendants" FromRole="PendantsImageURL" ToRole="Pendants" />
+          <NavigationProperty Name="JewelryMachines" Relationship="EulerDatabaseModel.FK_JewelryMachinesImageURL_JewelryMachines" FromRole="JewelryMachinesImageURL" ToRole="JewelryMachines" />
         </EntityType>
         <EntityType Name="Promotions">
           <Key>
@@ -1109,7 +534,7 @@
           <Property Name="PeriodFrom" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PeriodTo" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Rings" Type="Boolean" />
-          <Property Name="EngagementRIngs" Type="Boolean" />
+          <Property Name="EngagementRings" Type="Boolean" />
           <Property Name="WeddingRings" Type="Boolean" />
           <Property Name="Pendants" Type="Boolean" />
           <Property Name="Chains" Type="Boolean" />
@@ -1121,120 +546,6 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Promotion_Companies" FromRole="Promotions" ToRole="Companies" />
         </EntityType>
-        <EntityType Name="Rings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Radius" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Rings_Companies" FromRole="Rings" ToRole="Companies" />
-          <NavigationProperty Name="ImageURL" Relationship="EulerDatabaseModel.RingsImageURL" FromRole="Rings" ToRole="ImageURL" />
-        </EntityType>
-        <EntityType Name="SetsWatchesSunglasses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_SetsWatchesSunglasses_Companies" FromRole="SetsWatchesSunglasses" ToRole="Companies" />
-          <NavigationProperty Name="SetsWatchesSunglassesImageURL" Relationship="EulerDatabaseModel.FK_SetsWatchesSunglassesImageURL_SetsWatchesSunglasses" FromRole="SetsWatchesSunglasses" ToRole="SetsWatchesSunglassesImageURL" />
-        </EntityType>
-        <EntityType Name="SetsWatchesSunglassesImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SetsWatchesSunglasseId" Type="Int32" Nullable="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SetsWatchesSunglasses" Relationship="EulerDatabaseModel.FK_SetsWatchesSunglassesImageURL_SetsWatchesSunglasses" FromRole="SetsWatchesSunglassesImageURL" ToRole="SetsWatchesSunglasses" />
-        </EntityType>
-        <EntityType Name="WeddingRings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Decription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Radius" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Circumference" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Carat" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_WeddingRings_Companies" FromRole="WeddingRings" ToRole="Companies" />
-          <NavigationProperty Name="WeddingRingsImageURL" Relationship="EulerDatabaseModel.FK_WeddingRingsImageURL_WeddingRings" FromRole="WeddingRings" ToRole="WeddingRingsImageURL" />
-        </EntityType>
-        <EntityType Name="WeddingRingsImageURL">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WeddingRingId" Type="Int32" Nullable="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="WeddingRings" Relationship="EulerDatabaseModel.FK_WeddingRingsImageURL_WeddingRings" FromRole="WeddingRingsImageURL" ToRole="WeddingRings" />
-        </EntityType>
-        <Association Name="FK_Bracelets_Companies">
-          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.Bracelets" Role="Bracelets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bracelets">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BraceletsImageURL_Bracelets">
-          <End Type="EulerDatabaseModel.Bracelets" Role="Bracelets" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.BraceletsImageURL" Role="BraceletsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bracelets">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BraceletsImageURL">
-              <PropertyRef Name="BraceletId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Chains_Companies">
-          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.Chains" Role="Chains" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Chains">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ChainsImageURL_Chains">
-          <End Type="EulerDatabaseModel.Chains" Role="Chains" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.ChainsImageURL" Role="ChainsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Chains">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChainsImageURL">
-              <PropertyRef Name="ChainId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Discounts_Companies">
           <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
           <End Type="EulerDatabaseModel.Discounts" Role="Discounts" Multiplicity="*" />
@@ -1247,62 +558,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Earrings_Companies">
+        <Association Name="FK_ItemsJewelry_Companies">
           <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.Earrings" Role="Earrings" Multiplicity="*" />
+          <End Type="EulerDatabaseModel.JewelryItems" Role="JewelryItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Companies">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Earrings">
+            <Dependent Role="JewelryItems">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EngagementRings_Companies">
+        <Association Name="FK_JewelryMachines_Companies">
           <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.EngagementRings" Role="EngagementRings" Multiplicity="*" />
+          <End Type="EulerDatabaseModel.JewelryMachines" Role="JewelryMachines" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Companies">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="EngagementRings">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LightSets_Companies">
-          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.LightSets" Role="LightSets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LightSets">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Necklaces_Companies">
-          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.Necklaces" Role="Necklaces" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Necklaces">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Pendants_Companies">
-          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.Pendants" Role="Pendants" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pendants">
+            <Dependent Role="JewelryMachines">
               <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1319,123 +594,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Rings_Companies">
-          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.Rings" Role="Rings" Multiplicity="*" />
+        <Association Name="FK_ItemsJewelry_CategoriesJewelry">
+          <End Type="EulerDatabaseModel.JewelryCategories" Role="JewelryCategories" Multiplicity="1" />
+          <End Type="EulerDatabaseModel.JewelryItems" Role="JewelryItems" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Companies">
+            <Principal Role="JewelryCategories">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Rings">
-              <PropertyRef Name="CompanyId" />
+            <Dependent Role="JewelryItems">
+              <PropertyRef Name="CategoryJewelryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SetsWatchesSunglasses_Companies">
-          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.SetsWatchesSunglasses" Role="SetsWatchesSunglasses" Multiplicity="*" />
+        <Association Name="FK_JewelryMachinesImageURL_JewelryMachines">
+          <End Type="EulerDatabaseModel.JewelryMachines" Role="JewelryMachines" Multiplicity="1" />
+          <End Type="EulerDatabaseModel.JewelryMachinesImageURL" Role="JewelryMachinesImageURL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Companies">
+            <Principal Role="JewelryMachines">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="SetsWatchesSunglasses">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WeddingRings_Companies">
-          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.WeddingRings" Role="WeddingRings" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WeddingRings">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EarringsImageURL_Earrings">
-          <End Type="EulerDatabaseModel.Earrings" Role="Earrings" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.EarringsImageURL" Role="EarringsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Earrings">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EarringsImageURL">
-              <PropertyRef Name="EarringId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EngagementRingsImageURL_EngagementRings">
-          <End Type="EulerDatabaseModel.EngagementRings" Role="EngagementRings" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.EngagementRingsImageURL" Role="EngagementRingsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EngagementRings">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EngagementRingsImageURL">
-              <PropertyRef Name="EngagementRingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LightSetsImageURL_LightSets">
-          <End Type="EulerDatabaseModel.LightSets" Role="LightSets" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.LightSetsImageURL" Role="LightSetsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LightSets">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LightSetsImageURL">
-              <PropertyRef Name="LightSetId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NecklacesImageURL_Necklaces">
-          <End Type="EulerDatabaseModel.Necklaces" Role="Necklaces" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.NecklacesImageURL" Role="NecklacesImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Necklaces">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="NecklacesImageURL">
-              <PropertyRef Name="NecklaceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PendantsImageURL_Pendants">
-          <End Type="EulerDatabaseModel.Pendants" Role="Pendants" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.PendantsImageURL" Role="PendantsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pendants">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PendantsImageURL">
-              <PropertyRef Name="PendantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SetsWatchesSunglassesImageURL_SetsWatchesSunglasses">
-          <End Type="EulerDatabaseModel.SetsWatchesSunglasses" Role="SetsWatchesSunglasses" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.SetsWatchesSunglassesImageURL" Role="SetsWatchesSunglassesImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SetsWatchesSunglasses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SetsWatchesSunglassesImageURL">
-              <PropertyRef Name="SetsWatchesSunglasseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WeddingRingsImageURL_WeddingRings">
-          <End Type="EulerDatabaseModel.WeddingRings" Role="WeddingRings" Multiplicity="1" />
-          <End Type="EulerDatabaseModel.WeddingRingsImageURL" Role="WeddingRingsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WeddingRings">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WeddingRingsImageURL">
-              <PropertyRef Name="WeddingRingId" />
+            <Dependent Role="JewelryMachinesImageURL">
+              <PropertyRef Name="JewelryMachinesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1443,9 +622,13 @@
           <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="*" />
           <End Type="EulerDatabaseModel.CompanyType" Role="CompanyType" Multiplicity="*" />
         </Association>
-        <Association Name="RingsImageURL">
+        <Association Name="JewelryItemsGemstones">
+          <End Type="EulerDatabaseModel.Gemstones" Role="Gemstones" Multiplicity="*" />
+          <End Type="EulerDatabaseModel.JewelryItems" Role="JewelryItems" Multiplicity="*" />
+        </Association>
+        <Association Name="JewelryItemsImageURL">
           <End Type="EulerDatabaseModel.ImageURL" Role="ImageURL" Multiplicity="*" />
-          <End Type="EulerDatabaseModel.Rings" Role="Rings" Multiplicity="*" />
+          <End Type="EulerDatabaseModel.JewelryItems" Role="JewelryItems" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1453,56 +636,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EulerDatabaseModelStoreContainer" CdmEntityContainer="masterEntities">
-          <EntitySetMapping Name="Bracelets">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.Bracelets">
-              <MappingFragment StoreEntitySet="Bracelets">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Circumference" ColumnName="Circumference" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BraceletsImageURL">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.BraceletsImageURL">
-              <MappingFragment StoreEntitySet="BraceletsImageURL">
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="BraceletId" ColumnName="BraceletId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Chains">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.Chains">
-              <MappingFragment StoreEntitySet="Chains">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Circumference" ColumnName="Circumference" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ChainsImageURL">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.ChainsImageURL">
-              <MappingFragment StoreEntitySet="ChainsImageURL">
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="ChainId" ColumnName="ChainId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="EulerDatabaseModel.Companies">
               <MappingFragment StoreEntitySet="Companies">
@@ -1545,51 +678,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Earrings">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.Earrings">
-              <MappingFragment StoreEntitySet="Earrings">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Circumference" ColumnName="Circumference" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EarringsImageURL">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.EarringsImageURL">
-              <MappingFragment StoreEntitySet="EarringsImageURL">
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="EarringId" ColumnName="EarringId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EngagementRings">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.EngagementRings">
-              <MappingFragment StoreEntitySet="EngagementRings">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Circumference" ColumnName="Circumference" />
-                <ScalarProperty Name="Radius" ColumnName="Radius" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EngagementRingsImageURL">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.EngagementRingsImageURL">
-              <MappingFragment StoreEntitySet="EngagementRingsImageURL">
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="EngagementRingId" ColumnName="EngagementRingId" />
+          <EntitySetMapping Name="Gemstones">
+            <EntityTypeMapping TypeName="EulerDatabaseModel.Gemstones">
+              <MappingFragment StoreEntitySet="Gemstones">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1602,76 +694,51 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LightSets">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.LightSets">
-              <MappingFragment StoreEntitySet="LightSets">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Circumference" ColumnName="Circumference" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
+          <EntitySetMapping Name="JewelryCategories">
+            <EntityTypeMapping TypeName="EulerDatabaseModel.JewelryCategories">
+              <MappingFragment StoreEntitySet="JewelryCategories">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LightSetsImageURL">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.LightSetsImageURL">
-              <MappingFragment StoreEntitySet="LightSetsImageURL">
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="LightSetId" ColumnName="LightSetId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Necklaces">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.Necklaces">
-              <MappingFragment StoreEntitySet="Necklaces">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Circumference" ColumnName="Circumference" />
+          <EntitySetMapping Name="JewelryItems">
+            <EntityTypeMapping TypeName="EulerDatabaseModel.JewelryItems">
+              <MappingFragment StoreEntitySet="JewelryItems">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Wide" ColumnName="Wide" />
+                <ScalarProperty Name="Thick" ColumnName="Thick" />
                 <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NecklacesImageURL">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.NecklacesImageURL">
-              <MappingFragment StoreEntitySet="NecklacesImageURL">
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="NecklaceId" ColumnName="NecklaceId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pendants">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.Pendants">
-              <MappingFragment StoreEntitySet="Pendants">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Pieces" ColumnName="Pieces" />
                 <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Circumference" ColumnName="Circumference" />
-                <ScalarProperty Name="Radius" ColumnName="Radius" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Millem" ColumnName="Millem" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CategoryJewelryId" ColumnName="CategoryJewelryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PendantsImageURL">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.PendantsImageURL">
-              <MappingFragment StoreEntitySet="PendantsImageURL">
+          <EntitySetMapping Name="JewelryMachines">
+            <EntityTypeMapping TypeName="EulerDatabaseModel.JewelryMachines">
+              <MappingFragment StoreEntitySet="JewelryMachines">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AfterSalesService" ColumnName="AfterSalesService" />
+                <ScalarProperty Name="ProductDetails" ColumnName="ProductDetails" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="ModelType" ColumnName="ModelType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JewelryMachinesImageURL">
+            <EntityTypeMapping TypeName="EulerDatabaseModel.JewelryMachinesImageURL">
+              <MappingFragment StoreEntitySet="JewelryMachinesImageURL">
                 <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="PendantId" ColumnName="PendantId" />
+                <ScalarProperty Name="JewelryMachinesId" ColumnName="JewelryMachinesId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1688,76 +755,13 @@
                 <ScalarProperty Name="Chains" ColumnName="Chains" />
                 <ScalarProperty Name="Pendants" ColumnName="Pendants" />
                 <ScalarProperty Name="WeddingRings" ColumnName="WeddingRings" />
-                <ScalarProperty Name="EngagementRIngs" ColumnName="EngagementRIngs" />
+                <ScalarProperty Name="EngagementRings" ColumnName="EngagementRings" />
                 <ScalarProperty Name="Rings" ColumnName="Rings" />
                 <ScalarProperty Name="PeriodTo" ColumnName="PeriodTo" />
                 <ScalarProperty Name="PeriodFrom" ColumnName="PeriodFrom" />
                 <ScalarProperty Name="MinOrderPrice" ColumnName="MinOrderPrice" />
                 <ScalarProperty Name="MinOrderGram" ColumnName="MinOrderGram" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Rings">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.Rings">
-              <MappingFragment StoreEntitySet="Rings">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Circumference" ColumnName="Circumference" />
-                <ScalarProperty Name="Radius" ColumnName="Radius" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SetsWatchesSunglasses">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.SetsWatchesSunglasses">
-              <MappingFragment StoreEntitySet="SetsWatchesSunglasses">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SetsWatchesSunglassesImageURL">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.SetsWatchesSunglassesImageURL">
-              <MappingFragment StoreEntitySet="SetsWatchesSunglassesImageURL">
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="SetsWatchesSunglasseId" ColumnName="SetsWatchesSunglasseId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WeddingRings">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.WeddingRings">
-              <MappingFragment StoreEntitySet="WeddingRings">
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Carat" ColumnName="Carat" />
-                <ScalarProperty Name="Circumference" ColumnName="Circumference" />
-                <ScalarProperty Name="Radius" ColumnName="Radius" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Decription" ColumnName="Decription" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WeddingRingsImageURL">
-            <EntityTypeMapping TypeName="EulerDatabaseModel.WeddingRingsImageURL">
-              <MappingFragment StoreEntitySet="WeddingRingsImageURL">
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="WeddingRingId" ColumnName="WeddingRingId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1770,9 +774,17 @@
               <ScalarProperty Name="Id" ColumnName="CompanyId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="RingsImageURL" TypeName="EulerDatabaseModel.RingsImageURL" StoreEntitySet="RingsImageURL">
-            <EndProperty Name="Rings">
-              <ScalarProperty Name="Id" ColumnName="RingId" />
+          <AssociationSetMapping Name="JewelryItemsGemstones" TypeName="EulerDatabaseModel.JewelryItemsGemstones" StoreEntitySet="JewelryItemsGemstones">
+            <EndProperty Name="JewelryItems">
+              <ScalarProperty Name="Id" ColumnName="JewelryItemId" />
+            </EndProperty>
+            <EndProperty Name="Gemstones">
+              <ScalarProperty Name="Id" ColumnName="GemstoneId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="JewelryItemsImageURL" TypeName="EulerDatabaseModel.JewelryItemsImageURL" StoreEntitySet="JewelryItemsImageURL">
+            <EndProperty Name="JewelryItems">
+              <ScalarProperty Name="Id" ColumnName="JewelryItemId" />
             </EndProperty>
             <EndProperty Name="ImageURL">
               <ScalarProperty Name="Id" ColumnName="ImageURLId" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using EulerExchangeAppDev.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,19 @@ namespace EulerExchangeAppDev.Controllers
 {
     public class HomeController : Controller
     {
+        private masterEntities db = new masterEntities();
+        IMapper Mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
         public ActionResult Index()
         {
-            return View();
+
+            List<JewelryMachinesViewModel> JewelryMachineViewModel = new List<JewelryMachinesViewModel>();
+            List<JewelryMachines> JewelryMachine = db.JewelryMachines.ToList();
+            Mapper.Map(JewelryMachine, JewelryMachineViewModel);
+
+            ViewBag.currencyRates = DataAccess.CurrencyRate.getCurrencyRates();
+
+
+            return View(JewelryMachineViewModel);
         }
 
         public ActionResult About()

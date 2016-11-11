@@ -12,16 +12,16 @@ namespace EulerExchangeAppDev.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ImageURL
+    public partial class JewelryCategories
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ImageURL()
+        public JewelryCategories()
         {
             this.JewelryItems = new HashSet<JewelryItems>();
         }
     
         public int Id { get; set; }
-        public string ImageURL1 { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JewelryItems> JewelryItems { get; set; }

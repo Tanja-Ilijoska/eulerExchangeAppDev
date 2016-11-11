@@ -1,0 +1,66 @@
+﻿@model EulerExchangeAppDev.Models.JewelryMachines
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>JewelryMachines</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ModelType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModelType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrandName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AfterSalesService)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AfterSalesService)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Companies.ContactPersonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Companies.ContactPersonName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

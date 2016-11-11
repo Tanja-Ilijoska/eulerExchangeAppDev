@@ -17,18 +17,10 @@ namespace EulerExchangeAppDev.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Companies()
         {
-            this.Bracelets = new HashSet<Bracelets>();
-            this.Chains = new HashSet<Chains>();
             this.Discounts = new HashSet<Discounts>();
-            this.Earrings = new HashSet<Earrings>();
-            this.EngagementRings = new HashSet<EngagementRings>();
-            this.LightSets = new HashSet<LightSets>();
-            this.Necklaces = new HashSet<Necklaces>();
-            this.Pendants = new HashSet<Pendants>();
+            this.JewelryItems = new HashSet<JewelryItems>();
+            this.JewelryMachines = new HashSet<JewelryMachines>();
             this.Promotions = new HashSet<Promotions>();
-            this.Rings = new HashSet<Rings>();
-            this.SetsWatchesSunglasses = new HashSet<SetsWatchesSunglasses>();
-            this.WeddingRings = new HashSet<WeddingRings>();
             this.CompanyType = new HashSet<CompanyType>();
         }
     
@@ -48,29 +40,13 @@ namespace EulerExchangeAppDev.Models
         public string UserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bracelets> Bracelets { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Chains> Chains { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Discounts> Discounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Earrings> Earrings { get; set; }
+        public virtual ICollection<JewelryItems> JewelryItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EngagementRings> EngagementRings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LightSets> LightSets { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Necklaces> Necklaces { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pendants> Pendants { get; set; }
+        public virtual ICollection<JewelryMachines> JewelryMachines { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Promotions> Promotions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rings> Rings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SetsWatchesSunglasses> SetsWatchesSunglasses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WeddingRings> WeddingRings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyType> CompanyType { get; set; }
     }

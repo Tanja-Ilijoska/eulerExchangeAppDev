@@ -21,7 +21,7 @@ namespace EulerExchangeAppDev.Models
         public System.DateTime PeriodFrom { get; set; }
         public System.DateTime PeriodTo { get; set; }
         public Nullable<bool> Rings { get; set; }
-        public Nullable<bool> EngagementRIngs { get; set; }
+        public Nullable<bool> EngagementRings { get; set; }
         public Nullable<bool> WeddingRings { get; set; }
         public Nullable<bool> Pendants { get; set; }
         public Nullable<bool> Chains { get; set; }

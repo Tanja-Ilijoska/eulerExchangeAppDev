@@ -19,7 +19,7 @@ namespace EulerExchangeAppDev
                 cfg.CreateMap<CompanyType, CompanyTypeViewModel>().ReverseMap();
                 cfg.CreateMap<Companies, CompaniesViewModel>().ReverseMap();
 
-                cfg.CreateMap<Rings, RingsViewModel>().ReverseMap();
+                /*cfg.CreateMap<Rings, RingsViewModel>().ReverseMap();
                 cfg.CreateMap<EngagementRings, EngagementRingsViewModel>().ReverseMap();
                 cfg.CreateMap<WeddingRings, WeddingRingsViewModel>().ReverseMap();
                 cfg.CreateMap<Pendants, PendantsViewModel>().ReverseMap();
@@ -28,7 +28,9 @@ namespace EulerExchangeAppDev
                 cfg.CreateMap<Bracelets, BraceletsViewModel>().ReverseMap();
                 cfg.CreateMap<Earrings, EarringsViewModel>().ReverseMap();
                 cfg.CreateMap<LightSets, LightSetsViewModel>().ReverseMap();
-                cfg.CreateMap<SetsWatchesSunglasses, SetsWatchesSunglassesViewModel>().ReverseMap();
+                cfg.CreateMap<SetsWatchesSunglasses, SetsWatchesSunglassesViewModel>().ReverseMap();*/
+
+                cfg.CreateMap<JewelryMachines, JewelryMachinesViewModel>().ReverseMap();
 
                 cfg.CreateMap<Promotions, PromotionsViewModel>().ReverseMap();
                 cfg.CreateMap<Discounts, DiscountsViewModel>().ReverseMap();

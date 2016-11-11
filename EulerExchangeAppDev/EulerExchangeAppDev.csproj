@@ -191,21 +191,13 @@
     <Compile Include="Areas\GoldData\GoldDataAreaRegistration.cs" />
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BraceletsController.cs" />
-    <Compile Include="Controllers\ChainsController.cs" />
     <Compile Include="Controllers\DiscountsController.cs" />
-    <Compile Include="Controllers\EarringsController.cs" />
-    <Compile Include="Controllers\EngagementRingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LightSetsController.cs" />
+    <Compile Include="Controllers\JewelryMachinesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NecklacesController.cs" />
-    <Compile Include="Controllers\PendantsController.cs" />
     <Compile Include="Controllers\PromotionsController.cs" />
-    <Compile Include="Controllers\RingsController.cs" />
-    <Compile Include="Controllers\SetsWatchesSunglassesController.cs" />
-    <Compile Include="Controllers\WeddingRingsController.cs" />
     <Compile Include="DataAccess\CompanyTypeManager.cs" />
+    <Compile Include="DataAccess\CurrencyRate.cs" />
     <Compile Include="DataAccess\UserInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -216,18 +208,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Bracelets.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BraceletsImageURL.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Chains.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ChainsImageURL.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CheckBoxListItem.cs" />
     <Compile Include="Models\Companies.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
@@ -238,29 +218,29 @@
     <Compile Include="Models\Discounts.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Earrings.cs">
+    <Compile Include="Models\Gemstones.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EarringsImageURL.cs">
+    <Compile Include="Models\JewelryCategories.cs">
+      <DependentUpon>EulerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JewelryItems.cs">
+      <DependentUpon>EulerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JewelryMachines.cs">
+      <DependentUpon>EulerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JewelryMachinesImageURL.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Promotions.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModels\EarringsViewModel.cs" />
     <Compile Include="Models\ViewModels\DiscountsViewModel.cs" />
+    <Compile Include="Models\ViewModels\JewelryMachinesViewModel.cs" />
     <Compile Include="Models\ViewModels\PromotionsViewModel.cs" />
-    <Compile Include="Models\ViewModels\SetsWatchesSunglassesViewModel.cs" />
-    <Compile Include="Models\ViewModels\LightSetsViewModel.cs" />
-    <Compile Include="Models\ViewModels\BraceletsViewModel.cs" />
     <Compile Include="Models\ViewModels\CompanyTypeViewModel.cs" />
     <Compile Include="Models\ViewModels\CompaniesViewModel.cs" />
-    <Compile Include="Models\EngagementRings.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EngagementRingsImageURL.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EulerModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -280,46 +260,7 @@
     <Compile Include="Models\ImageURL.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LightSets.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LightSetsImageURL.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Necklaces.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NecklacesImageURL.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Pendants.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PendantsImageURL.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Rings.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewModels\ChainsViewModel.cs" />
-    <Compile Include="Models\ViewModels\NecklacesViewModel.cs" />
-    <Compile Include="Models\ViewModels\PendantsViewModel.cs" />
-    <Compile Include="Models\ViewModels\WeddingRingsViewModel.cs" />
-    <Compile Include="Models\ViewModels\EngagementRingsViewModel.cs" />
-    <Compile Include="Models\ViewModels\RingsViewModel.cs" />
-    <Compile Include="Models\SetsWatchesSunglasses.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SetsWatchesSunglassesImageURL.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WeddingRings.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WeddingRingsImageURL.cs">
-      <DependentUpon>EulerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -335,7 +276,9 @@
     <Content Include="App_Data\Images\Rings\1\ring9\3.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\logo.gif" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\marquee.css" />
     <Content Include="Content\Site.css" />
     <Content Include="DataImages\1.jpg" />
     <Content Include="DataImages\Rings\1\ring1002\1.jpg" />
@@ -981,6 +924,8 @@
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-HK.min.js" />
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-TW.min.js" />
     <Content Include="Scripts\kendo\pako_deflate.min.js" />
+    <Content Include="Scripts\MagnificPopup\jquery.magnific-popup.js" />
+    <Content Include="Scripts\MagnificPopup\magnific-popup.css" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -1025,11 +970,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Companies\Companies.cshtml" />
-    <Content Include="Views\Rings\Create.cshtml" />
-    <Content Include="Views\Rings\Delete.cshtml" />
-    <Content Include="Views\Rings\Details.cshtml" />
-    <Content Include="Views\Rings\Edit.cshtml" />
-    <Content Include="Views\Rings\Index.cshtml" />
     <Content Include="Scripts\kendo\cultures\kendo.culture.af-ZA.min.js.map" />
     <Content Include="Scripts\kendo\cultures\kendo.culture.af.min.js.map" />
     <Content Include="Scripts\kendo\cultures\kendo.culture.am-ET.min.js.map" />
@@ -1635,51 +1575,6 @@
     <Content Include="Scripts\kendo\messages\kendo.messages.zh-TW.min.js.map" />
     <Content Include="Views\Companies\CompanyTypes.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckBoxListItem.cshtml" />
-    <Content Include="Views\EngagementRings\Create.cshtml" />
-    <Content Include="Views\EngagementRings\Delete.cshtml" />
-    <Content Include="Views\EngagementRings\Details.cshtml" />
-    <Content Include="Views\EngagementRings\Edit.cshtml" />
-    <Content Include="Views\EngagementRings\Index.cshtml" />
-    <Content Include="Views\WeddingRings\Create.cshtml" />
-    <Content Include="Views\WeddingRings\Delete.cshtml" />
-    <Content Include="Views\WeddingRings\Details.cshtml" />
-    <Content Include="Views\WeddingRings\Edit.cshtml" />
-    <Content Include="Views\WeddingRings\Index.cshtml" />
-    <Content Include="Views\Pendants\Create.cshtml" />
-    <Content Include="Views\Pendants\Delete.cshtml" />
-    <Content Include="Views\Pendants\Details.cshtml" />
-    <Content Include="Views\Pendants\Edit.cshtml" />
-    <Content Include="Views\Pendants\Index.cshtml" />
-    <Content Include="Views\Necklaces\Create.cshtml" />
-    <Content Include="Views\Necklaces\Delete.cshtml" />
-    <Content Include="Views\Necklaces\Details.cshtml" />
-    <Content Include="Views\Necklaces\Edit.cshtml" />
-    <Content Include="Views\Necklaces\Index.cshtml" />
-    <Content Include="Views\Chains\Create.cshtml" />
-    <Content Include="Views\Chains\Delete.cshtml" />
-    <Content Include="Views\Chains\Details.cshtml" />
-    <Content Include="Views\Chains\Edit.cshtml" />
-    <Content Include="Views\Chains\Index.cshtml" />
-    <Content Include="Views\Bracelets\Create.cshtml" />
-    <Content Include="Views\Bracelets\Delete.cshtml" />
-    <Content Include="Views\Bracelets\Details.cshtml" />
-    <Content Include="Views\Bracelets\Edit.cshtml" />
-    <Content Include="Views\Bracelets\Index.cshtml" />
-    <Content Include="Views\LightSets\Create.cshtml" />
-    <Content Include="Views\LightSets\Delete.cshtml" />
-    <Content Include="Views\LightSets\Details.cshtml" />
-    <Content Include="Views\LightSets\Edit.cshtml" />
-    <Content Include="Views\LightSets\Index.cshtml" />
-    <Content Include="Views\SetsWatchesSunglasses\Create.cshtml" />
-    <Content Include="Views\SetsWatchesSunglasses\Delete.cshtml" />
-    <Content Include="Views\SetsWatchesSunglasses\Details.cshtml" />
-    <Content Include="Views\SetsWatchesSunglasses\Edit.cshtml" />
-    <Content Include="Views\SetsWatchesSunglasses\Index.cshtml" />
-    <Content Include="Views\Earrings\Create.cshtml" />
-    <Content Include="Views\Earrings\Delete.cshtml" />
-    <Content Include="Views\Earrings\Details.cshtml" />
-    <Content Include="Views\Earrings\Edit.cshtml" />
-    <Content Include="Views\Earrings\Index.cshtml" />
     <Content Include="Views\Promotions\Create.cshtml" />
     <Content Include="Views\Promotions\Delete.cshtml" />
     <Content Include="Views\Promotions\Details.cshtml" />
@@ -1690,6 +1585,12 @@
     <Content Include="Views\Discounts\Details.cshtml" />
     <Content Include="Views\Discounts\Edit.cshtml" />
     <Content Include="Views\Discounts\Index.cshtml" />
+    <Content Include="Views\JewelryMachines\Create.cshtml" />
+    <Content Include="Views\JewelryMachines\Delete.cshtml" />
+    <Content Include="Views\JewelryMachines\Details.cshtml" />
+    <Content Include="Views\JewelryMachines\Edit.cshtml" />
+    <Content Include="Views\JewelryMachines\Index.cshtml" />
+    <Content Include="Views\Home\Partials\JewelryMachinesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\Rings\1\ring12\" />

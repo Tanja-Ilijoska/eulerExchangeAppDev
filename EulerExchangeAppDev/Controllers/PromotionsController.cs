@@ -27,7 +27,7 @@ namespace EulerExchangeAppDev.Controllers
             List<Promotions> Promotions = db.Promotions.ToList();
             Mapper.Map(Promotions, PromotionsViewModel);
 
-            int pageSize = 3;
+            int pageSize = 100;
             int pageNumber = (page ?? 1);
             return View(PromotionsViewModel.ToPagedList(pageNumber, pageSize));
         }
