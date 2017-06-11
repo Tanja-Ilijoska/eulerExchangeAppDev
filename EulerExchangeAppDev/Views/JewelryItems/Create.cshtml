@@ -1,0 +1,223 @@
+﻿@using Kendo.Mvc.UI
+
+@model EulerExchangeAppDev.Models.ViewModels.JewelryItemsViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>JewelryItemsViewModel</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryJewelryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryJewelryId, Model.CategoryJewelryList)
+                @Html.ValidationMessageFor(model => model.CategoryJewelryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="weightDiv">
+            @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="priceDiv">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  id="millemDiv">
+            @Html.LabelFor(model => model.Millem, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Millem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Millem, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  id="caratDiv">
+            @Html.LabelFor(model => model.Carat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Carat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Carat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  id="piecesDiv" style="display: none;">
+            @Html.LabelFor(model => model.Pieces, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Pieces, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pieces, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  id="sizeDiv" style="display: none;">
+            @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Size, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="lengthDiv" style="display: none;">
+            @Html.LabelFor(model => model.Length, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Length, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Length, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  id="thickDiv" style="display: none;">
+            @Html.LabelFor(model => model.Thick, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Thick, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Thick, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  id="wideDiv" style="display: none;">
+            @Html.LabelFor(model => model.Wide, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Wide, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Wide, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group"  id="commentDiv">
+            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <!--
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyId, "CompanyId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model=> model.CompanyId, Model.CompanyList) @*("CompanyId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+            </div>
+        </div>-->
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @(Html.Kendo().Upload()
+                    .Name("files")
+                // .Async(a => a
+                //     .Save("Save", "Rings")
+                //    .Remove("Remove", "Rings")
+                //     .AutoUpload(true)
+                // )
+                )
+            </div>
+        </div>
+    
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script>
+
+    $("#CategoryJewelryId").change(function () {
+        console.log(this.value);
+        
+        //$("#weightDiv").hide();
+        //$("#priceDiv").hide();
+        //$("#millemDiv").hide();
+        //$("#caratDiv").hide();
+        $("#piecesDiv").hide();
+        $("#sizeDiv").hide();
+        $("#lengthDiv").hide();
+        $("#thickDiv").hide();
+        $("#wideDiv").hide();
+        //$("#commentDiv").hide();
+
+
+        switch(this.value) {
+            case "2": //Engagement rings
+                {
+                    $("#weightDiv").show();
+                    $("#priceDiv").show();
+                    $("#millemDiv").show();
+                    $("#caratDiv").show();
+                    $("#thickDiv").show();
+                    $("#wideDiv").show();
+                }
+                break;
+            case "3"://Wedding rings
+                {
+                    $("#weightDiv").show();
+                    $("#priceDiv").show();
+                    $("#millemDiv").show();
+                    $("#caratDiv").show();
+                    $("#thickDiv").show();
+                    $("#wideDiv").show();
+                }
+                break;
+            case "5"://	Necklace chains
+                {
+                    $("#weightDiv").show();
+                    $("#priceDiv").show();
+                    $("#millemDiv").show();
+                    $("#caratDiv").show();
+                    $("#lengthDiv").show(); 
+                    $("#thickDiv").show();
+                    $("#wideDiv").show();
+                }
+                break;
+            case "6"://Children necklace chains
+                {
+                    $("#weightDiv").show();
+                    $("#priceDiv").show();
+                    $("#millemDiv").show();
+                    $("#caratDiv").show();
+                    $("#lengthDiv").show(); 
+                    $("#thickDiv").show();
+                    $("#wideDiv").show();
+                }
+                break;
+            default:
+                {
+                    $("#weightDiv").show();
+                    $("#priceDiv").show();
+                    $("#millemDiv").show();
+                    $("#caratDiv").show();
+                }
+        } 
+        
+    });
+
+</script>

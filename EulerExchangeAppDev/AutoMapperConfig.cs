@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EulerExchangeAppDev.Models;
+using EulerExchangeAppDev.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace EulerExchangeAppDev
                 cfg.CreateMap<CompanyType, CompanyTypeViewModel>().ReverseMap();
                 cfg.CreateMap<Companies, CompaniesViewModel>().ReverseMap();
 
+                cfg.CreateMap<JewelryCategories, JewelryCategoriesViewModel>().ReverseMap();
+                cfg.CreateMap<JewelryItems, JewelryItemsViewModel>().ReverseMap();
+
                 /*cfg.CreateMap<Rings, RingsViewModel>().ReverseMap();
                 cfg.CreateMap<EngagementRings, EngagementRingsViewModel>().ReverseMap();
                 cfg.CreateMap<WeddingRings, WeddingRingsViewModel>().ReverseMap();
@@ -31,6 +35,7 @@ namespace EulerExchangeAppDev
                 cfg.CreateMap<SetsWatchesSunglasses, SetsWatchesSunglassesViewModel>().ReverseMap();*/
 
                 cfg.CreateMap<JewelryMachines, JewelryMachinesViewModel>().ReverseMap();
+                cfg.CreateMap<GoldBullionOffers, GoldBullionOfferViewModel>().ReverseMap();
 
                 cfg.CreateMap<Promotions, PromotionsViewModel>().ReverseMap();
                 cfg.CreateMap<Discounts, DiscountsViewModel>().ReverseMap();

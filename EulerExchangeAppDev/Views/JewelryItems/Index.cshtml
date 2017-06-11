@@ -1,0 +1,99 @@
+﻿@model IEnumerable<EulerExchangeAppDev.Models.ViewModels.JewelryItemsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Millem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Carat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Pieces)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Length)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Thick)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Wide)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CompanyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CategoryJewelryId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Millem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Carat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pieces)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Length)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thick)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Wide)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryJewelryId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

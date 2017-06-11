@@ -14,7 +14,7 @@ namespace EulerExchangeAppDev.DataAccess
             try { 
                 xDoc.Load("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return "";
             }

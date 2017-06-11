@@ -1,12 +1,14 @@
-﻿@model IEnumerable<EulerExchangeAppDev.Models.JewelryMachinesViewModel>
+﻿@model List<EulerExchangeAppDev.Models.JewelryMachinesViewModel>
 @*@model PagedList.IPagedList<EulerExchangeAppDev.Models.JewelryMachinesViewModel>*@
 
     <link rel="stylesheet" href="~/Scripts/MagnificPopup/magnific-popup.css">
     <script src="~/Scripts/MagnificPopup/jquery.magnific-popup.js"></script>
 
     <div style="display:table">
-        @foreach (var item in Model)
+        @if (Model != null)
         {
+            foreach (var item in Model)
+            {
             <div>
 
                 <div style="background-color:#eeeeee">@item.Companies.CompanyName</div>
@@ -51,6 +53,7 @@
                 <br />
 
             </div>
+            }
         }
     </div>
 <hr>

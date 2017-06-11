@@ -107,7 +107,7 @@ namespace EulerExchangeAppDev.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Number,Decription,Size,Radius,Circumference,Carat,Price,Weight,CompanyId")] JewelryMachines JewelryMachines)
+        public ActionResult Edit(JewelryMachines JewelryMachines)
         {
             if (ModelState.IsValid)
             {
@@ -154,7 +154,7 @@ namespace EulerExchangeAppDev.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult SaveImages(IEnumerable<HttpPostedFileBase> files, Companies company, JewelryMachines ring)
+        public ActionResult SaveImages(IEnumerable<HttpPostedFileBase> files, Companies company, JewelryMachines jewelryMachine)
         {
             // The Name of the Upload component is "files"
             if (files != null)
@@ -166,7 +166,7 @@ namespace EulerExchangeAppDev.Controllers
                     // Some browsers send file names with full path.
                     // We are only interested in the file name.
                     var fileName = Path.GetFileName(file.FileName);
-                    var webPath = "DataImages/JewelryMachines/" + company.Id + "/JewelryMachine" + ring.Id;
+                    var webPath = "DataImages/JewelryMachines/" + company.Id + "/JewelryMachine" + jewelryMachine.Id;
                     var physicalPath = Server.MapPath("/") + webPath;
 
                     if (!System.IO.Directory.Exists(physicalPath))
@@ -182,7 +182,7 @@ namespace EulerExchangeAppDev.Controllers
                     //physicalPath = physicalPath.Replace(" ", "%20");
                     JewelryMachinesImageURL imageURL = new JewelryMachinesImageURL();
                     imageURL.ImageURL = webPath;
-                    ring.JewelryMachinesImageURL.Add(imageURL);
+                    jewelryMachine.JewelryMachinesImageURL.Add(imageURL);
                     i++;
                 }
             }

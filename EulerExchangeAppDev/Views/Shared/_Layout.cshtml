@@ -3,24 +3,37 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common-bootstrap.min.css" />
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.bootstrap.min.css" />
-
+    *@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/kendo/css")
+
+    @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @*@Scripts.Render("~/bundles/jqueryui")*@
+    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/kendo")
+
+    
 
         @Styles.Render("~/Content/marquee.css")
         <link href="~/Content/marquee.css" rel="stylesheet" />
+@*
+    <script src="~/Scripts/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.min.js"></script>
 
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
     <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
+*@
 </head>
 <body>
-    @*
+   
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             
@@ -33,12 +46,13 @@
         @Html.ActionLink("Lumenore", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
     </div>
             <div class="navbar-collapse collapse">
-                @Html.Partial("_LoginPartial")
-                <ul class="nav navbar-nav">
+              @Html.Partial("_LoginPartial")
+   @*              <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
     <li>@Html.ActionLink("About", "About", "Home")</li>
     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+      
                     <li>@Html.ActionLink("Rings", "Index", "Rings")</li>
                     <li>@Html.ActionLink("EngagementRings", "Index", "EngagementRings")</li>
                     <li>@Html.ActionLink("WeddingRings", "Index", "WeddingRings")</li>
@@ -52,10 +66,10 @@
 
                     <li>@Html.ActionLink("Promotions", "Index", "Promotions")</li>
                     <li>@Html.ActionLink("Discounts", "Index", "Discounts")</li>
-                </ul>
+                </ul>*@
             </div>
         </div>
-    </div>*@
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -72,7 +86,14 @@
             <p>&copy; @DateTime.Now.Year - Lumenore</p>
         </footer>
     </div>
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(function () {
+            $('.datetimepicker1').datetimepicker({
+                sideBySide: true,
+                format: 'DD.MM.YYYY HH:mm'
+            });
+        });
+    </script>
 </body>
 </html>

@@ -18,6 +18,7 @@ namespace EulerExchangeAppDev.Models
         public Companies()
         {
             this.Discounts = new HashSet<Discounts>();
+            this.GoldBullionOffers = new HashSet<GoldBullionOffers>();
             this.JewelryItems = new HashSet<JewelryItems>();
             this.JewelryMachines = new HashSet<JewelryMachines>();
             this.Promotions = new HashSet<Promotions>();
@@ -41,6 +42,8 @@ namespace EulerExchangeAppDev.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Discounts> Discounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoldBullionOffers> GoldBullionOffers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JewelryItems> JewelryItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
