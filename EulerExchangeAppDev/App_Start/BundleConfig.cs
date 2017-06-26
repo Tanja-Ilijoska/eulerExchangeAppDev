@@ -9,7 +9,7 @@ namespace EulerExchangeAppDev
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js", "~/Scripts/jquery.unobtrusive-ajax.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
             //          "~/Scripts/jquery-{version}.js"));
@@ -36,11 +36,6 @@ namespace EulerExchangeAppDev
               "~/Scripts/kendo/kendo.all.min.js",
                 // "~/Scripts/kendo/kendo.timezones.min.js", // uncomment if using the Scheduler
               "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
-
-
-
-
-
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

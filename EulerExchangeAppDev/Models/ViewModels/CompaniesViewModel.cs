@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace EulerExchangeAppDev.Models
+namespace EulerExchangeAppDev.Models.ViewModels
 {
     public class CompaniesViewModel
     {
@@ -46,6 +46,8 @@ namespace EulerExchangeAppDev.Models
 
         [Display(Name = "Location")]
         public string CompanyLocation { get; set; }
+        [Display(Name = "Logo")]
+        public string ImageURL { get; set; }
 
         [Display(Name ="Company types")]
         public List<CheckBoxListItem> CompanyTypes { get; set; }

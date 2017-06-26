@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using EulerExchangeAppDev.Models.ViewModels;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EulerExchangeAppDev.Models

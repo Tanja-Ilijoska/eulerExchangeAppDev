@@ -21,6 +21,7 @@ namespace EulerExchangeAppDev.Models
             this.GoldBullionOffers = new HashSet<GoldBullionOffers>();
             this.JewelryItems = new HashSet<JewelryItems>();
             this.JewelryMachines = new HashSet<JewelryMachines>();
+            this.Orders = new HashSet<Orders>();
             this.Promotions = new HashSet<Promotions>();
             this.CompanyType = new HashSet<CompanyType>();
         }
@@ -38,6 +39,7 @@ namespace EulerExchangeAppDev.Models
         public string CompanyWebsite { get; set; }
         public string AdditionalEMails { get; set; }
         public string CompanyLocation { get; set; }
+        public string ImageURL { get; set; }
         public string UserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -48,6 +50,8 @@ namespace EulerExchangeAppDev.Models
         public virtual ICollection<JewelryItems> JewelryItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JewelryMachines> JewelryMachines { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Promotions> Promotions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

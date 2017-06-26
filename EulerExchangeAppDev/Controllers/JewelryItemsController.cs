@@ -11,6 +11,7 @@ using EulerExchangeAppDev.Models.ViewModels;
 using AutoMapper;
 using System.Security.Claims;
 using EulerExchangeAppDev.DataAccess;
+using System.IO;
 
 namespace EulerExchangeAppDev.Controllers
 {
@@ -59,7 +60,7 @@ namespace EulerExchangeAppDev.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(JewelryItemsViewModel jewelryItemsViewModel)
+        public ActionResult Create(JewelryItemsViewModel jewelryItemsViewModel, IEnumerable<HttpPostedFileBase> files)
         {
             if (ModelState.IsValid)
             {
@@ -75,6 +76,10 @@ namespace EulerExchangeAppDev.Controllers
 
                 db.JewelryItems.Add(jewelryItems);
                 db.SaveChanges();
+
+                //save images
+                SaveImages(files, company, jewelryItems);
+                
                 return RedirectToAction("Index");
             }
 
@@ -146,5 +151,99 @@ namespace EulerExchangeAppDev.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult SaveImages(IEnumerable<HttpPostedFileBase> files, Companies company, JewelryItems jewelryItems)
+        {
+            // The Name of the Upload component is "files"
+            if (files != null)
+            {
+                int i = 1;
+                var jewleryCategoriesName = db.Set<JewelryCategories>().Where(x => x.Id == jewelryItems.CategoryJewelryId).SingleOrDefault().Name;
+
+                foreach (var file in files)
+                {
+
+                    // Some browsers send file names with full path.
+                    // We are only interested in the file name.
+                    var fileName = Path.GetFileName(file.FileName);
+                    var webPath = "DataImages/JewelryItems/" + company.Id + "/"+ jewleryCategoriesName + "/" + jewelryItems.Id;
+                    var physicalPath = Server.MapPath("/") + webPath;
+
+                    if (!System.IO.Directory.Exists(physicalPath))
+                    {
+                        System.IO.Directory.CreateDirectory(physicalPath);
+                    }
+
+                    // The files are not actually saved in this demo
+                    physicalPath = physicalPath + "/" + i + "." + file.FileName.Split('.')[1];
+                    webPath = webPath + "/" + i + "." + file.FileName.Split('.')[1];
+
+                    file.SaveAs(physicalPath);
+                    //physicalPath = physicalPath.Replace(" ", "%20");
+                    JewelryItemsImageURL jewelryItemImageURL = new JewelryItemsImageURL();
+                    jewelryItemImageURL.ImageURL = webPath;
+                    jewelryItems.JewelryItemsImageURL.Add(jewelryItemImageURL);
+                    i++;
+                }
+            }
+
+
+            db.SaveChanges();
+
+            // Return an empty string to signify success
+            return Content("");
+        }
+
+        public ActionResult Remove(string[] fileNames)
+        {
+            // The parameter of the Remove action must be called "fileNames"
+
+            if (fileNames != null)
+            {
+                foreach (var fullName in fileNames)
+                {
+                    var fileName = Path.GetFileName(fullName);
+                    var physicalPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+
+                    // TODO: Verify user permissions
+
+                    if (System.IO.File.Exists(physicalPath))
+                    {
+                        // The files are not actually removed in this demo
+                        // System.IO.File.Delete(physicalPath);
+                    }
+                }
+            }
+
+            // Return an empty string to signify success
+            return Content("");
+        }
+
+        public ActionResult GetImage(JewelryItemsImageURL item)
+        {
+            if (item == null)
+                return null;
+
+            string path = Server.MapPath("/") + item.ImageURL;
+            if (!System.IO.File.Exists(path))
+                return null;
+
+            byte[] imageByteData = System.IO.File.ReadAllBytes(path);
+            return File(imageByteData, "image");
+        }
+
+        public ActionResult GetCompanyImage(CompaniesViewModel company)
+        {
+            if (company == null)
+                return null;
+
+            string path = Server.MapPath("/") + company.ImageURL;
+            if (!System.IO.File.Exists(path))
+                return null;
+
+            byte[] imageByteData = System.IO.File.ReadAllBytes(path);
+            return File(imageByteData, "image");
+        }
     }
 }
+

@@ -13,23 +13,35 @@ namespace EulerExchangeAppDev.Controllers
     {
         private masterEntities db = new masterEntities();
         IMapper Mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
+        [Authorize]
         public ActionResult Index()
         {
+
+
             ModelList modelList = new ModelList();
             
             List<JewelryItemsViewModel> JewelryItemViewModel = new List<JewelryItemsViewModel>();
-            List<JewelryItems> JewelryItem = db.JewelryItems.ToList();
+            List<JewelryItems> JewelryItem = db.JewelryItems.OrderByDescending(x => x.Id).ToList();
             Mapper.Map(JewelryItem, JewelryItemViewModel);
-            modelList.add(JewelryItemViewModel, "JewelryItem");
+            modelList.add(JewelryItemViewModel, "JewelryItems");
             
             List<JewelryMachinesViewModel> JewelryMachineViewModel = new List<JewelryMachinesViewModel>();
             List<JewelryMachines> JewelryMachine = db.JewelryMachines.ToList();
             Mapper.Map(JewelryMachine, JewelryMachineViewModel);
-            modelList.add(JewelryMachineViewModel, "JewelryMachine");
+            modelList.add(JewelryMachineViewModel, "JewelryMachines");
 
             List<GoldBullionOfferViewModel> GoldBullionOffersViewModel = new List<GoldBullionOfferViewModel>();
             List<GoldBullionOffers> GoldBullionOffers = db.GoldBullionOffers.ToList();
             Mapper.Map(GoldBullionOffers, GoldBullionOffersViewModel);
+            foreach(GoldBullionOfferViewModel offer in GoldBullionOffersViewModel)
+            {
+                // List<GoldBullionOfferBids> l = db.GoldBullionOfferBids.Where(bid => bid.GoldBullionOfferId == offer.Id).ToList();
+                // if (l.Count() == 0)
+                //     continue;
+                decimal value = db.GoldBullionOfferBids.Where(bid => bid.GoldBullionOfferId == offer.Id).Select(bid => bid.Price).DefaultIfEmpty(0).Max();
+                if (value != null && value != 0)
+                    offer.Price = (float) value;
+            }
             modelList.add(GoldBullionOffersViewModel, "GoldBullionOffers");
 
             ViewBag.currencyRates = DataAccess.CurrencyRate.getCurrencyRates();

@@ -32,7 +32,7 @@ namespace EulerExchangeAppDev.Models.ViewModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gemstones> Gemstones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImageURL> ImageURL { get; set; }
+        public virtual ICollection<JewelryItemsImageURL> JewelryItemsImageURL { get; set; }
 
 
     }

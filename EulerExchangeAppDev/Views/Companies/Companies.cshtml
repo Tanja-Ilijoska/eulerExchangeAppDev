@@ -1,4 +1,6 @@
-﻿@model EulerExchangeAppDev.Models.CompaniesViewModel
+﻿@model EulerExchangeAppDev.Models.ViewModels.CompaniesViewModel
+
+@using Kendo.Mvc.UI
 
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9fZslBCm6dN2U64XIJcjpeAZzOPzd5Gw&callback=initMap">
@@ -133,5 +135,14 @@
     @Html.LabelFor(m => m.CompanyTypes, new { @class = "col-md-2 control-label" })
     <div class="col-md-10">
        @Html.EditorFor(m => m.CompanyTypes)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ImageURL, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @(Html.Kendo().Upload()
+                    .Name("files")
+            )
+        </div>
     </div>
 </div>

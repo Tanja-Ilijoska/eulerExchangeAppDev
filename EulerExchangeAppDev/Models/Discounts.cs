@@ -14,6 +14,12 @@ namespace EulerExchangeAppDev.Models
     
     public partial class Discounts
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Discounts()
+        {
+            this.Orders = new HashSet<Orders>();
+        }
+    
         public int Id { get; set; }
         public Nullable<decimal> Persent { get; set; }
         public Nullable<decimal> FixPrice { get; set; }
@@ -24,5 +30,7 @@ namespace EulerExchangeAppDev.Models
         public int CompanyId { get; set; }
     
         public virtual Companies Companies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

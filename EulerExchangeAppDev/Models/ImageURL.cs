@@ -14,16 +14,7 @@ namespace EulerExchangeAppDev.Models
     
     public partial class ImageURL
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ImageURL()
-        {
-            this.JewelryItems = new HashSet<JewelryItems>();
-        }
-    
         public int Id { get; set; }
         public string ImageURL1 { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<JewelryItems> JewelryItems { get; set; }
     }
 }

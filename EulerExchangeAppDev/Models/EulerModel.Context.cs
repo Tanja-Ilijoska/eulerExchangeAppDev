@@ -44,12 +44,16 @@ namespace EulerExchangeAppDev.Models
         public virtual DbSet<CompanyType> CompanyType { get; set; }
         public virtual DbSet<Discounts> Discounts { get; set; }
         public virtual DbSet<Gemstones> Gemstones { get; set; }
+        public virtual DbSet<GoldBullionOfferBids> GoldBullionOfferBids { get; set; }
         public virtual DbSet<GoldBullionOffers> GoldBullionOffers { get; set; }
         public virtual DbSet<ImageURL> ImageURL { get; set; }
         public virtual DbSet<JewelryCategories> JewelryCategories { get; set; }
         public virtual DbSet<JewelryItems> JewelryItems { get; set; }
+        public virtual DbSet<JewelryItemsImageURL> JewelryItemsImageURL { get; set; }
         public virtual DbSet<JewelryMachines> JewelryMachines { get; set; }
         public virtual DbSet<JewelryMachinesImageURL> JewelryMachinesImageURL { get; set; }
+        public virtual DbSet<OrderJewelryItems> OrderJewelryItems { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Promotions> Promotions { get; set; }
     }
 }

@@ -162,5 +162,32 @@ namespace EulerExchangeAppDev.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public ActionResult bid(int id, decimal value)
+        {
+            GoldBullionOffers goldBullionOffers = db.GoldBullionOffers.Find(id);
+
+            GoldBullionOfferBids lastBid = db.GoldBullionOfferBids.Where(b => b.GoldBullionOfferId == id).OrderByDescending(b => b.Id).FirstOrDefault();
+            if (lastBid != null)
+                value += lastBid.Price;
+            else
+                value += (decimal) goldBullionOffers.Price;
+
+            GoldBullionOfferBids bid = new GoldBullionOfferBids();
+            
+            UserInfo userInfo = new UserInfo(db);
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            Companies company = userInfo.getLoggedCompanyId(claimsIdentity);
+
+            bid.GoldBullionOfferId = id;
+            bid.CompanyId = company.Id;
+            bid.Price = value;
+
+            db.GoldBullionOfferBids.Add(bid);
+            db.SaveChanges();
+            
+            return Json( new { result = value }, "plain/text");
+        }
     }
 }

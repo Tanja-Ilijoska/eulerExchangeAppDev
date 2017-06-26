@@ -1,12 +1,12 @@
 ﻿@model List<EulerExchangeAppDev.Models.ViewModels.GoldBullionOfferViewModel>
 
 
-<div style="display:table">
+<div style="overflow-y:auto; overflow-x: hidden; height:350px;">
     @if (Model != null)
     {
         foreach (var item in Model)
         {
-            <div>
+            <div>              
                 @if (item.getSecondsToEnd() > 300)
                 {
                     <div style="background-color:#eeeeee">@item.Companies.CompanyName</div>
@@ -16,9 +16,20 @@
                 {
                     <div style="background-color:#eeeeee">@item.Companies.CompanyName</div>
                     <b>@Html.DisplayNameFor(model => model.First().Carat):</b>@Html.DisplayFor(modelItem => item.Carat)<br />
-                    <b>@Html.DisplayNameFor(model => model.First().Price):</b>@Html.DisplayFor(modelItem => item.Price)<br />
+                    <b>@Html.DisplayNameFor(model => model.First().Price):</b><div id="@item.Id">@Html.DisplayFor(modelItem => item.Price)</div>
                     <b>@Html.DisplayNameFor(model => model.First().Weight):</b>@Html.DisplayFor(modelItem => item.Weight)<br />
                         <p id="@item.Id" class="countdownclass">@item.getSecondsToEnd()</p>
+                }
+
+                @if (item.getSecondsToEnd() > 0)
+                {
+                <table>
+                    <tr>
+                        <td><button type="button" onclick="button_bid_click(@item.Id,0.03)" class="btn btn-default">0.03</button></td>
+                        <td><button type="button" onclick="button_bid_click(@item.Id,0.05)"  class="btn btn-default">0.05</button></td>
+                        <td><button type="button" onclick="button_bid_click(@item.Id,0.1)"  class="btn btn-default">0.10</button></td>
+                    </tr>
+                </table>
                 }
 
             </div>
@@ -27,6 +38,8 @@
 </div>
 <hr>
 <script>
+
+    
     $(document).ready(function () {
         var elements = $(".countdownclass");
         for (i = 0; i < elements.length; i++) {
@@ -53,5 +66,20 @@
                 element.innerHTML = "FINISHED";
             }
         }, 1000);
+    }
+    
+    function button_bid_click(id, value) {
+        $.ajax({
+            type: "POST",
+            url: "/GoldBullionOffers/bid",
+            data: JSON.stringify({id : id, value:value}),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                $("#"+id).text(response.result);
+            }
+        })
+
+
     }
 </script>

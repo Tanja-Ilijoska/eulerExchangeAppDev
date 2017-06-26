@@ -17,8 +17,9 @@ namespace EulerExchangeAppDev.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public JewelryItems()
         {
+            this.JewelryItemsImageURL = new HashSet<JewelryItemsImageURL>();
+            this.OrderJewelryItems = new HashSet<OrderJewelryItems>();
             this.Gemstones = new HashSet<Gemstones>();
-            this.ImageURL = new HashSet<ImageURL>();
         }
     
         public int Id { get; set; }
@@ -38,8 +39,10 @@ namespace EulerExchangeAppDev.Models
         public virtual Companies Companies { get; set; }
         public virtual JewelryCategories JewelryCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gemstones> Gemstones { get; set; }
+        public virtual ICollection<JewelryItemsImageURL> JewelryItemsImageURL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImageURL> ImageURL { get; set; }
+        public virtual ICollection<OrderJewelryItems> OrderJewelryItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Gemstones> Gemstones { get; set; }
     }
 }

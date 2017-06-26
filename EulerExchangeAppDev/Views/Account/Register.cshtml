@@ -31,10 +31,6 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
-    
-@*
-    @Html.Partial("~/Views/Companies/CompanyTypes.cshtml", Model.Company.CompanyTypes, new ViewDataDictionary { TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "Company_CompanyTypes" } })
-*@
     @Html.Partial("~/Views/Companies/Companies.cshtml", Model.Company, new ViewDataDictionary { TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "Company" } })
 
     <div class="form-group">

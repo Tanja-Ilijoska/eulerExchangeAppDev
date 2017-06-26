@@ -211,7 +211,10 @@
     <Compile Include="Controllers\JewelryItemsController.cs" />
     <Compile Include="Controllers\JewelryMachinesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\PromotionsController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="DataAccess\CompanyTypeManager.cs" />
     <Compile Include="DataAccess\CurrencyRate.cs" />
     <Compile Include="DataAccess\UserInfo.cs" />
@@ -282,6 +285,9 @@
     <Compile Include="Models\Gemstones.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GoldBullionOfferBids.cs">
+      <DependentUpon>EulerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GoldBullionOffers.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
@@ -291,6 +297,9 @@
     <Compile Include="Models\JewelryItems.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\JewelryItemsImageURL.cs">
+      <DependentUpon>EulerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JewelryMachines.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
@@ -298,6 +307,12 @@
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelList.cs" />
+    <Compile Include="Models\OrderJewelryItems.cs">
+      <DependentUpon>EulerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.cs">
+      <DependentUpon>EulerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Promotions.cs">
       <DependentUpon>EulerModel.tt</DependentUpon>
     </Compile>
@@ -306,6 +321,7 @@
     <Compile Include="Models\ViewModels\JewelryItemsViewModel.cs" />
     <Compile Include="Models\ViewModels\GoldBullionOfferViewModel.cs" />
     <Compile Include="Models\ViewModels\JewelryMachinesViewModel.cs" />
+    <Compile Include="Models\ViewModels\OrderJewelryItemsViewModel.cs" />
     <Compile Include="Models\ViewModels\PromotionsViewModel.cs" />
     <Compile Include="Models\ViewModels\CompanyTypeViewModel.cs" />
     <Compile Include="Models\ViewModels\CompaniesViewModel.cs" />
@@ -494,6 +510,8 @@
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1793,6 +1811,9 @@
     <Content Include="Views\GoldBullionOffers\Edit.cshtml" />
     <Content Include="Views\GoldBullionOffers\Index.cshtml" />
     <Content Include="Views\Home\Partials\GoldBullionOffersList.cshtml" />
+    <Content Include="Views\Portfolio\Index.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\Rings\1\ring12\" />

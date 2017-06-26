@@ -70,7 +70,14 @@
             </div>
         </div>
     </div>
+    
     <div class="container body-content">
+        <div class="jumbotron" style="padding-top:2px; padding-bottom:0px">
+            <h1>Lumenore</h1>
+        </div>
+        <div class="marquee" style="padding-top:-5px">
+            <p>@ViewBag.currencyRates</p>
+        </div>
         @RenderBody()
         <hr />
         @*<div class="example1">
@@ -78,9 +85,7 @@
             @ViewBag.currencyRates
         </p>
     </div>*@
-        <div class="marquee">
-            <p>@ViewBag.currencyRates</p>
-        </div>
+        
 
         <footer>
             <p>&copy; @DateTime.Now.Year - Lumenore</p>

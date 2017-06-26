@@ -214,6 +214,7 @@
           <Property Name="CompanyWebsite" Type="nvarchar" MaxLength="50" />
           <Property Name="AdditionalEMails" Type="nvarchar" MaxLength="250" />
           <Property Name="CompanyLocation" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CompaniesCompanyType">
@@ -250,6 +251,15 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoldBullionOfferBids">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="GoldBullionOfferId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="4" Nullable="false" />
         </EntityType>
         <EntityType Name="GoldBullionOffers">
           <Key>
@@ -304,11 +314,11 @@
         </EntityType>
         <EntityType Name="JewelryItemsImageURL">
           <Key>
-            <PropertyRef Name="JewelryItemId" />
-            <PropertyRef Name="ImageURLId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="JewelryItemId" Type="int" Nullable="false" />
-          <Property Name="ImageURLId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JewelryItemsId" Type="int" Nullable="false" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="JewelryMachines">
           <Key>
@@ -329,6 +339,26 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="JewelryMachinesId" Type="int" Nullable="false" />
           <Property Name="ImageURL" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="OrderJewelryItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="JewelryItemId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="DiscountId" Type="int" />
+          <Property Name="PromotionId" Type="int" />
         </EntityType>
         <EntityType Name="Promotions">
           <Key>
@@ -636,19 +666,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JewelryItemsImageURL_ImageURL">
-          <End Role="ImageURL" Type="Self.ImageURL" Multiplicity="1" />
-          <End Role="JewelryItemsImageURL" Type="Self.JewelryItemsImageURL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ImageURL">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="JewelryItemsImageURL">
-              <PropertyRef Name="ImageURLId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JewelryItemsImageURL_JewelryItems">
+        <Association Name="FK_JewelryItemsImageURL_JewelryItemsImageURL">
           <End Role="JewelryItems" Type="Self.JewelryItems" Multiplicity="1" />
           <End Role="JewelryItemsImageURL" Type="Self.JewelryItemsImageURL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -656,7 +674,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="JewelryItemsImageURL">
-              <PropertyRef Name="JewelryItemId" />
+              <PropertyRef Name="JewelryItemsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -681,6 +699,66 @@
             </Principal>
             <Dependent Role="JewelryMachinesImageURL">
               <PropertyRef Name="JewelryMachinesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderJewelryItems_OrderJewelryItems">
+          <End Role="JewelryItems" Type="Self.JewelryItems" Multiplicity="1" />
+          <End Role="OrderJewelryItems" Type="Self.OrderJewelryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JewelryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderJewelryItems">
+              <PropertyRef Name="JewelryItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderJewelryItems_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderJewelryItems" Type="Self.OrderJewelryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderJewelryItems">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Discounts">
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="DiscountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Promotions">
+          <End Role="Promotions" Type="Self.Promotions" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PromotionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -719,6 +797,7 @@
           <EntitySet Name="CompanyType" EntityType="Self.CompanyType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gemstones" EntityType="Self.Gemstones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoldBullionOfferBids" EntityType="Self.GoldBullionOfferBids" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GoldBullionOffers" EntityType="Self.GoldBullionOffers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImageURL" EntityType="Self.ImageURL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JewelryCategories" EntityType="Self.JewelryCategories" Schema="dbo" store:Type="Tables" />
@@ -727,6 +806,8 @@
           <EntitySet Name="JewelryItemsImageURL" EntityType="Self.JewelryItemsImageURL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JewelryMachines" EntityType="Self.JewelryMachines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JewelryMachinesImageURL" EntityType="Self.JewelryMachinesImageURL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderJewelryItems" EntityType="Self.OrderJewelryItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotions" EntityType="Self.Promotions" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__aspnet_Me__Appli__24E777C3" Association="Self.FK__aspnet_Me__Appli__24E777C3">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
@@ -820,11 +901,7 @@
             <End Role="JewelryItems" EntitySet="JewelryItems" />
             <End Role="JewelryItemsGemstones" EntitySet="JewelryItemsGemstones" />
           </AssociationSet>
-          <AssociationSet Name="FK_JewelryItemsImageURL_ImageURL" Association="Self.FK_JewelryItemsImageURL_ImageURL">
-            <End Role="ImageURL" EntitySet="ImageURL" />
-            <End Role="JewelryItemsImageURL" EntitySet="JewelryItemsImageURL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JewelryItemsImageURL_JewelryItems" Association="Self.FK_JewelryItemsImageURL_JewelryItems">
+          <AssociationSet Name="FK_JewelryItemsImageURL_JewelryItemsImageURL" Association="Self.FK_JewelryItemsImageURL_JewelryItemsImageURL">
             <End Role="JewelryItems" EntitySet="JewelryItems" />
             <End Role="JewelryItemsImageURL" EntitySet="JewelryItemsImageURL" />
           </AssociationSet>
@@ -835,6 +912,26 @@
           <AssociationSet Name="FK_JewelryMachinesImageURL_JewelryMachines" Association="Self.FK_JewelryMachinesImageURL_JewelryMachines">
             <End Role="JewelryMachines" EntitySet="JewelryMachines" />
             <End Role="JewelryMachinesImageURL" EntitySet="JewelryMachinesImageURL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderJewelryItems_OrderJewelryItems" Association="Self.FK_OrderJewelryItems_OrderJewelryItems">
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
+            <End Role="OrderJewelryItems" EntitySet="OrderJewelryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderJewelryItems_Orders" Association="Self.FK_OrderJewelryItems_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderJewelryItems" EntitySet="OrderJewelryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Companies" Association="Self.FK_Orders_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Discounts" Association="Self.FK_Orders_Discounts">
+            <End Role="Discounts" EntitySet="Discounts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Promotions" Association="Self.FK_Orders_Promotions">
+            <End Role="Promotions" EntitySet="Promotions" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Promotion_Companies" Association="Self.FK_Promotion_Companies">
             <End Role="Companies" EntitySet="Companies" />
@@ -865,12 +962,16 @@
           <EntitySet Name="CompanyType" EntityType="EulerDatabaseModel.CompanyType" />
           <EntitySet Name="Discounts" EntityType="EulerDatabaseModel.Discounts" />
           <EntitySet Name="Gemstones" EntityType="EulerDatabaseModel.Gemstones" />
+          <EntitySet Name="GoldBullionOfferBids" EntityType="EulerDatabaseModel.GoldBullionOfferBids" />
           <EntitySet Name="GoldBullionOffers" EntityType="EulerDatabaseModel.GoldBullionOffers" />
           <EntitySet Name="ImageURL" EntityType="EulerDatabaseModel.ImageURL" />
           <EntitySet Name="JewelryCategories" EntityType="EulerDatabaseModel.JewelryCategories" />
           <EntitySet Name="JewelryItems" EntityType="EulerDatabaseModel.JewelryItems" />
+          <EntitySet Name="JewelryItemsImageURL" EntityType="EulerDatabaseModel.JewelryItemsImageURL" />
           <EntitySet Name="JewelryMachines" EntityType="EulerDatabaseModel.JewelryMachines" />
           <EntitySet Name="JewelryMachinesImageURL" EntityType="EulerDatabaseModel.JewelryMachinesImageURL" />
+          <EntitySet Name="OrderJewelryItems" EntityType="EulerDatabaseModel.OrderJewelryItems" />
+          <EntitySet Name="Orders" EntityType="EulerDatabaseModel.Orders" />
           <EntitySet Name="Promotions" EntityType="EulerDatabaseModel.Promotions" />
           <AssociationSet Name="FK__aspnet_Me__Appli__24E777C3" Association="EulerDatabaseModel.FK__aspnet_Me__Appli__24E777C3">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
@@ -932,17 +1033,41 @@
             <End Role="Companies" EntitySet="Companies" />
             <End Role="JewelryMachines" EntitySet="JewelryMachines" />
           </AssociationSet>
+          <AssociationSet Name="FK_Orders_Companies" Association="EulerDatabaseModel.FK_Orders_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_Promotion_Companies" Association="EulerDatabaseModel.FK_Promotion_Companies">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Promotions" EntitySet="Promotions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Discounts" Association="EulerDatabaseModel.FK_Orders_Discounts">
+            <End Role="Discounts" EntitySet="Discounts" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemsJewelry_CategoriesJewelry" Association="EulerDatabaseModel.FK_ItemsJewelry_CategoriesJewelry">
             <End Role="JewelryCategories" EntitySet="JewelryCategories" />
             <End Role="JewelryItems" EntitySet="JewelryItems" />
           </AssociationSet>
+          <AssociationSet Name="FK_JewelryItemsImageURL_JewelryItemsImageURL" Association="EulerDatabaseModel.FK_JewelryItemsImageURL_JewelryItemsImageURL">
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
+            <End Role="JewelryItemsImageURL" EntitySet="JewelryItemsImageURL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderJewelryItems_OrderJewelryItems" Association="EulerDatabaseModel.FK_OrderJewelryItems_OrderJewelryItems">
+            <End Role="JewelryItems" EntitySet="JewelryItems" />
+            <End Role="OrderJewelryItems" EntitySet="OrderJewelryItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_JewelryMachinesImageURL_JewelryMachines" Association="EulerDatabaseModel.FK_JewelryMachinesImageURL_JewelryMachines">
             <End Role="JewelryMachines" EntitySet="JewelryMachines" />
             <End Role="JewelryMachinesImageURL" EntitySet="JewelryMachinesImageURL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderJewelryItems_Orders" Association="EulerDatabaseModel.FK_OrderJewelryItems_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderJewelryItems" EntitySet="OrderJewelryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Promotions" Association="EulerDatabaseModel.FK_Orders_Promotions">
+            <End Role="Promotions" EntitySet="Promotions" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="aspnet_UsersInRoles" Association="EulerDatabaseModel.aspnet_UsersInRoles">
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
@@ -958,10 +1083,6 @@
           </AssociationSet>
           <AssociationSet Name="JewelryItemsGemstones" Association="EulerDatabaseModel.JewelryItemsGemstones">
             <End Role="Gemstones" EntitySet="Gemstones" />
-            <End Role="JewelryItems" EntitySet="JewelryItems" />
-          </AssociationSet>
-          <AssociationSet Name="JewelryItemsImageURL" Association="EulerDatabaseModel.JewelryItemsImageURL">
-            <End Role="ImageURL" EntitySet="ImageURL" />
             <End Role="JewelryItems" EntitySet="JewelryItems" />
           </AssociationSet>
         </EntityContainer>
@@ -1184,11 +1305,13 @@
           <Property Name="CompanyWebsite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalEMails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CompanyLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Discounts" Relationship="EulerDatabaseModel.FK_Discounts_Companies" FromRole="Companies" ToRole="Discounts" />
           <NavigationProperty Name="GoldBullionOffers" Relationship="EulerDatabaseModel.FK_GoldBullionOffers_Companies" FromRole="Companies" ToRole="GoldBullionOffers" />
           <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.FK_ItemsJewelry_Companies" FromRole="Companies" ToRole="JewelryItems" />
           <NavigationProperty Name="JewelryMachines" Relationship="EulerDatabaseModel.FK_JewelryMachines_Companies" FromRole="Companies" ToRole="JewelryMachines" />
+          <NavigationProperty Name="Orders" Relationship="EulerDatabaseModel.FK_Orders_Companies" FromRole="Companies" ToRole="Orders" />
           <NavigationProperty Name="Promotions" Relationship="EulerDatabaseModel.FK_Promotion_Companies" FromRole="Companies" ToRole="Promotions" />
           <NavigationProperty Name="CompanyType" Relationship="EulerDatabaseModel.CompaniesCompanyType" FromRole="Companies" ToRole="CompanyType" />
         </EntityType>
@@ -1213,6 +1336,7 @@
           <Property Name="PeriodTo" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Discounts_Companies" FromRole="Discounts" ToRole="Companies" />
+          <NavigationProperty Name="Orders" Relationship="EulerDatabaseModel.FK_Orders_Discounts" FromRole="Discounts" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Gemstones">
           <Key>
@@ -1221,6 +1345,15 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.JewelryItemsGemstones" FromRole="Gemstones" ToRole="JewelryItems" />
+        </EntityType>
+        <EntityType Name="GoldBullionOfferBids">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="GoldBullionOfferId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
         </EntityType>
         <EntityType Name="GoldBullionOffers">
           <Key>
@@ -1240,7 +1373,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImageURL1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.JewelryItemsImageURL" FromRole="ImageURL" ToRole="JewelryItems" />
         </EntityType>
         <EntityType Name="JewelryCategories">
           <Key>
@@ -1269,8 +1401,18 @@
           <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_ItemsJewelry_Companies" FromRole="JewelryItems" ToRole="Companies" />
           <NavigationProperty Name="JewelryCategories" Relationship="EulerDatabaseModel.FK_ItemsJewelry_CategoriesJewelry" FromRole="JewelryItems" ToRole="JewelryCategories" />
+          <NavigationProperty Name="JewelryItemsImageURL" Relationship="EulerDatabaseModel.FK_JewelryItemsImageURL_JewelryItemsImageURL" FromRole="JewelryItems" ToRole="JewelryItemsImageURL" />
+          <NavigationProperty Name="OrderJewelryItems" Relationship="EulerDatabaseModel.FK_OrderJewelryItems_OrderJewelryItems" FromRole="JewelryItems" ToRole="OrderJewelryItems" />
           <NavigationProperty Name="Gemstones" Relationship="EulerDatabaseModel.JewelryItemsGemstones" FromRole="JewelryItems" ToRole="Gemstones" />
-          <NavigationProperty Name="ImageURL" Relationship="EulerDatabaseModel.JewelryItemsImageURL" FromRole="JewelryItems" ToRole="ImageURL" />
+        </EntityType>
+        <EntityType Name="JewelryItemsImageURL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JewelryItemsId" Type="Int32" Nullable="false" />
+          <Property Name="ImageURL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.FK_JewelryItemsImageURL_JewelryItemsImageURL" FromRole="JewelryItemsImageURL" ToRole="JewelryItems" />
         </EntityType>
         <EntityType Name="JewelryMachines">
           <Key>
@@ -1295,6 +1437,32 @@
           <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="JewelryMachines" Relationship="EulerDatabaseModel.FK_JewelryMachinesImageURL_JewelryMachines" FromRole="JewelryMachinesImageURL" ToRole="JewelryMachines" />
         </EntityType>
+        <EntityType Name="OrderJewelryItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="JewelryItemId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Single" Nullable="false" />
+          <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.FK_OrderJewelryItems_OrderJewelryItems" FromRole="OrderJewelryItems" ToRole="JewelryItems" />
+          <NavigationProperty Name="Orders" Relationship="EulerDatabaseModel.FK_OrderJewelryItems_Orders" FromRole="OrderJewelryItems" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="DiscountId" Type="Int32" />
+          <Property Name="PromotionId" Type="Int32" />
+          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Orders_Companies" FromRole="Orders" ToRole="Companies" />
+          <NavigationProperty Name="Discounts" Relationship="EulerDatabaseModel.FK_Orders_Discounts" FromRole="Orders" ToRole="Discounts" />
+          <NavigationProperty Name="OrderJewelryItems" Relationship="EulerDatabaseModel.FK_OrderJewelryItems_Orders" FromRole="Orders" ToRole="OrderJewelryItems" />
+          <NavigationProperty Name="Promotions" Relationship="EulerDatabaseModel.FK_Orders_Promotions" FromRole="Orders" ToRole="Promotions" />
+        </EntityType>
         <EntityType Name="Promotions">
           <Key>
             <PropertyRef Name="Id" />
@@ -1317,6 +1485,7 @@
           <Property Name="SetsWatchesSunglasses" Type="Boolean" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Promotion_Companies" FromRole="Promotions" ToRole="Companies" />
+          <NavigationProperty Name="Orders" Relationship="EulerDatabaseModel.FK_Orders_Promotions" FromRole="Promotions" ToRole="Orders" />
         </EntityType>
         <Association Name="FK__aspnet_Me__Appli__24E777C3">
           <End Type="EulerDatabaseModel.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
@@ -1502,6 +1671,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orders_Companies">
+          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
+          <End Type="EulerDatabaseModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Promotion_Companies">
           <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
           <End Type="EulerDatabaseModel.Promotions" Role="Promotions" Multiplicity="*" />
@@ -1511,6 +1692,18 @@
             </Principal>
             <Dependent Role="Promotions">
               <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Discounts">
+          <End Type="EulerDatabaseModel.Discounts" Role="Discounts" Multiplicity="0..1" />
+          <End Type="EulerDatabaseModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="DiscountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1526,6 +1719,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JewelryItemsImageURL_JewelryItemsImageURL">
+          <End Type="EulerDatabaseModel.JewelryItems" Role="JewelryItems" Multiplicity="1" />
+          <End Type="EulerDatabaseModel.JewelryItemsImageURL" Role="JewelryItemsImageURL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JewelryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JewelryItemsImageURL">
+              <PropertyRef Name="JewelryItemsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderJewelryItems_OrderJewelryItems">
+          <End Type="EulerDatabaseModel.JewelryItems" Role="JewelryItems" Multiplicity="1" />
+          <End Type="EulerDatabaseModel.OrderJewelryItems" Role="OrderJewelryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JewelryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderJewelryItems">
+              <PropertyRef Name="JewelryItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_JewelryMachinesImageURL_JewelryMachines">
           <End Type="EulerDatabaseModel.JewelryMachines" Role="JewelryMachines" Multiplicity="1" />
           <End Type="EulerDatabaseModel.JewelryMachinesImageURL" Role="JewelryMachinesImageURL" Multiplicity="*" />
@@ -1535,6 +1752,30 @@
             </Principal>
             <Dependent Role="JewelryMachinesImageURL">
               <PropertyRef Name="JewelryMachinesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderJewelryItems_Orders">
+          <End Type="EulerDatabaseModel.Orders" Role="Orders" Multiplicity="1" />
+          <End Type="EulerDatabaseModel.OrderJewelryItems" Role="OrderJewelryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderJewelryItems">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Promotions">
+          <End Type="EulerDatabaseModel.Promotions" Role="Promotions" Multiplicity="0..1" />
+          <End Type="EulerDatabaseModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PromotionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1552,10 +1793,6 @@
         </Association>
         <Association Name="JewelryItemsGemstones">
           <End Type="EulerDatabaseModel.Gemstones" Role="Gemstones" Multiplicity="*" />
-          <End Type="EulerDatabaseModel.JewelryItems" Role="JewelryItems" Multiplicity="*" />
-        </Association>
-        <Association Name="JewelryItemsImageURL">
-          <End Type="EulerDatabaseModel.ImageURL" Role="ImageURL" Multiplicity="*" />
           <End Type="EulerDatabaseModel.JewelryItems" Role="JewelryItems" Multiplicity="*" />
         </Association>
         </Schema>
@@ -1755,6 +1992,7 @@
             <EntityTypeMapping TypeName="EulerDatabaseModel.Companies">
               <MappingFragment StoreEntitySet="Companies">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
                 <ScalarProperty Name="CompanyLocation" ColumnName="CompanyLocation" />
                 <ScalarProperty Name="AdditionalEMails" ColumnName="AdditionalEMails" />
                 <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
@@ -1797,6 +2035,16 @@
             <EntityTypeMapping TypeName="EulerDatabaseModel.Gemstones">
               <MappingFragment StoreEntitySet="Gemstones">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoldBullionOfferBids">
+            <EntityTypeMapping TypeName="EulerDatabaseModel.GoldBullionOfferBids">
+              <MappingFragment StoreEntitySet="GoldBullionOfferBids">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="GoldBullionOfferId" ColumnName="GoldBullionOfferId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1848,6 +2096,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="JewelryItemsImageURL">
+            <EntityTypeMapping TypeName="EulerDatabaseModel.JewelryItemsImageURL">
+              <MappingFragment StoreEntitySet="JewelryItemsImageURL">
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="JewelryItemsId" ColumnName="JewelryItemsId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="JewelryMachines">
             <EntityTypeMapping TypeName="EulerDatabaseModel.JewelryMachines">
               <MappingFragment StoreEntitySet="JewelryMachines">
@@ -1866,6 +2123,28 @@
               <MappingFragment StoreEntitySet="JewelryMachinesImageURL">
                 <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
                 <ScalarProperty Name="JewelryMachinesId" ColumnName="JewelryMachinesId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderJewelryItems">
+            <EntityTypeMapping TypeName="EulerDatabaseModel.OrderJewelryItems">
+              <MappingFragment StoreEntitySet="OrderJewelryItems">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="JewelryItemId" ColumnName="JewelryItemId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="EulerDatabaseModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
+                <ScalarProperty Name="DiscountId" ColumnName="DiscountId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1923,14 +2202,6 @@
             </EndProperty>
             <EndProperty Name="Gemstones">
               <ScalarProperty Name="Id" ColumnName="GemstoneId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="JewelryItemsImageURL" TypeName="EulerDatabaseModel.JewelryItemsImageURL" StoreEntitySet="JewelryItemsImageURL">
-            <EndProperty Name="JewelryItems">
-              <ScalarProperty Name="Id" ColumnName="JewelryItemId" />
-            </EndProperty>
-            <EndProperty Name="ImageURL">
-              <ScalarProperty Name="Id" ColumnName="ImageURLId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

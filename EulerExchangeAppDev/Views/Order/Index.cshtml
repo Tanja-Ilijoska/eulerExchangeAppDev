@@ -1,0 +1,95 @@
+﻿@model List<EulerExchangeAppDev.Models.ViewModels.OrderJewelryItemsViewModel>
+@{
+    ViewBag.Title = "Order";
+}
+
+<h2>Order</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Millem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Carat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Pieces)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Length)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Thick)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Wide)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.CompanyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().JewelryItems.CategoryJewelryId)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Millem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Carat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Pieces)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Length)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Thick)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Wide)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.CompanyId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JewelryItems.CategoryJewelryId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

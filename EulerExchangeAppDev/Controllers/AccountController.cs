@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using AutoMapper;
 using EulerExchangeAppDev.DataAccess;
 using System.Diagnostics;
+using System.IO;
+using EulerExchangeAppDev.Models.ViewModels;
 
 namespace EulerExchangeAppDev.Controllers
 {
@@ -26,7 +28,7 @@ namespace EulerExchangeAppDev.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -38,9 +40,9 @@ namespace EulerExchangeAppDev.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -124,7 +126,7 @@ namespace EulerExchangeAppDev.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -159,6 +161,9 @@ namespace EulerExchangeAppDev.Controllers
                 });
             }
             company.CompanyTypes = checkBoxListItems;
+
+
+
             return View(model);
         }
 
@@ -167,7 +172,7 @@ namespace EulerExchangeAppDev.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, IEnumerable<HttpPostedFileBase> files)
         {
             if (ModelState.IsValid)
             {
@@ -213,11 +218,15 @@ namespace EulerExchangeAppDev.Controllers
                             }
 
                             dbContext.Companies.Add(company);
-                            //dbContext.Set<Company>().Add(company);
+                            //save images
+                            SaveImages(files, company);
 
                             company.UserId = user.Id;
 
                             dbContext.SaveChanges();
+
+                            //save images
+                            SaveImages(files, company);
                         }
                     }
                     catch (Exception ex)
@@ -543,5 +552,41 @@ namespace EulerExchangeAppDev.Controllers
             }
         }
         #endregion
+
+
+        public ActionResult SaveImages(IEnumerable<HttpPostedFileBase> files, Companies company)
+        {
+            // The Name of the Upload component is "files"
+            if (files != null)
+            {
+                masterEntities db = new masterEntities();
+
+                var file = files.First();
+
+                // Some browsers send file names with full path.
+                // We are only interested in the file name.
+                var fileName = Path.GetFileName(file.FileName);
+                var webPath = "DataImages/CompaniesLogos/" + company.Id;
+                var physicalPath = Server.MapPath("/") + webPath;
+
+                if (!System.IO.Directory.Exists(physicalPath))
+                {
+                    System.IO.Directory.CreateDirectory(physicalPath);
+                }
+
+                // The files are not actually saved in this demo
+                physicalPath = physicalPath + "/logo." + file.FileName.Split('.')[1];
+                webPath = webPath + "/logo." + file.FileName.Split('.')[1];
+
+                file.SaveAs(physicalPath);
+                company.ImageURL = webPath;
+
+                db.SaveChanges();
+            }
+
+
+            // Return an empty string to signify success
+            return Content("");
+        }
     }
 }
