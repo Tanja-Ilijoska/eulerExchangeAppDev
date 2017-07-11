@@ -239,10 +239,12 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Persent" Type="decimal" Precision="18" Scale="4" />
           <Property Name="FixPrice" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="Millem" Type="decimal" Precision="18" Scale="4" />
           <Property Name="MinOrderGram" Type="decimal" Precision="18" Scale="4" />
           <Property Name="MinOrderPrice" Type="decimal" Precision="18" Scale="4" />
           <Property Name="PeriodFrom" Type="datetime" Nullable="false" />
           <Property Name="PeriodTo" Type="datetime" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Gemstones">
@@ -303,6 +305,7 @@
           <Property Name="Thick" Type="real" />
           <Property Name="Wide" Type="real" />
           <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateCreated" Type="datetime" />
         </EntityType>
         <EntityType Name="JewelryItemsGemstones">
           <Key>
@@ -330,6 +333,7 @@
           <Property Name="ProductDetails" Type="nvarchar" MaxLength="500" />
           <Property Name="AfterSalesService" Type="nvarchar" MaxLength="500" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="DateCreated" Type="datetime" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="JewelryMachinesImageURL">
@@ -365,7 +369,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="Millem" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="Persent" Type="decimal" Precision="18" Scale="4" />
           <Property Name="MinOrderGram" Type="decimal" Precision="18" Scale="4" />
           <Property Name="MinOrderPrice" Type="decimal" Precision="18" Scale="4" />
           <Property Name="PeriodFrom" Type="datetime" Nullable="false" />
@@ -373,13 +379,20 @@
           <Property Name="Rings" Type="bit" />
           <Property Name="EngagementRings" Type="bit" />
           <Property Name="WeddingRings" Type="bit" />
-          <Property Name="Pendants" Type="bit" />
-          <Property Name="Chains" Type="bit" />
-          <Property Name="Necklaces" Type="bit" />
+          <Property Name="NecklacesSets" Type="bit" />
+          <Property Name="NecklacesChains" Type="bit" />
+          <Property Name="ChildrenNecklaceChains" Type="bit" />
+          <Property Name="Sets" Type="bit" />
           <Property Name="Bracelets" Type="bit" />
+          <Property Name="ChildrenBracelets" Type="bit" />
+          <Property Name="Bangles" Type="bit" />
+          <Property Name="ChildrenBangles" Type="bit" />
           <Property Name="Earrings" Type="bit" />
-          <Property Name="LightSets" Type="bit" />
-          <Property Name="SetsWatchesSunglasses" Type="bit" />
+          <Property Name="ChildrenEarrings" Type="bit" />
+          <Property Name="Pendants" Type="bit" />
+          <Property Name="PinBrooch" Type="bit" />
+          <Property Name="Cufflinks" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__aspnet_Me__Appli__24E777C3">
@@ -1330,10 +1343,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Persent" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="FixPrice" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Millem" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="MinOrderGram" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="MinOrderPrice" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="PeriodFrom" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PeriodTo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Discounts_Companies" FromRole="Discounts" ToRole="Companies" />
           <NavigationProperty Name="Orders" Relationship="EulerDatabaseModel.FK_Orders_Discounts" FromRole="Discounts" ToRole="Orders" />
@@ -1399,6 +1414,7 @@
           <Property Name="Thick" Type="Single" />
           <Property Name="Wide" Type="Single" />
           <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_ItemsJewelry_Companies" FromRole="JewelryItems" ToRole="Companies" />
           <NavigationProperty Name="JewelryCategories" Relationship="EulerDatabaseModel.FK_ItemsJewelry_CategoriesJewelry" FromRole="JewelryItems" ToRole="JewelryCategories" />
           <NavigationProperty Name="JewelryItemsImageURL" Relationship="EulerDatabaseModel.FK_JewelryItemsImageURL_JewelryItemsImageURL" FromRole="JewelryItems" ToRole="JewelryItemsImageURL" />
@@ -1424,6 +1440,7 @@
           <Property Name="ProductDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="AfterSalesService" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_JewelryMachines_Companies" FromRole="JewelryMachines" ToRole="Companies" />
           <NavigationProperty Name="JewelryMachinesImageURL" Relationship="EulerDatabaseModel.FK_JewelryMachinesImageURL_JewelryMachines" FromRole="JewelryMachines" ToRole="JewelryMachinesImageURL" />
@@ -1468,7 +1485,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Millem" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Persent" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="MinOrderGram" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="MinOrderPrice" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="PeriodFrom" Type="DateTime" Nullable="false" Precision="3" />
@@ -1476,13 +1495,20 @@
           <Property Name="Rings" Type="Boolean" />
           <Property Name="EngagementRings" Type="Boolean" />
           <Property Name="WeddingRings" Type="Boolean" />
-          <Property Name="Pendants" Type="Boolean" />
-          <Property Name="Chains" Type="Boolean" />
-          <Property Name="Necklaces" Type="Boolean" />
+          <Property Name="NecklacesSets" Type="Boolean" />
+          <Property Name="NecklacesChains" Type="Boolean" />
+          <Property Name="ChildrenNecklaceChains" Type="Boolean" />
+          <Property Name="Sets" Type="Boolean" />
           <Property Name="Bracelets" Type="Boolean" />
+          <Property Name="ChildrenBracelets" Type="Boolean" />
+          <Property Name="Bangles" Type="Boolean" />
+          <Property Name="ChildrenBangles" Type="Boolean" />
           <Property Name="Earrings" Type="Boolean" />
-          <Property Name="LightSets" Type="Boolean" />
-          <Property Name="SetsWatchesSunglasses" Type="Boolean" />
+          <Property Name="ChildrenEarrings" Type="Boolean" />
+          <Property Name="Pendants" Type="Boolean" />
+          <Property Name="PinBrooch" Type="Boolean" />
+          <Property Name="Cufflinks" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Promotion_Companies" FromRole="Promotions" ToRole="Companies" />
           <NavigationProperty Name="Orders" Relationship="EulerDatabaseModel.FK_Orders_Promotions" FromRole="Promotions" ToRole="Orders" />
@@ -2021,10 +2047,12 @@
             <EntityTypeMapping TypeName="EulerDatabaseModel.Discounts">
               <MappingFragment StoreEntitySet="Discounts">
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="PeriodTo" ColumnName="PeriodTo" />
                 <ScalarProperty Name="PeriodFrom" ColumnName="PeriodFrom" />
                 <ScalarProperty Name="MinOrderPrice" ColumnName="MinOrderPrice" />
                 <ScalarProperty Name="MinOrderGram" ColumnName="MinOrderGram" />
+                <ScalarProperty Name="Millem" ColumnName="Millem" />
                 <ScalarProperty Name="FixPrice" ColumnName="FixPrice" />
                 <ScalarProperty Name="Persent" ColumnName="Persent" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2080,6 +2108,7 @@
           <EntitySetMapping Name="JewelryItems">
             <EntityTypeMapping TypeName="EulerDatabaseModel.JewelryItems">
               <MappingFragment StoreEntitySet="JewelryItems">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Wide" ColumnName="Wide" />
                 <ScalarProperty Name="Thick" ColumnName="Thick" />
@@ -2109,6 +2138,7 @@
             <EntityTypeMapping TypeName="EulerDatabaseModel.JewelryMachines">
               <MappingFragment StoreEntitySet="JewelryMachines">
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="AfterSalesService" ColumnName="AfterSalesService" />
                 <ScalarProperty Name="ProductDetails" ColumnName="ProductDetails" />
@@ -2153,13 +2183,20 @@
             <EntityTypeMapping TypeName="EulerDatabaseModel.Promotions">
               <MappingFragment StoreEntitySet="Promotions">
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="SetsWatchesSunglasses" ColumnName="SetsWatchesSunglasses" />
-                <ScalarProperty Name="LightSets" ColumnName="LightSets" />
-                <ScalarProperty Name="Earrings" ColumnName="Earrings" />
-                <ScalarProperty Name="Bracelets" ColumnName="Bracelets" />
-                <ScalarProperty Name="Necklaces" ColumnName="Necklaces" />
-                <ScalarProperty Name="Chains" ColumnName="Chains" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Cufflinks" ColumnName="Cufflinks" />
+                <ScalarProperty Name="PinBrooch" ColumnName="PinBrooch" />
                 <ScalarProperty Name="Pendants" ColumnName="Pendants" />
+                <ScalarProperty Name="ChildrenEarrings" ColumnName="ChildrenEarrings" />
+                <ScalarProperty Name="Earrings" ColumnName="Earrings" />
+                <ScalarProperty Name="ChildrenBangles" ColumnName="ChildrenBangles" />
+                <ScalarProperty Name="Bangles" ColumnName="Bangles" />
+                <ScalarProperty Name="ChildrenBracelets" ColumnName="ChildrenBracelets" />
+                <ScalarProperty Name="Bracelets" ColumnName="Bracelets" />
+                <ScalarProperty Name="Sets" ColumnName="Sets" />
+                <ScalarProperty Name="ChildrenNecklaceChains" ColumnName="ChildrenNecklaceChains" />
+                <ScalarProperty Name="NecklacesChains" ColumnName="NecklacesChains" />
+                <ScalarProperty Name="NecklacesSets" ColumnName="NecklacesSets" />
                 <ScalarProperty Name="WeddingRings" ColumnName="WeddingRings" />
                 <ScalarProperty Name="EngagementRings" ColumnName="EngagementRings" />
                 <ScalarProperty Name="Rings" ColumnName="Rings" />
@@ -2167,6 +2204,8 @@
                 <ScalarProperty Name="PeriodFrom" ColumnName="PeriodFrom" />
                 <ScalarProperty Name="MinOrderPrice" ColumnName="MinOrderPrice" />
                 <ScalarProperty Name="MinOrderGram" ColumnName="MinOrderGram" />
+                <ScalarProperty Name="Persent" ColumnName="Persent" />
+                <ScalarProperty Name="Millem" ColumnName="Millem" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

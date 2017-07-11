@@ -4,9 +4,13 @@
 @model EulerExchangeAppDev.Models.ModelList
 
 
-<h2>Portfolio</h2>
+<h2>@ViewBag.Company.CompanyName Discount</h2>
 
 <div>
+    @ViewBag.Discount.PeriodFrom.ToString().Split(' ')[0] 
+    -
+    @ViewBag.Discount.PeriodTo.ToString().Split(' ')[0]
+</div>
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
@@ -28,10 +32,6 @@
                         {
                             <div class="item  col-xs-3 col-lg-3">
                                 <div class="thumbnail">
-                                    <p style="text-align:right">
-                                         <a href='@Url.Action("Edit", "JewelryItems", new { id = item.Id })'><span class="glyphicon glyphicon-edit"></span></a>
-                                        <a href='@Url.Action("Delete", "JewelryItems", new { id = item.Id })'><span class="glyphicon glyphicon-trash"></span></a>
-                                    </p>
                                     @if (item.JewelryItemsImageURL != null && item.JewelryItemsImageURL.Count > 0)
                                     {
                                         <div class="gallery">
@@ -60,6 +60,11 @@
                                             @Html.DisplayFor(modelItem => item.Weight)
                                         </p>
                                     </div>
+                                    <div style="background-color:#e0dddd">
+                                        <b>Quantity:</b><input id="input-@item.Id" value="0" size="3"/>
+                                        <button type="button" class="btn btn-default btn-sm" onclick="plus(@item.Id)"><i class="glyphicon glyphicon-plus"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm" onclick="minus(@item.Id)"><i class="glyphicon glyphicon-minus"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         }
@@ -69,10 +74,69 @@
         }
         <!--tab content end-->
     </div>
-    
+
+@using (Html.BeginForm("Index", "Order", FormMethod.Post))
+{
+    <input type="submit" value="Procced to order" class="btn btn-default" onclick="proceed()" />
+    <input type="hidden" name="selectedItems" id="selectedItems" />
+}
+
+
     <link rel="stylesheet" href="~/Scripts/MagnificPopup/magnific-popup.css">
     <script src="~/Scripts/MagnificPopup/jquery.magnific-popup.js"></script>
     <script>
+
+        selectedItems = [];
+        
+        function proceed() {
+            //$('#selectedItems').val(JSON.stringify({ selectedItems: selectedItems }));
+            $('#selectedItems').val(JSON.stringify( selectedItems ));
+            debugger;
+            @*
+            $.post({
+                url: '@Url.Action("index", "order")',
+                data: JSON.stringify({ selectedItems: selectedItems }),
+                contentType: "application/json; charset=utf-8",
+                type: 'POST',
+                success: function (data) { alert(data); },
+                failure: function (errMsg) {
+                        alert(errMsg);
+                    }
+                });
+                *@
+
+        }
+
+        function plus(id) {
+            var result = $.grep(selectedItems, function (e) { return e.JewelryItemId == id; });
+
+            if (result.length == 0) {
+                var item = { JewelryItemId: id, Quantity: 1 };
+                $("#input-" + id).val(1);
+                selectedItems.push(item);
+            } else if (result.length == 1) {
+                result[0].Quantity++;
+                $("#input-" + id).val(result[0].Quantity);
+            } else {
+                console.error("duplicate item");
+            }
+        }
+
+        function minus(id) {
+            var result = $.grep(selectedItems, function (e) { return e.JewelryItemId == id; });
+
+            if (result.length == 0) {
+            } else if (result.length == 1) {
+                result[0].Quantity--;
+                $("#input-" + id).val(result[0].Quantity);
+                if (result[0].Quantity == 0)
+                    selectedItems.splice(selectedItems.indexOf(result[0]), 1);
+            } else {
+                console.error("duplicate item");
+            }
+        }
+
+        /*
         selectedItems = [];
 
         function select(id) {
@@ -94,7 +158,7 @@
 
 
         }
-
+        */
 
 
         $('.gallery').each(function () { // the containers for all your galleries

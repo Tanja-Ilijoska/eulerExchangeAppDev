@@ -26,6 +26,7 @@ namespace EulerExchangeAppDev.Models
         public string ProductDetails { get; set; }
         public string AfterSalesService { get; set; }
         public Nullable<decimal> Price { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
         public int CompanyId { get; set; }
     
         public virtual Companies Companies { get; set; }

@@ -18,6 +18,7 @@ namespace EulerExchangeAppDev.Models
         public Nullable<decimal> Price { get; set; }
         public virtual ICollection<JewelryMachinesImageURL> JewelryMachinesImageURL { get; set; }
         public int CompanyId { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
         public virtual Companies Companies { get; set; }
     }
 

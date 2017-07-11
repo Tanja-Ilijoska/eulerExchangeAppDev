@@ -1,21 +1,21 @@
-﻿@model List<EulerExchangeAppDev.Models.ViewModels.JewelryItemsViewModel>
+﻿@model List<EulerExchangeAppDev.Controllers.Offer>
 
-    <link rel="stylesheet" href="~/Scripts/MagnificPopup/magnific-popup.css">
-    <script src="~/Scripts/MagnificPopup/jquery.magnific-popup.js"></script>
+<link rel="stylesheet" href="~/Scripts/MagnificPopup/magnific-popup.css">
+<script src="~/Scripts/MagnificPopup/jquery.magnific-popup.js"></script>
 
-    <div style="overflow-y:auto; overflow-x: hidden; height:350px;">
-        @if (Model != null)
+<div style="overflow-y:auto; overflow-x: hidden; height:100vh;">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
         {
-            foreach (var item in Model)
+            if (item.jewelryItem != null)
             {
-            <div style="clear:both;">
-                @Html.ActionLink(@item.Companies.CompanyName, "Index", "Store", new {id = item.CompanyId }, null)
-                <div style="background-color:#f0ed3f">@item.Companies.CompanyName</div>
+                <div style="background-color:#f0ed3f" class="img-rounded">@Html.ActionLink(@item.jewelryItem.Companies.CompanyName, "Index", "Store", new { id = item.jewelryItem.CompanyId }, null)</div>
 
-                @if (item.Companies.ImageURL != null)
+                if (item.jewelryItem.Companies.ImageURL != null)
                 {
                     <div class="gallery">
-                        <img src='@Url.Action("GetCompanyImage", "JewelryItems", item.Companies)' width="150" height="150" /><br />
+                        <img src='@Url.Action("GetCompanyImage", "JewelryItems", item.jewelryItem.Companies)' width="150" height="150" /><br />
                     </div>
                 }
                 else
@@ -23,12 +23,42 @@
                     <img src="~/DataImages/noimage.png" width="150" />
                     <br />
                 }
+            }
 
-                <b>@Html.LabelFor(model => item.JewelryCategories.Name):</b>
-                @Html.DisplayFor(modelItem => item.JewelryCategories)
-                <br />
-            </div>
+            if (item.discount != null)
+            {
+                <div style="background-color:#ab60a4" class="img-rounded">@Html.ActionLink(@item.discount.Companies.CompanyName, "Discount", "Store", new { id = item.discount.Id }, null)</div>
+
+                if (item.discount.Companies.ImageURL != null)
+                {
+                    <div class="gallery">
+                        <img src='@Url.Action("GetCompanyImage", "JewelryItems", item.discount.Companies)' width="150" height="150" /><br />
+                    </div>
+                }
+                else
+                {
+                    <img src="~/DataImages/noimage.png" width="150" />
+                    <br />
+                }
+            }
+
+            if (item.promotion != null)
+            {
+                <div style="background-color:#41ab59" class="img-rounded">@Html.ActionLink(@item.promotion.Companies.CompanyName, "Promotion", "Store", new { id = item.promotion.Id }, null)</div>
+
+                if (item.promotion.Companies.ImageURL != null)
+                {
+                    <div class="gallery">
+                        <img src='@Url.Action("GetCompanyImage", "JewelryItems", item.promotion.Companies)' width="150" height="150" /><br />
+                    </div>
+                }
+                else
+                {
+                    <img src="~/DataImages/noimage.png" width="150" />
+                    <br />
+                }
             }
         }
+    }
     </div>
-<hr>
+    <hr>

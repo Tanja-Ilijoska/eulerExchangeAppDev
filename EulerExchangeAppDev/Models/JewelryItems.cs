@@ -35,6 +35,7 @@ namespace EulerExchangeAppDev.Models
         public Nullable<float> Thick { get; set; }
         public Nullable<float> Wide { get; set; }
         public string Comment { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
     
         public virtual Companies Companies { get; set; }
         public virtual JewelryCategories JewelryCategories { get; set; }

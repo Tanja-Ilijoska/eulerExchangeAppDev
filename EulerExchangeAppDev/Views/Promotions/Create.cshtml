@@ -19,10 +19,22 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-2 control-label">
+                @Html.LabelFor(model => model.Percent, htmlAttributes: new { @style = "color:black", @onclick = "change('percent')", @id = "lbl_percent" })
+                @Html.LabelFor(model => model.Price, htmlAttributes: new { @style = "color:gray", @onclick = "change('price')", @id = "lbl_price" })
+                @Html.LabelFor(model => model.Millem, htmlAttributes: new { @style = "color:gray", @onclick = "change('millem')", @id = "lbl_millem" })
+            </div>
+            <div class="col-md-10" id="tb_percent">
+                @Html.EditorFor(model => model.Percent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Percent, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-10" style="display: none" id="tb_price">
                 @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-10" style="display: none" id="tb_millem">
+                @Html.EditorFor(model => model.Millem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Millem, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -45,7 +57,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PeriodFrom, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10 datepicker">
-                @Html.EditorFor(model => model.PeriodFrom, new {htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.PeriodFrom, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PeriodFrom, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -173,10 +185,6 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
@@ -200,5 +208,34 @@
         check(false);
     }
 
+    function change(button) {
+        if (button == "percent") {
+            $("#lbl_percent").css("color", "black");
+            $("#lbl_price").css("color", "gray");
+            $("#lbl_millem").css("color", "gray");
+
+            $("#tb_percent").show();
+            $("#tb_price").hide();
+            $("#tb_millem").hide();
+        }
+        if (button == "price") {
+            $("#lbl_percent").css("color", "gray");
+            $("#lbl_price").css("color", "black");
+            $("#lbl_millem").css("color", "gray");
+
+            $("#tb_percent").hide();
+            $("#tb_price").show();
+            $("#tb_millem").hide();
+        }
+        if (button == "millem") {
+            $("#lbl_percent").css("color", "gray");
+            $("#lbl_price").css("color", "gray");
+            $("#lbl_millem").css("color", "black");
+
+            $("#tb_percent").hide();
+            $("#tb_price").hide();
+            $("#tb_millem").show();
+        }
+    }
 
 </script>

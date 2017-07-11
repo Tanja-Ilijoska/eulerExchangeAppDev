@@ -13,9 +13,9 @@ namespace EulerExchangeAppDev.Models.ViewModels
         public int OrderId { get; set; }
         public int JewelryItemId { get; set; }
         public int Quantity { get; set; }
-        public float Price { get; set; }
+        public Nullable<decimal> Price { get; set; }
 
-        public virtual JewelryItems JewelryItems { get; set; }
-        public virtual Orders Orders { get; set; }
+        public virtual JewelryItemsViewModel JewelryItems { get; set; }
+        public virtual OrderViewModel Orders { get; set; }
     }
 }

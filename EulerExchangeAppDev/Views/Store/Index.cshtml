@@ -1,94 +1,133 @@
 ﻿@using EulerExchangeAppDev.Models;
 @using EulerExchangeAppDev.Models.ViewModels;
+@using EulerExchangeAppDev.Controllers;
 
-@model EulerExchangeAppDev.Models.ModelList
+@model StoreModel
 
 
-<h2>Store</h2>
+<h2 style="float:left">Store</h2>
+<div id="bill" class="thumbnail" style="position:fixed;top: 4em;right: 18.5em;float:right;z-index:5;text-align:right;display: none;">
+    <!--this div is for selected items-->
+</div>
 
-<div>
-
+@using (Html.BeginForm("Index", "Order", FormMethod.Post))
+{
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        @foreach (JewelryCategoriesViewModel category in Model.data[Model.names["JewelryCategories"]])
+    <ul class="nav nav-tabs" role="tablist" style="clear:left">
+        @foreach (JewelryCategoriesViewModel category in Model.categories)
         {
             <li role="presentation" class=""><a href="#@category.getNameUnderScored()" role="tab" data-toggle="tab">@category.Name</a></li>
         }
     </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="tab-content" style="clear:left">
+        @{var index = 0;
+            for (int k = 0; k < Model.categories.Count(); k++)
+            {
+                var category = Model.categories[k];
 
-        @foreach (JewelryCategoriesViewModel category in Model.data[Model.names["JewelryCategories"]])
-        {
-            <div role="tabpanel" class="tab-pane" id="@category.getNameUnderScored()">
-                <div style="padding-top:5px">
-                    <div id="products" class="row list-group">
-                        @foreach (JewelryItemsViewModel item in Model.data[Model.names[@category.Name]])
-                        {
-                            <div class="item  col-xs-3 col-lg-3">
-                                <div class="thumbnail">
-                                    @if (item.JewelryItemsImageURL != null && item.JewelryItemsImageURL.Count > 0)
-                                    {
-                                        <div class="gallery">
-                                            <a href="@Url.Action("GetImage", "JewelryItems", item.JewelryItemsImageURL.First())" productDetails="">
-                                                <img src='@Url.Action("GetImage", "JewelryItems", item.JewelryItemsImageURL.First())' class="group list-group-image" style="height:150px; width:auto" /><br />
-                                            </a>
-                                            @for (int i = 1; i < item.JewelryItemsImageURL.Count; i++)
-                                            {
-                                                <a href="@Url.Action("GetImage", "JewelryItems", item.JewelryItemsImageURL.ElementAt(i))" class="group list-group-image" style="height:150px; width:auto"></a>
-                                            }
+                <div role="tabpanel" class="tab-pane" id="@category.getNameUnderScored()">
+                    <div style="padding-top:5px">
+                        <div id="products" class="row list-group">
+                            <div style="display:none">
+                                @Html.EditorFor(model => model.categories[k])
+                            </div>
+                            @for (int j = 0; j < Model.jewelries.Where(x => x.CategoryJewelryId == category.Id).Count(); j++, index++)
+                            {
+                                var item = Model.jewelries.Where(x => x.CategoryJewelryId == category.Id).ToList()[j];
 
+                                <div class="item  col-xs-3 col-lg-3">
+                                    <div class="thumbnail">
+                                        @if (item.JewelryItemsImageURL != null && item.JewelryItemsImageURL.Count > 0)
+                                        {
+                                            <div class="gallery">
+                                                <a href="@Url.Action("GetImage", "JewelryItems", item.JewelryItemsImageURL.First())" productDetails="">
+                                                    <img src='@Url.Action("GetImage", "JewelryItems", item.JewelryItemsImageURL.First())' class="group list-group-image" style="height:150px; width:auto" /><br />
+                                                </a>
+                                                @for (int i = 1; i < item.JewelryItemsImageURL.Count; i++)
+                                                {
+                                                    <a href="@Url.Action("GetImage", "JewelryItems", item.JewelryItemsImageURL.ElementAt(i))" class="group list-group-image" style="height:150px; width:auto"></a>
+                                                }
+
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <img src="~/DataImages/noimage.png" style="height:150px; width:auto" />
+                                            <br />
+                                        }
+                                        <div id="info-@item.Id" class="caption" onclick="select('@item.Id')">
+                                            <p class="group inner list-group-item-text">
+                                                <b>@Html.LabelFor(model => item.Carat):</b>
+                                                <label id="carat-@item.Id">@item.Carat</label>
+                                                <b>@Html.LabelFor(model => item.Price):</b>
+                                                <label id="price-@item.Id">@item.Price</label>
+                                                <b>@Html.LabelFor(model => item.Weight):</b>
+                                                <label id="weight-@item.Id">@item.Weight</label>
+                                            </p>
                                         </div>
-                                    }
-                                    else
-                                    {
-                                        <img src="~/DataImages/noimage.png" style="height:150px; width:auto" />
-                                        <br />
-                                    }
-                                    <div id="info-@item.Id" class="caption" onclick="select('@item.Id')">
-                                        <p class="group inner list-group-item-text">
-                                            <b>@Html.LabelFor(model => item.Carat):</b>
-                                            @Html.DisplayFor(modelItem => item.Carat)
-                                            <b>@Html.LabelFor(model => item.Price):</b>
-                                            @Html.DisplayFor(modelItem => item.Price)
-                                            <b>@Html.LabelFor(model => item.Weight):</b>
-                                            @Html.DisplayFor(modelItem => item.Weight)
-                                        </p>
-                                    </div>
-                                    <div style="background-color:#e0dddd">
-                                        <b>Quantity:</b><input id="input-@item.Id" value="0" size="3"/>
-                                        <button type="button" class="btn btn-default btn-sm" onclick="plus(@item.Id)"><i class="glyphicon glyphicon-plus"></i></button>
-                                        <button type="button" class="btn btn-default btn-sm" onclick="minus(@item.Id)"><i class="glyphicon glyphicon-minus"></i></button>
+                                        <div style="background-color:#e0dddd">
+                                            <div style="display:none">
+                                                @Html.EditorFor(model => model.jewelries[index].Id)
+                                                @*@Html.EditorFor(model => model.jewelries[index].Weight)
+                                                @Html.EditorFor(model => model.jewelries[index].Price)
+                                                @Html.EditorFor(model => model.jewelries[index].Millem)
+                                                @Html.EditorFor(model => model.jewelries[index].Carat)
+                                                @Html.EditorFor(model => model.jewelries[index].Size)
+                                                @Html.EditorFor(model => model.jewelries[index].Length)
+                                                @Html.EditorFor(model => model.jewelries[index].Thick)
+                                                @Html.EditorFor(model => model.jewelries[index].Wide)
+                                                @Html.EditorFor(model => model.jewelries[index].Comment)
+                                                @Html.EditorFor(model => model.jewelries[index].CompanyId)
+                                                @Html.EditorFor(model => model.jewelries[index].CategoryJewelryId)
+                                                @Html.EditorFor(model => model.jewelries[index].JewelryItemsImageURL)*@
+
+
+                                                
+                                                    
+                                            </div>
+                                            @Html.LabelFor(model => model.jewelries[index].Quantity, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.jewelries[index].Quantity, new { htmlAttributes = new { @min = "0", @max = "1000", @id = "input-" + @item.Id, @onchange = "quantityChanged(" + @item.Id + ")" } })
+                                            @Html.ValidationMessageFor(model => model.jewelries[index].Quantity, "", new { @class = "text-danger" })
+
+                                            <button type="button" class="btn btn-default btn-sm" onclick="plus(@item.Id)"><i class="glyphicon glyphicon-plus"></i></button>
+                                            <button type="button" class="btn btn-default btn-sm" onclick="minus(@item.Id)"><i class="glyphicon glyphicon-minus"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         }
         <!--tab content end-->
     </div>
 
-@using (Html.BeginForm("Index", "Order", FormMethod.Post))
-{
-    <input type="submit" value="Procced to order" class="btn btn-default" onclick="proceed()" />
-    <input type="hidden" name="selectedItems" id="selectedItems" />
-}
+    <input type="submit" value="Procced to order" class="btn btn-default" />
+            }
+
+@*
+    @using (Html.BeginForm("Index", "Order", FormMethod.Post))
+    {
+        <input type="submit" value="Procced to order" class="btn btn-default" onclick="proceed()" />
+        <input type="hidden" name="selectedItems" id="selectedItems" />
+    }
+*@
+
+<link rel="stylesheet" href="~/Scripts/MagnificPopup/magnific-popup.css">
+<script src="~/Scripts/MagnificPopup/jquery.magnific-popup.js"></script>
+<script>
+
+    selectedItems = [];
 
 
-    <link rel="stylesheet" href="~/Scripts/MagnificPopup/magnific-popup.css">
-    <script src="~/Scripts/MagnificPopup/jquery.magnific-popup.js"></script>
-    <script>
-
-        selectedItems = [];
-        
-        function proceed() {
-            //$('#selectedItems').val(JSON.stringify({ selectedItems: selectedItems }));
-            $('#selectedItems').val(JSON.stringify( selectedItems ));
-            debugger;
-            @*
+    // function proceed() {
+    //$('#selectedItems').val(JSON.stringify({ selectedItems: selectedItems }));
+    //     $('#selectedItems').val(JSON.stringify( selectedItems ));
+    //     debugger;
+    @*
             $.post({
                 url: '@Url.Action("index", "order")',
                 data: JSON.stringify({ selectedItems: selectedItems }),
@@ -101,103 +140,122 @@
                 });
                 *@
 
+    // }
+
+    function plus(id) {
+        var result = $.grep(selectedItems, function (e) { return e.JewelryItemId == id; });
+
+        if (result.length == 0) {
+            var item = { JewelryItemId: id, Quantity: 1, Carat: $("#carat-" + id).html(), Price: $("#price-" + id).html(), Weight: $("#weight-" + id).html() };
+            $("#input-" + id).val(1);
+            selectedItems.push(item);
+        } else if (result.length == 1) {
+            result[0].Quantity++;
+            $("#input-" + id).val(result[0].Quantity);
+        } else {
+            console.error("duplicate item");
         }
 
-        function plus(id) {
-            var result = $.grep(selectedItems, function (e) { return e.JewelryItemId == id; });
+        displayBill();
+    }
 
-            if (result.length == 0) {
-                var item = { JewelryItemId: id, Quantity: 1 };
-                $("#input-" + id).val(1);
-                selectedItems.push(item);
-            } else if (result.length == 1) {
-                result[0].Quantity++;
-                $("#input-" + id).val(result[0].Quantity);
-            } else {
-                console.error("duplicate item");
-            }
+    function minus(id) {
+        var result = $.grep(selectedItems, function (e) { return e.JewelryItemId == id; });
+
+        if (result.length == 0) {
+        } else if (result.length == 1) {
+            result[0].Quantity--;
+            $("#input-" + id).val(result[0].Quantity);
+            if (result[0].Quantity == 0)
+                selectedItems.splice(selectedItems.indexOf(result[0]), 1);
+        } else {
+            console.error("duplicate item");
         }
 
-        function minus(id) {
-            var result = $.grep(selectedItems, function (e) { return e.JewelryItemId == id; });
+        displayBill();
+    }
 
-            if (result.length == 0) {
-            } else if (result.length == 1) {
-                result[0].Quantity--;
-                $("#input-" + id).val(result[0].Quantity);
-                if (result[0].Quantity == 0)
-                    selectedItems.splice(selectedItems.indexOf(result[0]), 1);
-            } else {
-                console.error("duplicate item");
-            }
+    function quantityChanged(id) {
+        console.log($("#input-" + id).val());
+
+        var result = $.grep(selectedItems, function (e) { return e.JewelryItemId == id; });
+
+        if (result.length == 0) {
+            var item = { JewelryItemId: id, Quantity: $("#input-" + id).val(), Carat: $("#carat-" + id).html(), Price: $("#price-" + id).html(), Weight: $("#weight-" + id).html() };
+            selectedItems.push(item);
+        } else if (result.length == 1) {
+            result[0].Quantity = $("#input-" + id).val();
+        } else {
+            console.error("duplicate item");
         }
 
-        /*
-        selectedItems = [];
+        displayBill();
+    }
 
-        function select(id) {
+    function displayBill() {
+        if (selectedItems.length == 0)
+            $("#bill").hide();
+        else
+            $("#bill").show();
 
-            if ($("#info-" + id).attr('selected') == "selected") {
-                $("#info-" + id).removeAttr('selected');
-                $("#info-" + id).css('background-color', '#ffffff');
+        sum_carat = 0;
+        sum_price = 0;
+        sum_weight = 0;
 
-                selectedItems.splice(selectedItems.indexOf(id), 1);
-            }
-            else {
-                $("#info-" + id).css('background-color', '#42f46e');
-                $("#info-" + id).attr('selected', true);
-
-                selectedItems.push(id);
-            }
-
-            console.log(selectedItems);
-
-
+        for (i = 0; i < selectedItems.length; i++) {
+            item = selectedItems[i];
+            sum_carat += parseInt(item["Carat"]) * parseInt(item["Quantity"]);
+            sum_price += parseInt(item["Price"]) * parseInt(item["Quantity"]);
+            sum_weight += parseInt(item["Weight"]) * parseInt(item["Quantity"]);
         }
-        */
+
+        $("#bill").html(
+            "<p><b>Average price</b>: " + Math.round((sum_carat / selectedItems.length) * 10) / 10 + "<br/><b>Total weight</b>: " + sum_weight
+        )
+    }
 
 
-        $('.gallery').each(function () { // the containers for all your galleries
-            $(this).magnificPopup({
-                delegate: 'a', // the selector for gallery item
-                type: 'image',
-                tLoading: 'Loading image #%curr%...',
-                image: {
-                    verticalFit: true
+    $('.gallery').each(function () { // the containers for all your galleries
+        $(this).magnificPopup({
+            delegate: 'a', // the selector for gallery item
+            type: 'image',
+            tLoading: 'Loading image #%curr%...',
+            image: {
+                verticalFit: true
+            },
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0, 1]
+            },
+            image: {
+                tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+                titleSrc: function (item) {
+                    return "ProductDetails: " + item.el.attr('productDetails');
                 },
-                gallery: {
-                    enabled: true,
-                    navigateByImgClick: true,
-                    preload: [0, 1]
-                },
-                image: {
-                    tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-                    titleSrc: function (item) {
-                        return "ProductDetails: " + item.el.attr('productDetails');
-                    },
-                    markup: '<div class="mfp-figure">' +
-                                '<div style="color:white">TEXT</div>' +
-                                '<div class="mfp-close"></div>' +
-                                    '<div class="mfp-img"></div>' +
-                                '<div class="mfp-bottom-bar">' +
-                                    '<div class="mfp-title"></div>' +
-                                    '<div class="mfp-counter"></div>' +
-                                 '</div>' +
-                            '</div>',
-                    verticalFit: true
-                },
-                callbacks: {
-                    resize: changeImgSize,
-                    imageLoadComplete: changeImgSize,
-                    change: changeImgSize
-                }
-            });
+                markup: '<div class="mfp-figure">' +
+                            '<div style="color:white">TEXT</div>' +
+                            '<div class="mfp-close"></div>' +
+                                '<div class="mfp-img"></div>' +
+                            '<div class="mfp-bottom-bar">' +
+                                '<div class="mfp-title"></div>' +
+                                '<div class="mfp-counter"></div>' +
+                             '</div>' +
+                        '</div>',
+                verticalFit: true
+            },
+            callbacks: {
+                resize: changeImgSize,
+                imageLoadComplete: changeImgSize,
+                change: changeImgSize
+            }
         });
+    });
 
 
-        function changeImgSize() {
-            var img = this.content.find('img');
-            img.css('height', '500');
-            img.css('width', '500');
-        }
-    </script>
+    function changeImgSize() {
+        var img = this.content.find('img');
+        img.css('height', '500');
+        img.css('width', '500');
+    }
+</script>

@@ -11,6 +11,12 @@ using System.Security.Claims;
 
 namespace EulerExchangeAppDev.Controllers
 {
+
+    public class StoreModel
+    {
+        public List<JewelryCategoriesViewModel> categories { get; set; }
+        public List<JewelryItemsViewModel> jewelries { get; set; }
+    }
     public class StoreController : Controller
     {
         private masterEntities db = new masterEntities();
@@ -24,6 +30,54 @@ namespace EulerExchangeAppDev.Controllers
             }
 
             Companies company = db.Companies.Find(id);
+
+            //ModelList modelList = new ModelList();
+
+            List <JewelryCategories> categories = db.JewelryCategories.ToList();
+            List<JewelryCategoriesViewModel> categoriesVM = new List<JewelryCategoriesViewModel>();
+            Mapper.Map(categories, categoriesVM);
+            //modelList.add(categoriesVM, "JewelryCategories");
+
+            //Dictionary<String, List<JewelryItemsViewModel>> fullData = new Dictionary<String, List<JewelryItemsViewModel>>();
+
+            /*
+            for (int i = 0; i < categoriesVM.Count; i++)
+            {
+                List<JewelryItemsViewModel> dataVM = new List<JewelryItemsViewModel>();
+                List<JewelryItems> data = db.JewelryItems.Where(x => x.CompanyId == company.Id).Where(x => x.CategoryJewelryId == (i + 1)).OrderByDescending(x => x.Id).ToList();
+                Mapper.Map(data, dataVM);
+                //modelList.add(dataVM, categoriesVM[i].Name);
+                //fullData.Add(categoriesVM[i].Name, dataVM);
+            }
+            */
+
+            List<JewelryItemsViewModel> jewelriesVM = new List<JewelryItemsViewModel>();
+            List<JewelryItems> jewelries = db.JewelryItems.Where(x => x.CompanyId == company.Id).OrderBy(x => x.CategoryJewelryId).ThenByDescending(x => x.Id).ToList();
+            Mapper.Map(jewelries, jewelriesVM);
+
+            //Tuple<List<JewelryCategoriesViewModel>, Dictionary<String, List<JewelryItemsViewModel>>> tuple = new Tuple<List<JewelryCategoriesViewModel>, Dictionary<String, List<JewelryItemsViewModel>>>(categoriesVM, fullData);
+
+            StoreModel storeModel = new StoreModel();
+            storeModel.categories = categoriesVM;
+            storeModel.jewelries = jewelriesVM;
+
+            return View("Index", storeModel);
+        }
+
+        public ActionResult Discount(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+
+            Discounts discount = db.Discounts.Find(id);
+
+            if(discount == null)
+                return RedirectToAction("Index", "Home");
+
+            Companies company = discount.Companies;
+
+            ViewBag.Discount = discount;
+            ViewBag.Company = company;
 
             ModelList modelList = new ModelList();
 
@@ -40,7 +94,40 @@ namespace EulerExchangeAppDev.Controllers
                 modelList.add(dataVM, categoriesVM[i].Name);
             }
 
-            return View("Index", modelList);
+            return View("Discount", modelList);
+        }
+
+        public ActionResult Promotion(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("Index", "Home");
+
+            Promotions promotion = db.Promotions.Find(id);
+
+            if (promotion == null)
+                return RedirectToAction("Index", "Home");
+
+            Companies company = promotion.Companies;
+
+            ViewBag.Promotion = promotion;
+            ViewBag.Company = company;
+
+            ModelList modelList = new ModelList();
+
+            List<JewelryCategories> categories = db.JewelryCategories.ToList();
+            List<JewelryCategoriesViewModel> categoriesVM = new List<JewelryCategoriesViewModel>();
+            Mapper.Map(categories, categoriesVM);
+            modelList.add(categoriesVM, "JewelryCategories");
+
+            for (int i = 0; i < categoriesVM.Count; i++)
+            {
+                List<JewelryItemsViewModel> dataVM = new List<JewelryItemsViewModel>();
+                List<JewelryItems> data = db.JewelryItems.Where(x => x.CompanyId == company.Id).Where(x => x.CategoryJewelryId == (i + 1)).OrderByDescending(x => x.Id).ToList();
+                Mapper.Map(data, dataVM);
+                modelList.add(dataVM, categoriesVM[i].Name);
+            }
+
+            return View("Promotion", modelList);
         }
 
         // GET: Store/Details/5

@@ -1,7 +1,7 @@
 ﻿@model List<EulerExchangeAppDev.Models.ViewModels.GoldBullionOfferViewModel>
 
 
-<div style="overflow-y:auto; overflow-x: hidden; height:350px;">
+<div style="overflow-y:auto; overflow-x: hidden; height:100vh;">
     @if (Model != null)
     {
         foreach (var item in Model)
@@ -9,12 +9,12 @@
             <div>              
                 @if (item.getSecondsToEnd() > 300)
                 {
-                    <div style="background-color:#eeeeee">@item.Companies.CompanyName</div>
+                    <div style="background-color:#eeeeee" class="img-rounded">@item.Companies.CompanyName</div>
                     <p>Starts at @item.DateTime</p>
                 }
                 else
                 {
-                    <div style="background-color:#eeeeee">@item.Companies.CompanyName</div>
+                    <div style="background-color:#eeeeee" class="img-rounded">@item.Companies.CompanyName</div>
                     <b>@Html.DisplayNameFor(model => model.First().Carat):</b>@Html.DisplayFor(modelItem => item.Carat)<br />
                     <b>@Html.DisplayNameFor(model => model.First().Price):</b><div id="@item.Id">@Html.DisplayFor(modelItem => item.Price)</div>
                     <b>@Html.DisplayNameFor(model => model.First().Weight):</b>@Html.DisplayFor(modelItem => item.Weight)<br />

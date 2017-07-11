@@ -23,10 +23,12 @@ namespace EulerExchangeAppDev.Models
         public int Id { get; set; }
         public Nullable<decimal> Persent { get; set; }
         public Nullable<decimal> FixPrice { get; set; }
+        public Nullable<decimal> Millem { get; set; }
         public Nullable<decimal> MinOrderGram { get; set; }
         public Nullable<decimal> MinOrderPrice { get; set; }
         public System.DateTime PeriodFrom { get; set; }
         public System.DateTime PeriodTo { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
         public int CompanyId { get; set; }
     
         public virtual Companies Companies { get; set; }

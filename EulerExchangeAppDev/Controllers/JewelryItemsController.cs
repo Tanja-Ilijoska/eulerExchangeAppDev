@@ -93,11 +93,15 @@ namespace EulerExchangeAppDev.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JewelryItems   jewelryItemsViewModel = db.JewelryItems.Find(id);
-            if (jewelryItemsViewModel == null)
+            JewelryItems   jewelryItems = db.JewelryItems.Find(id);
+            if (jewelryItems == null)
             {
                 return HttpNotFound();
             }
+
+            JewelryItemsViewModel jewelryItemsViewModel = new JewelryItemsViewModel();
+            Mapper.Map(jewelryItems, jewelryItemsViewModel);
+
             return View(jewelryItemsViewModel);
         }
 
@@ -124,11 +128,14 @@ namespace EulerExchangeAppDev.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JewelryItems jewelryItemsViewModel = db.JewelryItems.Find(id);
-            if (jewelryItemsViewModel == null)
+            JewelryItems jewelryItems = db.JewelryItems.Find(id);
+            if (jewelryItems == null)
             {
                 return HttpNotFound();
             }
+            JewelryItemsViewModel jewelryItemsViewModel = new JewelryItemsViewModel();
+            Mapper.Map(jewelryItems, jewelryItemsViewModel);
+            
             return View(jewelryItemsViewModel);
         }
 

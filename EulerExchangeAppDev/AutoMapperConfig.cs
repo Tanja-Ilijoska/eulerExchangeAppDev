@@ -39,6 +39,9 @@ namespace EulerExchangeAppDev
 
                 cfg.CreateMap<Promotions, PromotionsViewModel>().ReverseMap();
                 cfg.CreateMap<Discounts, DiscountsViewModel>().ReverseMap();
+
+                cfg.CreateMap<Orders, OrderViewModel>().ReverseMap();
+                cfg.CreateMap<OrderJewelryItems, OrderJewelryItemsViewModel>().ReverseMap();
             });
         }
     }

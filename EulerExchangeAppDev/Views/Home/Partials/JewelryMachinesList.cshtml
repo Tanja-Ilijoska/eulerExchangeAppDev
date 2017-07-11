@@ -4,14 +4,14 @@
     <link rel="stylesheet" href="~/Scripts/MagnificPopup/magnific-popup.css">
     <script src="~/Scripts/MagnificPopup/jquery.magnific-popup.js"></script>
 
-    <div style="overflow-y:auto; overflow-x: hidden; height:1150px;"">
+    <div style="overflow-y:auto; overflow-x: hidden; height:90vh;">
         @if (Model != null)
         {
             foreach (var item in Model)
             {
             <div>
 
-                <div style="background-color:#eeeeee">@item.Companies.CompanyName</div>
+                <div style="background-color:#eeeeee" class="img-rounded">@item.Companies.CompanyName</div>
 
                 @if (item.JewelryMachinesImageURL != null && item.JewelryMachinesImageURL.Count > 0)
                 {

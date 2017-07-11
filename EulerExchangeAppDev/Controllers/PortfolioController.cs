@@ -8,6 +8,7 @@ using EulerExchangeAppDev.Models.ViewModels;
 using AutoMapper;
 using EulerExchangeAppDev.DataAccess;
 using System.Security.Claims;
+using System.Net;
 
 namespace EulerExchangeAppDev.Controllers
 {
@@ -111,6 +112,21 @@ namespace EulerExchangeAppDev.Controllers
             {
                 return View();
             }
+        }
+
+        // GET: JewelryItems/Edit/5
+        public ActionResult EditItem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            JewelryItems jewelryItemsViewModel = db.JewelryItems.Find(id);
+            if (jewelryItemsViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(jewelryItemsViewModel);
         }
     }
 }

@@ -11,11 +11,9 @@ namespace EulerExchangeAppDev.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class OrderJewelryItems
     {
-        [ScaffoldColumn(false)]
         public int Id { get; set; }
         public int OrderId { get; set; }
         public int JewelryItemId { get; set; }

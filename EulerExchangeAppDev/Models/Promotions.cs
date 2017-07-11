@@ -21,7 +21,9 @@ namespace EulerExchangeAppDev.Models
         }
     
         public int Id { get; set; }
-        public decimal Price { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> Millem { get; set; }
+        public Nullable<decimal> Persent { get; set; }
         public Nullable<decimal> MinOrderGram { get; set; }
         public Nullable<decimal> MinOrderPrice { get; set; }
         public System.DateTime PeriodFrom { get; set; }
@@ -29,13 +31,20 @@ namespace EulerExchangeAppDev.Models
         public Nullable<bool> Rings { get; set; }
         public Nullable<bool> EngagementRings { get; set; }
         public Nullable<bool> WeddingRings { get; set; }
-        public Nullable<bool> Pendants { get; set; }
-        public Nullable<bool> Chains { get; set; }
-        public Nullable<bool> Necklaces { get; set; }
+        public Nullable<bool> NecklacesSets { get; set; }
+        public Nullable<bool> NecklacesChains { get; set; }
+        public Nullable<bool> ChildrenNecklaceChains { get; set; }
+        public Nullable<bool> Sets { get; set; }
         public Nullable<bool> Bracelets { get; set; }
+        public Nullable<bool> ChildrenBracelets { get; set; }
+        public Nullable<bool> Bangles { get; set; }
+        public Nullable<bool> ChildrenBangles { get; set; }
         public Nullable<bool> Earrings { get; set; }
-        public Nullable<bool> LightSets { get; set; }
-        public Nullable<bool> SetsWatchesSunglasses { get; set; }
+        public Nullable<bool> ChildrenEarrings { get; set; }
+        public Nullable<bool> Pendants { get; set; }
+        public Nullable<bool> PinBrooch { get; set; }
+        public Nullable<bool> Cufflinks { get; set; }
+        public Nullable<System.DateTime> DateCreated { get; set; }
         public int CompanyId { get; set; }
     
         public virtual Companies Companies { get; set; }

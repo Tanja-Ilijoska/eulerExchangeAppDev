@@ -7,27 +7,32 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Discounts</h4>
+        <h4>Create discounts</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Persent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-2 control-label">
+                @Html.LabelFor(model => model.Persent, htmlAttributes: new { @style = "color:black", @onclick = "change('persent')", @id="lbl_persent"})
+                @Html.LabelFor(model => model.FixPrice, htmlAttributes: new { @style = "color:gray", @onclick = "change('fixPrice')", @id = "lbl_fixPrice" })
+                @Html.LabelFor(model => model.Millem, htmlAttributes: new { @style = "color:gray", @onclick = "change('millem')", @id = "lbl_millem" })
+            </div>
+            <div class="col-md-10" id="tb_persent">
                 @Html.EditorFor(model => model.Persent, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Persent, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FixPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10"  style="display: none" id="tb_fixPrice">
                 @Html.EditorFor(model => model.FixPrice, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FixPrice, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-10" style="display: none" id="tb_millem">
+                @Html.EditorFor(model => model.Millem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Millem, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -78,3 +83,36 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    function change(button)
+    {
+        if (button == "persent") {
+            $("#lbl_persent").css("color", "black");
+            $("#lbl_fixPrice").css("color", "gray");
+            $("#lbl_millem").css("color", "gray");
+
+            $("#tb_persent").show();
+            $("#tb_fixPrice").hide();
+            $("#tb_millem").hide();
+        }
+        if (button == "fixPrice") {
+            $("#lbl_persent").css("color", "gray");
+            $("#lbl_fixPrice").css("color", "black");
+            $("#lbl_millem").css("color", "gray");
+
+            $("#tb_persent").hide();
+            $("#tb_fixPrice").show();
+            $("#tb_millem").hide();
+        }
+        if (button == "millem") {
+            $("#lbl_persent").css("color", "gray");
+            $("#lbl_fixPrice").css("color", "gray");
+            $("#lbl_millem").css("color", "black");
+
+            $("#tb_persent").hide();
+            $("#tb_fixPrice").hide();
+            $("#tb_millem").show();
+        }
+    }
+</script>
