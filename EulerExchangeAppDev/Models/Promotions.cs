@@ -28,23 +28,25 @@ namespace EulerExchangeAppDev.Models
         public Nullable<decimal> MinOrderPrice { get; set; }
         public System.DateTime PeriodFrom { get; set; }
         public System.DateTime PeriodTo { get; set; }
-        public Nullable<bool> Rings { get; set; }
-        public Nullable<bool> EngagementRings { get; set; }
-        public Nullable<bool> WeddingRings { get; set; }
-        public Nullable<bool> NecklacesSets { get; set; }
-        public Nullable<bool> NecklacesChains { get; set; }
-        public Nullable<bool> ChildrenNecklaceChains { get; set; }
-        public Nullable<bool> Sets { get; set; }
-        public Nullable<bool> Bracelets { get; set; }
-        public Nullable<bool> ChildrenBracelets { get; set; }
-        public Nullable<bool> Bangles { get; set; }
-        public Nullable<bool> ChildrenBangles { get; set; }
-        public Nullable<bool> Earrings { get; set; }
-        public Nullable<bool> ChildrenEarrings { get; set; }
-        public Nullable<bool> Pendants { get; set; }
-        public Nullable<bool> PinBrooch { get; set; }
-        public Nullable<bool> Cufflinks { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
+        public bool Rings { get; set; }
+        public bool EngagementRings { get; set; }
+        public bool WeddingRings { get; set; }
+        public bool NecklacesSets { get; set; }
+        public bool NecklacesChains { get; set; }
+        public bool ChildrenNecklaceChains { get; set; }
+        public bool Sets { get; set; }
+        public bool Bracelets { get; set; }
+        public bool ChildrenBracelets { get; set; }
+        public bool Bangles { get; set; }
+        public bool ChildrenBangles { get; set; }
+        public bool Earrings { get; set; }
+        public bool ChildrenEarrings { get; set; }
+        public bool Pendants { get; set; }
+        public bool PinBrooch { get; set; }
+        public bool Cufflinks { get; set; }
+        public bool Watches { get; set; }
+        public bool Sunglasses { get; set; }
+        public System.DateTime DateCreated { get; set; }
         public int CompanyId { get; set; }
     
         public virtual Companies Companies { get; set; }

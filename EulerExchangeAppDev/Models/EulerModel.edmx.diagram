@@ -6,35 +6,35 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d16511bb7ae34f909f74ae297047ee67" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="EulerDatabaseModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Applications" Width="1.5" PointX="10.75" PointY="7.875" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Membership" Width="1.5" PointX="18" PointY="6.5" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Paths" Width="1.5" PointX="13" PointY="6.375" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="15.25" PointY="9.875" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="15.25" PointY="6.375" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Profile" Width="1.5" PointX="17.5" PointY="13.875" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Roles" Width="1.5" PointX="13" PointY="15.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Applications" Width="1.5" PointX="7.75" PointY="7.875" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Membership" Width="1.5" PointX="10" PointY="6.5" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Paths" Width="1.5" PointX="10" PointY="15.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="12.25" PointY="19.125" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="14.5" PointY="12.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Profile" Width="1.5" PointX="14.5" PointY="9.375" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Roles" Width="1.5" PointX="10" PointY="12.625" />
         <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_SchemaVersions" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Users" Width="1.5" PointX="15.25" PointY="13.375" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_WebEvent_Events" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.AspNetRoles" Width="1.5" PointX="15.75" PointY="19.5" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.AspNetUserClaims" Width="1.5" PointX="20.25" PointY="18" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.AspNetUserLogins" Width="1.5" PointX="20.25" PointY="20.75" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.AspNetUsers" Width="1.5" PointX="18" PointY="18.375" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.Companies" Width="1.5" PointX="0.75" PointY="12" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.CompanyType" Width="1.5" PointX="3" PointY="18" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.Discounts" Width="1.5" PointX="3" PointY="10.25" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.Gemstones" Width="1.5" PointX="3.75" PointY="7.625" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.GoldBullionOfferBids" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.GoldBullionOffers" Width="1.5" PointX="3" PointY="20.375" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.ImageURL" Width="1.5" PointX="5.75" PointY="3.75" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryCategories" Width="1.5" PointX="3.75" PointY="5" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryItems" Width="1.5" PointX="6" PointY="9.25" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryItemsImageURL" Width="1.5" PointX="8.25" PointY="10.75" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryMachines" Width="1.5" PointX="3" PointY="14.25" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryMachinesImageURL" Width="1.5" PointX="5.25" PointY="14.875" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.OrderJewelryItems" Width="1.5" PointX="8.25" PointY="14.125" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.Orders" Width="1.5" PointX="5.25" PointY="18.625" />
-        <EntityTypeShape EntityType="EulerDatabaseModel.Promotions" Width="1.5" PointX="3" PointY="23.5" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_Users" Width="1.5" PointX="12.25" PointY="9.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.aspnet_WebEvent_Events" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.AspNetRoles" Width="1.5" PointX="12.75" PointY="2.5" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.AspNetUserClaims" Width="1.5" PointX="17.25" PointY="1" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.AspNetUserLogins" Width="1.5" PointX="17.25" PointY="3.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.AspNetUsers" Width="1.5" PointX="15" PointY="1.375" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Companies" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.CompanyType" Width="1.5" PointX="3" PointY="6.375" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Discounts" Width="1.5" PointX="3" PointY="31.625" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Gemstones" Width="1.5" PointX="0.75" PointY="20.5" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.GoldBullionOfferBids" Width="1.5" PointX="5.25" PointY="19.375" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.GoldBullionOffers" Width="1.5" PointX="3" PointY="24.625" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.ImageURL" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryCategories" Width="1.5" PointX="0.75" PointY="22.875" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryItems" Width="1.5" PointX="3" PointY="17.25" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryItemsImageURL" Width="1.5" PointX="5.25" PointY="16.625" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryMachines" Width="1.5" PointX="3" PointY="28" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.JewelryMachinesImageURL" Width="1.5" PointX="5.25" PointY="28.5" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.OrderJewelryItems" Width="1.5" PointX="7.5" PointY="20.125" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Orders" Width="1.5" PointX="5.25" PointY="22.25" />
+        <EntityTypeShape EntityType="EulerDatabaseModel.Promotions" Width="1.5" PointX="3" PointY="8.75" />
         <AssociationConnector Association="EulerDatabaseModel.FK__aspnet_Me__Appli__24E777C3" />
         <AssociationConnector Association="EulerDatabaseModel.FK__aspnet_Pa__Appli__567ED357" />
         <AssociationConnector Association="EulerDatabaseModel.FK__aspnet_Ro__Appli__436BFEE3" />
@@ -47,12 +47,15 @@
         <AssociationConnector Association="EulerDatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="EulerDatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="EulerDatabaseModel.FK_Discounts_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_GoldBullionOfferBids_Companies" />
         <AssociationConnector Association="EulerDatabaseModel.FK_GoldBullionOffers_Companies" />
         <AssociationConnector Association="EulerDatabaseModel.FK_ItemsJewelry_Companies" />
         <AssociationConnector Association="EulerDatabaseModel.FK_JewelryMachines_Companies" />
         <AssociationConnector Association="EulerDatabaseModel.FK_Orders_Companies" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_Orders_Companies1" />
         <AssociationConnector Association="EulerDatabaseModel.FK_Promotion_Companies" />
         <AssociationConnector Association="EulerDatabaseModel.FK_Orders_Discounts" />
+        <AssociationConnector Association="EulerDatabaseModel.FK_GoldBullionOfferBids_GoldBullionOffers" />
         <AssociationConnector Association="EulerDatabaseModel.FK_ItemsJewelry_CategoriesJewelry" />
         <AssociationConnector Association="EulerDatabaseModel.FK_JewelryItemsImageURL_JewelryItemsImageURL" />
         <AssociationConnector Association="EulerDatabaseModel.FK_OrderJewelryItems_OrderJewelryItems" />

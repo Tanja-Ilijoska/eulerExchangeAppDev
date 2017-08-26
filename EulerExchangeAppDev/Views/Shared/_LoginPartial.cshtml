@@ -11,8 +11,7 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="#">Orders 1</a></li>
-                <li><a href="#">Orders 2</a></li>
+                <li>@Html.ActionLink("Orders", "Index", "Order", routeValues: null, htmlAttributes: new { title = "Orders" })</li>
                 <li>@Html.ActionLink("Portfolio", "Index", "Portfolio", routeValues: null, htmlAttributes: new { title = "Portfolio" })</li>
                 <li>@Html.ActionLink("Manage account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

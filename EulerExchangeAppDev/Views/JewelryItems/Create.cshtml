@@ -54,7 +54,7 @@
         <div class="form-group"  id="caratDiv">
             @Html.LabelFor(model => model.Carat, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Carat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Carat, new { htmlAttributes = new { @class = "form-control", @list = "caratsList" } })
                 @Html.ValidationMessageFor(model => model.Carat, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -148,6 +148,25 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+<datalist id="caratsList">
+    <option value="999.999">
+    <option value="999.99">
+    <option value="999.9">
+    <option value="999">
+    <option value="995">
+    <option value="990">
+    <option value="986">
+    <option value="958.3">
+    <option value="916">
+    <option value="900">
+    <option value="834">
+    <option value="750">
+    <option value="625">
+    <option value="585">
+    <option value="417">
+    <option value="376">
+    <option value="333">
+</datalist>
 
 <script>
 

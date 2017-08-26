@@ -4,10 +4,12 @@
 @model EulerExchangeAppDev.Models.ModelList
 
 
-<h2>Portfolio</h2>
-
 <div>
+        <h2 style="float:left">Portfolio</h2>
+    <div style="float:right">@Html.ActionLink("Add new Item", "Create", "JewelryItems", routeValues: null, htmlAttributes: new { title = "Add new Item" })</div>
+</div>
 
+<div style="clear: both;">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         @foreach (JewelryCategoriesViewModel category in Model.data[Model.names["JewelryCategories"]])
@@ -15,7 +17,7 @@
             <li role="presentation" class=""><a href="#@category.getNameUnderScored()" role="tab" data-toggle="tab">@category.Name</a></li>
         }
     </ul>
-
+</div>
     <!-- Tab panes -->
     <div class="tab-content">
 

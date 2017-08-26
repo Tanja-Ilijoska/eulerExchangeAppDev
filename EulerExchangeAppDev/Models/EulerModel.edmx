@@ -360,9 +360,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DateTime" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="CompanyId" Type="int" Nullable="false" />
-          <Property Name="DiscountId" Type="int" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="SupplierId" Type="int" Nullable="false" />
           <Property Name="PromotionId" Type="int" />
+          <Property Name="DiscountId" Type="int" />
         </EntityType>
         <EntityType Name="Promotions">
           <Key>
@@ -376,23 +377,25 @@
           <Property Name="MinOrderPrice" Type="decimal" Precision="18" Scale="4" />
           <Property Name="PeriodFrom" Type="datetime" Nullable="false" />
           <Property Name="PeriodTo" Type="datetime" Nullable="false" />
-          <Property Name="Rings" Type="bit" />
-          <Property Name="EngagementRings" Type="bit" />
-          <Property Name="WeddingRings" Type="bit" />
-          <Property Name="NecklacesSets" Type="bit" />
-          <Property Name="NecklacesChains" Type="bit" />
-          <Property Name="ChildrenNecklaceChains" Type="bit" />
-          <Property Name="Sets" Type="bit" />
-          <Property Name="Bracelets" Type="bit" />
-          <Property Name="ChildrenBracelets" Type="bit" />
-          <Property Name="Bangles" Type="bit" />
-          <Property Name="ChildrenBangles" Type="bit" />
-          <Property Name="Earrings" Type="bit" />
-          <Property Name="ChildrenEarrings" Type="bit" />
-          <Property Name="Pendants" Type="bit" />
-          <Property Name="PinBrooch" Type="bit" />
-          <Property Name="Cufflinks" Type="bit" />
-          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="Rings" Type="bit" Nullable="false" />
+          <Property Name="EngagementRings" Type="bit" Nullable="false" />
+          <Property Name="WeddingRings" Type="bit" Nullable="false" />
+          <Property Name="NecklacesSets" Type="bit" Nullable="false" />
+          <Property Name="NecklacesChains" Type="bit" Nullable="false" />
+          <Property Name="ChildrenNecklaceChains" Type="bit" Nullable="false" />
+          <Property Name="Sets" Type="bit" Nullable="false" />
+          <Property Name="Bracelets" Type="bit" Nullable="false" />
+          <Property Name="ChildrenBracelets" Type="bit" Nullable="false" />
+          <Property Name="Bangles" Type="bit" Nullable="false" />
+          <Property Name="ChildrenBangles" Type="bit" Nullable="false" />
+          <Property Name="Earrings" Type="bit" Nullable="false" />
+          <Property Name="ChildrenEarrings" Type="bit" Nullable="false" />
+          <Property Name="Pendants" Type="bit" Nullable="false" />
+          <Property Name="PinBrooch" Type="bit" Nullable="false" />
+          <Property Name="Cufflinks" Type="bit" Nullable="false" />
+          <Property Name="Watches" Type="bit" Nullable="false" />
+          <Property Name="Sunglasses" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__aspnet_Me__Appli__24E777C3">
@@ -619,6 +622,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GoldBullionOfferBids_Companies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="GoldBullionOfferBids" Type="Self.GoldBullionOfferBids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoldBullionOfferBids">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoldBullionOfferBids_GoldBullionOffers">
+          <End Role="GoldBullionOffers" Type="Self.GoldBullionOffers" Multiplicity="1" />
+          <End Role="GoldBullionOfferBids" Type="Self.GoldBullionOfferBids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoldBullionOffers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoldBullionOfferBids">
+              <PropertyRef Name="GoldBullionOfferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GoldBullionOffers_Companies">
           <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
           <End Role="GoldBullionOffers" Type="Self.GoldBullionOffers" Multiplicity="*" />
@@ -747,7 +774,19 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Orders">
-              <PropertyRef Name="CompanyId" />
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Companies1">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="SupplierId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -894,6 +933,14 @@
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Discounts" EntitySet="Discounts" />
           </AssociationSet>
+          <AssociationSet Name="FK_GoldBullionOfferBids_Companies" Association="Self.FK_GoldBullionOfferBids_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="GoldBullionOfferBids" EntitySet="GoldBullionOfferBids" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoldBullionOfferBids_GoldBullionOffers" Association="Self.FK_GoldBullionOfferBids_GoldBullionOffers">
+            <End Role="GoldBullionOffers" EntitySet="GoldBullionOffers" />
+            <End Role="GoldBullionOfferBids" EntitySet="GoldBullionOfferBids" />
+          </AssociationSet>
           <AssociationSet Name="FK_GoldBullionOffers_Companies" Association="Self.FK_GoldBullionOffers_Companies">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="GoldBullionOffers" EntitySet="GoldBullionOffers" />
@@ -935,6 +982,10 @@
             <End Role="OrderJewelryItems" EntitySet="OrderJewelryItems" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Companies" Association="Self.FK_Orders_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Companies1" Association="Self.FK_Orders_Companies1">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
@@ -1034,6 +1085,10 @@
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Discounts" EntitySet="Discounts" />
           </AssociationSet>
+          <AssociationSet Name="FK_GoldBullionOfferBids_Companies" Association="EulerDatabaseModel.FK_GoldBullionOfferBids_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="GoldBullionOfferBids" EntitySet="GoldBullionOfferBids" />
+          </AssociationSet>
           <AssociationSet Name="FK_GoldBullionOffers_Companies" Association="EulerDatabaseModel.FK_GoldBullionOffers_Companies">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="GoldBullionOffers" EntitySet="GoldBullionOffers" />
@@ -1050,6 +1105,10 @@
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_Orders_Companies1" Association="EulerDatabaseModel.FK_Orders_Companies1">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_Promotion_Companies" Association="EulerDatabaseModel.FK_Promotion_Companies">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="Promotions" EntitySet="Promotions" />
@@ -1057,6 +1116,10 @@
           <AssociationSet Name="FK_Orders_Discounts" Association="EulerDatabaseModel.FK_Orders_Discounts">
             <End Role="Discounts" EntitySet="Discounts" />
             <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoldBullionOfferBids_GoldBullionOffers" Association="EulerDatabaseModel.FK_GoldBullionOfferBids_GoldBullionOffers">
+            <End Role="GoldBullionOffers" EntitySet="GoldBullionOffers" />
+            <End Role="GoldBullionOfferBids" EntitySet="GoldBullionOfferBids" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemsJewelry_CategoriesJewelry" Association="EulerDatabaseModel.FK_ItemsJewelry_CategoriesJewelry">
             <End Role="JewelryCategories" EntitySet="JewelryCategories" />
@@ -1321,10 +1384,12 @@
           <Property Name="ImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Discounts" Relationship="EulerDatabaseModel.FK_Discounts_Companies" FromRole="Companies" ToRole="Discounts" />
+          <NavigationProperty Name="GoldBullionOfferBids" Relationship="EulerDatabaseModel.FK_GoldBullionOfferBids_Companies" FromRole="Companies" ToRole="GoldBullionOfferBids" />
           <NavigationProperty Name="GoldBullionOffers" Relationship="EulerDatabaseModel.FK_GoldBullionOffers_Companies" FromRole="Companies" ToRole="GoldBullionOffers" />
           <NavigationProperty Name="JewelryItems" Relationship="EulerDatabaseModel.FK_ItemsJewelry_Companies" FromRole="Companies" ToRole="JewelryItems" />
           <NavigationProperty Name="JewelryMachines" Relationship="EulerDatabaseModel.FK_JewelryMachines_Companies" FromRole="Companies" ToRole="JewelryMachines" />
           <NavigationProperty Name="Orders" Relationship="EulerDatabaseModel.FK_Orders_Companies" FromRole="Companies" ToRole="Orders" />
+          <NavigationProperty Name="Orders1" Relationship="EulerDatabaseModel.FK_Orders_Companies1" FromRole="Companies" ToRole="Orders" />
           <NavigationProperty Name="Promotions" Relationship="EulerDatabaseModel.FK_Promotion_Companies" FromRole="Companies" ToRole="Promotions" />
           <NavigationProperty Name="CompanyType" Relationship="EulerDatabaseModel.CompaniesCompanyType" FromRole="Companies" ToRole="CompanyType" />
         </EntityType>
@@ -1369,6 +1434,8 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="GoldBullionOfferId" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_GoldBullionOfferBids_Companies" FromRole="GoldBullionOfferBids" ToRole="Companies" />
+          <NavigationProperty Name="GoldBullionOffers" Relationship="EulerDatabaseModel.FK_GoldBullionOfferBids_GoldBullionOffers" FromRole="GoldBullionOfferBids" ToRole="GoldBullionOffers" />
         </EntityType>
         <EntityType Name="GoldBullionOffers">
           <Key>
@@ -1381,6 +1448,7 @@
           <Property Name="Carat" Type="Single" />
           <Property Name="DateTime" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_GoldBullionOffers_Companies" FromRole="GoldBullionOffers" ToRole="Companies" />
+          <NavigationProperty Name="GoldBullionOfferBids" Relationship="EulerDatabaseModel.FK_GoldBullionOfferBids_GoldBullionOffers" FromRole="GoldBullionOffers" ToRole="GoldBullionOfferBids" />
         </EntityType>
         <EntityType Name="ImageURL">
           <Key>
@@ -1472,10 +1540,12 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <Property Name="DiscountId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="SupplierId" Type="Int32" Nullable="false" />
           <Property Name="PromotionId" Type="Int32" />
+          <Property Name="DiscountId" Type="Int32" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Orders_Companies" FromRole="Orders" ToRole="Companies" />
+          <NavigationProperty Name="Companies1" Relationship="EulerDatabaseModel.FK_Orders_Companies1" FromRole="Orders" ToRole="Companies" />
           <NavigationProperty Name="Discounts" Relationship="EulerDatabaseModel.FK_Orders_Discounts" FromRole="Orders" ToRole="Discounts" />
           <NavigationProperty Name="OrderJewelryItems" Relationship="EulerDatabaseModel.FK_OrderJewelryItems_Orders" FromRole="Orders" ToRole="OrderJewelryItems" />
           <NavigationProperty Name="Promotions" Relationship="EulerDatabaseModel.FK_Orders_Promotions" FromRole="Orders" ToRole="Promotions" />
@@ -1492,23 +1562,25 @@
           <Property Name="MinOrderPrice" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="PeriodFrom" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PeriodTo" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Rings" Type="Boolean" />
-          <Property Name="EngagementRings" Type="Boolean" />
-          <Property Name="WeddingRings" Type="Boolean" />
-          <Property Name="NecklacesSets" Type="Boolean" />
-          <Property Name="NecklacesChains" Type="Boolean" />
-          <Property Name="ChildrenNecklaceChains" Type="Boolean" />
-          <Property Name="Sets" Type="Boolean" />
-          <Property Name="Bracelets" Type="Boolean" />
-          <Property Name="ChildrenBracelets" Type="Boolean" />
-          <Property Name="Bangles" Type="Boolean" />
-          <Property Name="ChildrenBangles" Type="Boolean" />
-          <Property Name="Earrings" Type="Boolean" />
-          <Property Name="ChildrenEarrings" Type="Boolean" />
-          <Property Name="Pendants" Type="Boolean" />
-          <Property Name="PinBrooch" Type="Boolean" />
-          <Property Name="Cufflinks" Type="Boolean" />
-          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="Rings" Type="Boolean" Nullable="false" />
+          <Property Name="EngagementRings" Type="Boolean" Nullable="false" />
+          <Property Name="WeddingRings" Type="Boolean" Nullable="false" />
+          <Property Name="NecklacesSets" Type="Boolean" Nullable="false" />
+          <Property Name="NecklacesChains" Type="Boolean" Nullable="false" />
+          <Property Name="ChildrenNecklaceChains" Type="Boolean" Nullable="false" />
+          <Property Name="Sets" Type="Boolean" Nullable="false" />
+          <Property Name="Bracelets" Type="Boolean" Nullable="false" />
+          <Property Name="ChildrenBracelets" Type="Boolean" Nullable="false" />
+          <Property Name="Bangles" Type="Boolean" Nullable="false" />
+          <Property Name="ChildrenBangles" Type="Boolean" Nullable="false" />
+          <Property Name="Earrings" Type="Boolean" Nullable="false" />
+          <Property Name="ChildrenEarrings" Type="Boolean" Nullable="false" />
+          <Property Name="Pendants" Type="Boolean" Nullable="false" />
+          <Property Name="PinBrooch" Type="Boolean" Nullable="false" />
+          <Property Name="Cufflinks" Type="Boolean" Nullable="false" />
+          <Property Name="Watches" Type="Boolean" Nullable="false" />
+          <Property Name="Sunglasses" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Companies" Relationship="EulerDatabaseModel.FK_Promotion_Companies" FromRole="Promotions" ToRole="Companies" />
           <NavigationProperty Name="Orders" Relationship="EulerDatabaseModel.FK_Orders_Promotions" FromRole="Promotions" ToRole="Orders" />
@@ -1661,6 +1733,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GoldBullionOfferBids_Companies">
+          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
+          <End Type="EulerDatabaseModel.GoldBullionOfferBids" Role="GoldBullionOfferBids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoldBullionOfferBids">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GoldBullionOffers_Companies">
           <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
           <End Type="EulerDatabaseModel.GoldBullionOffers" Role="GoldBullionOffers" Multiplicity="*" />
@@ -1705,7 +1789,19 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Orders">
-              <PropertyRef Name="CompanyId" />
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Companies1">
+          <End Type="EulerDatabaseModel.Companies" Role="Companies" Multiplicity="1" />
+          <End Type="EulerDatabaseModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="SupplierId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1730,6 +1826,18 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="DiscountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoldBullionOfferBids_GoldBullionOffers">
+          <End Type="EulerDatabaseModel.GoldBullionOffers" Role="GoldBullionOffers" Multiplicity="1" />
+          <End Type="EulerDatabaseModel.GoldBullionOfferBids" Role="GoldBullionOfferBids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoldBullionOffers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoldBullionOfferBids">
+              <PropertyRef Name="GoldBullionOfferId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2171,9 +2279,10 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="EulerDatabaseModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
                 <ScalarProperty Name="DiscountId" ColumnName="DiscountId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="PromotionId" ColumnName="PromotionId" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -2184,6 +2293,8 @@
               <MappingFragment StoreEntitySet="Promotions">
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Sunglasses" ColumnName="Sunglasses" />
+                <ScalarProperty Name="Watches" ColumnName="Watches" />
                 <ScalarProperty Name="Cufflinks" ColumnName="Cufflinks" />
                 <ScalarProperty Name="PinBrooch" ColumnName="PinBrooch" />
                 <ScalarProperty Name="Pendants" ColumnName="Pendants" />

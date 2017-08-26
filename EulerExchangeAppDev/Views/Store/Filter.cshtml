@@ -1,0 +1,17 @@
+﻿@using EulerExchangeAppDev.Models.ViewModels;
+@model StoreFilterItemViewModel
+
+@using (Html.BeginForm("Index", "Store", FormMethod.Post))
+{
+    <div  class="panel panel-default">
+        @Html.LabelFor(model => model.carat)
+        @Html.EditorFor(model => model.carat)
+
+        @Html.LabelFor(model => model.weightMin)
+        @Html.EditorFor(model => model.weightMin)
+        -
+        @Html.EditorFor(model => model.weightMax)
+
+        <button type="submit" value="Filter" class="btn btn-default "> <span class="glyphicon glyphicon-search"></span> Filter</button>
+    </div>
+}

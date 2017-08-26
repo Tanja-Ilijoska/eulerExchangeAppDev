@@ -16,13 +16,14 @@ namespace EulerExchangeAppDev.Controllers
     {
         public List<JewelryCategoriesViewModel> categories { get; set; }
         public List<JewelryItemsViewModel> jewelries { get; set; }
+        public StoreFilterItemViewModel filter { get; set; }
     }
     public class StoreController : Controller
     {
         private masterEntities db = new masterEntities();
         IMapper Mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
         // GET: Store
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? id, StoreFilterItemViewModel filter)
         {
             if(id == null)
             {
@@ -31,35 +32,28 @@ namespace EulerExchangeAppDev.Controllers
 
             Companies company = db.Companies.Find(id);
 
-            //ModelList modelList = new ModelList();
-
             List <JewelryCategories> categories = db.JewelryCategories.ToList();
             List<JewelryCategoriesViewModel> categoriesVM = new List<JewelryCategoriesViewModel>();
             Mapper.Map(categories, categoriesVM);
-            //modelList.add(categoriesVM, "JewelryCategories");
-
-            //Dictionary<String, List<JewelryItemsViewModel>> fullData = new Dictionary<String, List<JewelryItemsViewModel>>();
-
-            /*
-            for (int i = 0; i < categoriesVM.Count; i++)
-            {
-                List<JewelryItemsViewModel> dataVM = new List<JewelryItemsViewModel>();
-                List<JewelryItems> data = db.JewelryItems.Where(x => x.CompanyId == company.Id).Where(x => x.CategoryJewelryId == (i + 1)).OrderByDescending(x => x.Id).ToList();
-                Mapper.Map(data, dataVM);
-                //modelList.add(dataVM, categoriesVM[i].Name);
-                //fullData.Add(categoriesVM[i].Name, dataVM);
-            }
-            */
 
             List<JewelryItemsViewModel> jewelriesVM = new List<JewelryItemsViewModel>();
-            List<JewelryItems> jewelries = db.JewelryItems.Where(x => x.CompanyId == company.Id).OrderBy(x => x.CategoryJewelryId).ThenByDescending(x => x.Id).ToList();
+            IQueryable<JewelryItems> jewelries = db.JewelryItems.Where(x => x.CompanyId == company.Id);
+            if (filter.carat != null)
+                jewelries = jewelries.Where(x => x.Carat == filter.carat);
+            if(filter.weightMin != null)
+                jewelries = jewelries.Where(x => x.Weight >= filter.weightMin);
+            if (filter.weightMax != null)
+                jewelries = jewelries.Where(x => x.Weight <= filter.weightMax);
+
+            //more from filter fields
+
+            List<JewelryItems> jewelriesList = jewelries.OrderBy(x => x.CategoryJewelryId).ThenByDescending(x => x.Id).ToList();
             Mapper.Map(jewelries, jewelriesVM);
-
-            //Tuple<List<JewelryCategoriesViewModel>, Dictionary<String, List<JewelryItemsViewModel>>> tuple = new Tuple<List<JewelryCategoriesViewModel>, Dictionary<String, List<JewelryItemsViewModel>>>(categoriesVM, fullData);
-
+            
             StoreModel storeModel = new StoreModel();
             storeModel.categories = categoriesVM;
             storeModel.jewelries = jewelriesVM;
+            storeModel.filter = new StoreFilterItemViewModel();
 
             return View("Index", storeModel);
         }

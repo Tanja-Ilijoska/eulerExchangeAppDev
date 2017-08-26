@@ -22,11 +22,13 @@ namespace EulerExchangeAppDev.Models
     
         public int Id { get; set; }
         public System.DateTime DateTime { get; set; }
-        public int CompanyId { get; set; }
-        public Nullable<int> DiscountId { get; set; }
+        public int CustomerId { get; set; }
+        public int SupplierId { get; set; }
         public Nullable<int> PromotionId { get; set; }
+        public Nullable<int> DiscountId { get; set; }
     
         public virtual Companies Companies { get; set; }
+        public virtual Companies Companies1 { get; set; }
         public virtual Discounts Discounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderJewelryItems> OrderJewelryItems { get; set; }

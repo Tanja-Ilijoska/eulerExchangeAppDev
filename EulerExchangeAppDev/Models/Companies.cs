@@ -18,10 +18,12 @@ namespace EulerExchangeAppDev.Models
         public Companies()
         {
             this.Discounts = new HashSet<Discounts>();
+            this.GoldBullionOfferBids = new HashSet<GoldBullionOfferBids>();
             this.GoldBullionOffers = new HashSet<GoldBullionOffers>();
             this.JewelryItems = new HashSet<JewelryItems>();
             this.JewelryMachines = new HashSet<JewelryMachines>();
             this.Orders = new HashSet<Orders>();
+            this.Orders1 = new HashSet<Orders>();
             this.Promotions = new HashSet<Promotions>();
             this.CompanyType = new HashSet<CompanyType>();
         }
@@ -45,6 +47,8 @@ namespace EulerExchangeAppDev.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Discounts> Discounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoldBullionOfferBids> GoldBullionOfferBids { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoldBullionOffers> GoldBullionOffers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JewelryItems> JewelryItems { get; set; }
@@ -52,6 +56,8 @@ namespace EulerExchangeAppDev.Models
         public virtual ICollection<JewelryMachines> JewelryMachines { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Promotions> Promotions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

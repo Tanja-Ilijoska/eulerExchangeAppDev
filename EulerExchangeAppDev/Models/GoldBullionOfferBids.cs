@@ -18,5 +18,8 @@ namespace EulerExchangeAppDev.Models
         public int CompanyId { get; set; }
         public int GoldBullionOfferId { get; set; }
         public decimal Price { get; set; }
+    
+        public virtual Companies Companies { get; set; }
+        public virtual GoldBullionOffers GoldBullionOffers { get; set; }
     }
 }

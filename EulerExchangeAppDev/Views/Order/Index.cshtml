@@ -1,204 +1,74 @@
-﻿@using EulerExchangeAppDev.Models;
-@using EulerExchangeAppDev.Models.ViewModels;
-@using EulerExchangeAppDev.Controllers;
-
-@model OrderModel
+﻿@model EulerExchangeAppDev.Controllers.OrderController.OrderIndexModel
 @{
-    ViewBag.Title = "Order";
+    ViewBag.Title = "Index";
 }
 
-<h2>Order</h2>
-@using (Html.BeginForm("Create", "Order", FormMethod.Post))
-{
-    var index = 0;
-    for (int k = 0; k < Model.Categories.Count(); k++)
-    {
-        var category = Model.Categories[k];
-        <div style="font-size:1.5em; padding-top:1em">@category.Name</div>
-        <div id="products" class="row list-group" style="margin-bottom:0;">
-            <div style="display:none">
-                @Html.EditorFor(model => model.Categories[k])
-            </div>
-            @for (int j = 0; j < Model.Jewelries.Where(x => x.CategoryJewelryId == category.Id).Count(); j++, index++)
+<div class="row">
+    <div class="col-md-6">
+        <h2>Orders</h2>
+        
+        <table class="table">
+            <tr>
+                <th>
+                    Supplier
+                </th>
+                <th>
+                    Date and Time
+                </th>
+                <th>
+                    
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.ordersDelivered) 
             {
-                var item = Model.Jewelries.Where(x => x.CategoryJewelryId == category.Id).ToList()[j];
-
-                <div style="display:none">
-                    @Html.EditorFor(model => model.Jewelries[j])
-                </div>
-                    <div class="item  col-xs-3 col-lg-3">
-                        <div class="thumbnail">
-                            <p class="group inner list-group-item-text" style="float:left; font-size:0.9em">
-                                <b>@Html.LabelFor(model => item.Id):</b>
-                                <label id="carat-@item.Id">@item.Id</label><br />
-                                <b>@Html.LabelFor(model => item.Carat):</b>
-                                <label id="carat-@item.Id">@item.Carat</label><br />
-                                <b>@Html.LabelFor(model => item.Price):</b>
-                                <label id="price-@item.Id">@item.Price</label><br />
-                                <b>@Html.LabelFor(model => item.Weight):</b>
-                                <label id="weight-@item.Id">@item.Weight</label><br />
-                                <b>@Html.LabelFor(model => item.Quantity):</b>
-                                <label id="weight-@item.Id">@item.Quantity</label><br />
-                            </p>
-                            @if (item.JewelryItemsImageURL != null && item.JewelryItemsImageURL.Count > 0)
-                            {
-                                <div class="gallery">
-                                    <a href="@Url.Action("GetImage", "JewelryItems", item.JewelryItemsImageURL.First())" productDetails="">
-                                        <img src='@Url.Action("GetImage", "JewelryItems", item.JewelryItemsImageURL.First())' class="group list-group-image" style="height:80px; width:auto" /><br />
-                                    </a>
-                                    @for (int i = 1; i < item.JewelryItemsImageURL.Count; i++)
-                                    {
-                                        <a href="@Url.Action("GetImage", "JewelryItems", item.JewelryItemsImageURL.ElementAt(i))" class="group list-group-image" style="height:80px; width:auto"></a>
-                                    }
-
-                                </div>
-                            }
-                            else
-                            {
-                                <img src="~/DataImages/noimage.png" style="height:80px; width:auto" />
-                                <br />
-                            }
-                        </div>
-                    </div>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Companies1.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTime)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    </td>
+                </tr>
             }
-        </div>
-            <div style="text-align:right"><b>Weight:</b>@Model.Weight[@category.Name] <b>Price:</b>@Model.Price[@category.Name] <b>Quantity:</b>@Model.Quantity[@category.Name]</div>
-    }
-
-    <hr />
-    <div style="font-size:1.2em; padding-bottom:1em">
-        <div style="text-align:left; float:left"><b>Total</b></div>
-        <div style="text-align:right;"><b>Weight:</b>@Model.Weight["Total"] <b>Price:</b>@Model.Price["Total"] <b>Quantity:</b>@Model.Quantity["Total"]</div>
+        </table>
 
     </div>
+    <div class="col-md-6">
+        <h2>Orders recieved</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    Customer
+                </th>
+                <th>
+                    Date and Time
+                </th>
+                <th>
 
-    <input type="submit" value="Confirm order" class="btn btn-default" />
-}
-<link rel="stylesheet" href="~/Scripts/MagnificPopup/magnific-popup.css">
-<script src="~/Scripts/MagnificPopup/jquery.magnific-popup.js"></script>
-<script>
+                </th>
+                <th></th>
+            </tr>
 
-    selectedItems = [];
-
-
-    function proceed() {
-        //$('#selectedItems').val(JSON.stringify({ selectedItems: selectedItems }));
-        $('#selectedItems').val(JSON.stringify(selectedItems));
-        debugger;
-        @*
-            $.post({
-                url: '@Url.Action("index", "order")',
-                data: JSON.stringify({ selectedItems: selectedItems }),
-                contentType: "application/json; charset=utf-8",
-                type: 'POST',
-                success: function (data) { alert(data); },
-                failure: function (errMsg) {
-                        alert(errMsg);
-                    }
-                });
-                *@
-
-    }
-
-    function plus(id) {
-        var result = $.grep(selectedItems, function (e) { return e.JewelryItemId == id; });
-
-        if (result.length == 0) {
-            var item = { JewelryItemId: id, Quantity: 1, Carat: $("#carat-" + id).html(), Price: $("#price-" + id).html(), Weight: $("#weight-" + id).html() };
-            $("#input-" + id).val(1);
-            selectedItems.push(item);
-        } else if (result.length == 1) {
-            result[0].Quantity++;
-            $("#input-" + id).val(result[0].Quantity);
-        } else {
-            console.error("duplicate item");
-        }
-
-        displayBill();
-    }
-
-    function minus(id) {
-        var result = $.grep(selectedItems, function (e) { return e.JewelryItemId == id; });
-
-        if (result.length == 0) {
-        } else if (result.length == 1) {
-            result[0].Quantity--;
-            $("#input-" + id).val(result[0].Quantity);
-            if (result[0].Quantity == 0)
-                selectedItems.splice(selectedItems.indexOf(result[0]), 1);
-        } else {
-            console.error("duplicate item");
-        }
-
-        displayBill();
-    }
-
-    function displayBill() {
-        if (selectedItems.length == 0)
-            $("#bill").hide();
-        else
-            $("#bill").show();
-
-        sum_carat = 0;
-        sum_price = 0;
-        sum_weight = 0;
-
-        for (i = 0; i < selectedItems.length; i++) {
-            item = selectedItems[i];
-            sum_carat += parseInt(item["Carat"]);
-            sum_price += parseInt(item["Price"]);
-            sum_weight += parseInt(item["Weight"]);
-        }
-
-        console.log(selectedItems.length)
-
-        $("#bill").html(
-            "<p><b>Average price</b>: " + Math.round((sum_carat / selectedItems.length) * 10) / 10 + "<br/><b>Total weight</b>: " + sum_weight
-        )
-    }
-
-
-    $('.gallery').each(function () { // the containers for all your galleries
-        $(this).magnificPopup({
-            delegate: 'a', // the selector for gallery item
-            type: 'image',
-            tLoading: 'Loading image #%curr%...',
-            image: {
-                verticalFit: true
-            },
-            gallery: {
-                enabled: true,
-                navigateByImgClick: true,
-                preload: [0, 1]
-            },
-            image: {
-                tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-                titleSrc: function (item) {
-                    return "ProductDetails: " + item.el.attr('productDetails');
-                },
-                markup: '<div class="mfp-figure">' +
-                            '<div style="color:white">TEXT</div>' +
-                            '<div class="mfp-close"></div>' +
-                                '<div class="mfp-img"></div>' +
-                            '<div class="mfp-bottom-bar">' +
-                                '<div class="mfp-title"></div>' +
-                                '<div class="mfp-counter"></div>' +
-                             '</div>' +
-                        '</div>',
-                verticalFit: true
-            },
-            callbacks: {
-                resize: changeImgSize,
-                imageLoadComplete: changeImgSize,
-                change: changeImgSize
+            @foreach (var item in Model.ordersRecieved)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Companies.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTime)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    </td>
+                </tr>
             }
-        });
-    });
+        </table>
 
-
-    function changeImgSize() {
-        var img = this.content.find('img');
-        img.css('height', '500');
-        img.css('width', '500');
-    }
-</script>
+    </div>
+</div>

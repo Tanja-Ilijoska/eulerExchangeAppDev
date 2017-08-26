@@ -1,16 +1,16 @@
-﻿@using EulerExchangeAppDev.Models;
-@using EulerExchangeAppDev.Models.ViewModels;
+﻿@using EulerExchangeAppDev.Models.ViewModels;
 @using EulerExchangeAppDev.Controllers;
 
 @model StoreModel
 
-
-<h2 style="float:left">Store</h2>
+<div >
+    <h2 >Store</h2>
+</div>
 <div id="bill" class="thumbnail" style="position:fixed;top: 4em;right: 18.5em;float:right;z-index:5;text-align:right;display: none;">
     <!--this div is for selected items-->
 </div>
-
-@using (Html.BeginForm("Index", "Order", FormMethod.Post))
+@Html.Partial("Filter", Model.filter)
+@using (Html.BeginForm("View", "Order", FormMethod.Post))
 {
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist" style="clear:left">

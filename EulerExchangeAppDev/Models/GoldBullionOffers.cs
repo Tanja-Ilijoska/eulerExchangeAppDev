@@ -14,6 +14,12 @@ namespace EulerExchangeAppDev.Models
     
     public partial class GoldBullionOffers
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GoldBullionOffers()
+        {
+            this.GoldBullionOfferBids = new HashSet<GoldBullionOfferBids>();
+        }
+    
         public int Id { get; set; }
         public int CompanyId { get; set; }
         public Nullable<float> Price { get; set; }
@@ -22,5 +28,7 @@ namespace EulerExchangeAppDev.Models
         public Nullable<System.DateTime> DateTime { get; set; }
     
         public virtual Companies Companies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoldBullionOfferBids> GoldBullionOfferBids { get; set; }
     }
 }

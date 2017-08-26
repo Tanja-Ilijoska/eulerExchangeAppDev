@@ -35,7 +35,7 @@ namespace EulerExchangeAppDev.Controllers
             Price.Add("Total", 0);
             Quantity.Add("Total", 0);
         }
-        
+
         public void addItem(JewelryItemsViewModel item)
         {
             Jewelries.Add(item);
@@ -46,7 +46,7 @@ namespace EulerExchangeAppDev.Controllers
                 Price.Add(item.JewelryCategories.Name, 0);
                 Quantity.Add(item.JewelryCategories.Name, 0);
             }
-            Weight[item.JewelryCategories.Name] += item.Weight.Value*item.Quantity;
+            Weight[item.JewelryCategories.Name] += item.Weight.Value * item.Quantity;
             Price[item.JewelryCategories.Name] += item.Price.Value * item.Quantity;
             Quantity[item.JewelryCategories.Name] += item.Quantity;
 
@@ -62,7 +62,7 @@ namespace EulerExchangeAppDev.Controllers
         private masterEntities db = new masterEntities();
         IMapper Mapper = AutoMapperConfig.MapperConfiguration.CreateMapper();
         // GET: Order
-        public ActionResult Index(StoreModel data)
+        public ActionResult View(StoreModel data)
         {
             OrderModel orderModel = new OrderModel();
             foreach (JewelryItemsViewModel item in data.jewelries)
@@ -77,13 +77,56 @@ namespace EulerExchangeAppDev.Controllers
                 }
             }
 
+            ModelState.Clear();
+
             return View(orderModel);
         }
-        
+
+        public class OrderIndexModel
+        {
+            public List<OrderViewModel> ordersRecieved;
+            public List<OrderViewModel> ordersDelivered;
+        }
+
+        public ActionResult Index()
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            UserInfo userInfo = new UserInfo(db);
+            Companies company = userInfo.getLoggedCompanyId(claimsIdentity);
+
+            List<Orders> ordersRecieved = db.Orders.Where(x => x.SupplierId == company.Id).ToList();
+            List<Orders> ordersDelivered = db.Orders.Where(x => x.CustomerId == company.Id).ToList();
+
+            List<OrderViewModel> ordersRecievedVM = new List<OrderViewModel>();
+            List<OrderViewModel> ordersDeliveredVM = new List<OrderViewModel>();
+
+            Mapper.Map(ordersRecieved, ordersRecievedVM);
+            Mapper.Map(ordersDelivered, ordersDeliveredVM);
+
+            OrderIndexModel orderIndexModel = new OrderIndexModel();
+
+            orderIndexModel.ordersRecieved = ordersRecievedVM;
+            orderIndexModel.ordersDelivered = ordersDeliveredVM;
+
+            return View(orderIndexModel);
+        }
+
         // GET: Order/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Orders order = db.Orders.Where(x => x.Id == id).ToList().First();
+
+            OrderModel orderModel = new OrderModel();
+
+            foreach (var item in order.OrderJewelryItems)
+            {
+                JewelryItemsViewModel itemVM = new JewelryItemsViewModel();
+                Mapper.Map(item.JewelryItems, itemVM);
+                itemVM.Quantity = item.Quantity;
+                orderModel.addItem(itemVM);
+            }
+
+            return View(orderModel);
         }
 
         // GET: Order/Create
@@ -94,7 +137,7 @@ namespace EulerExchangeAppDev.Controllers
 
         // POST: Order/Create
         [HttpPost]
-        public ActionResult Create(StoreModel data)
+        public ActionResult Create(OrderModel data)
         {
             try
             {
@@ -104,7 +147,8 @@ namespace EulerExchangeAppDev.Controllers
                 UserInfo userInfo = new UserInfo(db);
                 Companies company = userInfo.getLoggedCompanyId(claimsIdentity);
 
-                order.Companies = company;
+                order.CustomerId = company.Id;
+                order.SupplierId = data.Jewelries.First().CompanyId;
                 order.DateTime = DateTime.Now;
                 //check for promotion
 
@@ -115,7 +159,7 @@ namespace EulerExchangeAppDev.Controllers
 
                 Mapper.Map(order, orderVM);
 
-                foreach(JewelryItemsViewModel item in data.jewelries)
+                foreach (JewelryItemsViewModel item in data.Jewelries)
                 {
                     OrderJewelryItemsViewModel orderJewelryItemVM = new OrderJewelryItemsViewModel();
                     orderJewelryItemVM.JewelryItemId = item.Id;
@@ -128,9 +172,9 @@ namespace EulerExchangeAppDev.Controllers
                     db.OrderJewelryItems.Add(orderJewelryItems);
                     db.SaveChanges();
                 }
-                
 
-                return RedirectToAction("Index", "Home");
+
+                return RedirectToAction("Index", "Order");
             }
             catch
             {
